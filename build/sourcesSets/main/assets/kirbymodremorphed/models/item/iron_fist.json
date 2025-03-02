@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "kirbymodremorphed:custom/iron_fist_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "kirbymodremorphed:item/iron_fist_2d"
+    },
+    "ground": {
+      "parent": "kirbymodremorphed:item/iron_fist_2d"
+    },
+    "fixed": {
+      "parent": "kirbymodremorphed:item/iron_fist_2d"
+    }
+  }
+}

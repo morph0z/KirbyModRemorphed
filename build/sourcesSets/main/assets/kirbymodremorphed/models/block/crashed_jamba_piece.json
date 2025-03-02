@@ -1,0 +1,9 @@
+{
+  "parent": "kirbymodremorphed:custom/jambacrashedcrashed",
+  "textures": {
+    "all": "kirbymodremorphed:block/corrupeted_magma",
+    "particle": "kirbymodremorphed:block/corrupeted_magma",
+    "0": "kirbymodremorphed:block/jamba_heart"
+  },
+  "render_type": "translucent"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "kirbymodremorphed:item/dark_meta_knights_sword"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "power_up": {
+    "subtitle": "subtitles.Power Up",
+    "sounds": [
+      {
+        "name": "power_up",
+        "stream": false
+      }
+    ]
+  }
+}

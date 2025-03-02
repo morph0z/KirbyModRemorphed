@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kirbymodremorphed:block/cloudwood_slab"
+    },
+    "type=double": {
+      "model": "kirbymodremorphed:block/cloudwood_planks"
+    },
+    "type=top": {
+      "model": "kirbymodremorphed:block/cloudwood_slab_top"
+    }
+  }
+}

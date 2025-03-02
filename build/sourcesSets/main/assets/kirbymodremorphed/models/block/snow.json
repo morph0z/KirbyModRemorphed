@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "kirbymodremorphed:block/groundkirby",
+    "up": "kirbymodremorphed:block/snow_top",
+    "north": "kirbymodremorphed:block/snow_side",
+    "east": "kirbymodremorphed:block/snow_side",
+    "south": "kirbymodremorphed:block/snow_side",
+    "west": "kirbymodremorphed:block/snow_side",
+    "particle": "kirbymodremorphed:block/groundkirby"
+  },
+  "render_type": "solid"
+}

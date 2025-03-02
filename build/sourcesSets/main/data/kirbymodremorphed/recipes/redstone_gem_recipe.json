@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:emerald_block"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "minecraft:iron_block"
+    }
+  ],
+  "result": {
+    "item": "kirbymodremorphed:redstonegem",
+    "count": 1
+  }
+}

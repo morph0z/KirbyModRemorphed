@@ -1,0 +1,52 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "mirror"
+      },
+      "name": "default"
+    },
+    "gobbler": {
+      "map": {
+        "1": "mirrorglobber"
+      },
+      "name": "gobbler"
+    },
+    "hand": {
+      "map": {
+        "1": "mirrorcrazyh"
+      },
+      "name": "hand"
+    },
+    "kinggolem": {
+      "map": {
+        "1": "mirrorgolem"
+      },
+      "name": "kinggolem"
+    },
+    "kracko": {
+      "map": {
+        "1": "mirrorkrako"
+      },
+      "name": "kracko"
+    },
+    "moley": {
+      "map": {
+        "1": "mirrormoley"
+      },
+      "name": "moley"
+    },
+    "wiz": {
+      "map": {
+        "1": "mirrorwiz"
+      },
+      "name": "wiz"
+    },
+    "megatitan": {
+      "map": {
+        "1": "mirrortitan"
+      },
+      "name": "megatitan"
+    }
+  }
+}

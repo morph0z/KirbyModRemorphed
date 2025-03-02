@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "kirbymodremorphed:custom/fighter_glove_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "kirbymodremorphed:item/fighter_glove_2d"
+    },
+    "ground": {
+      "parent": "kirbymodremorphed:item/fighter_glove_2d"
+    },
+    "fixed": {
+      "parent": "kirbymodremorphed:item/fighter_glove_2d"
+    }
+  }
+}

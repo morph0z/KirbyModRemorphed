@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "012"
+  ],
+  "key": {
+    "0": {
+      "item": "kirbymodremorphed:cloudwood_planks"
+    },
+    "1": {
+      "item": "kirbymodremorphed:cloudwood_planks"
+    },
+    "2": {
+      "item": "kirbymodremorphed:cloudwood_planks"
+    }
+  },
+  "result": {
+    "item": "kirbymodremorphed:cloudwood_slab",
+    "count": 6
+  }
+}

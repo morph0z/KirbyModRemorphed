@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "kirbymodremorphed:block/cloudwood_log_top",
+    "side": "kirbymodremorphed:block/cloudwood_log"
+  },
+  "render_type": "translucent"
+}

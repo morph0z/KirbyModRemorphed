@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "kirbymodremorphed:block/corrupeted_magma",
+    "up": "kirbymodremorphed:block/corrupeted_magma",
+    "north": "kirbymodremorphed:block/corrupeted_magma",
+    "east": "kirbymodremorphed:block/corrupeted_magma",
+    "south": "kirbymodremorphed:block/corrupeted_magma",
+    "west": "kirbymodremorphed:block/corrupeted_magma",
+    "particle": "kirbymodremorphed:block/corrupeted_magma"
+  },
+  "render_type": "solid"
+}

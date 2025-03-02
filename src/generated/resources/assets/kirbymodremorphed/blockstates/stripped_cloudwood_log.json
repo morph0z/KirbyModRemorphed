@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "kirbymodremorphed:block/stripped_cloudwood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "kirbymodremorphed:block/stripped_cloudwood_log"
+    },
+    "axis=z": {
+      "model": "kirbymodremorphed:block/stripped_cloudwood_log_horizontal",
+      "x": 90
+    }
+  }
+}

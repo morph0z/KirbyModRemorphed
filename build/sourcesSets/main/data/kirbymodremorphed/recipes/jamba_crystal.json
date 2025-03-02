@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kirbymodremorphed:jamba_heart"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "kirbymodremorphed:jamba_crystal"
+  }
+}

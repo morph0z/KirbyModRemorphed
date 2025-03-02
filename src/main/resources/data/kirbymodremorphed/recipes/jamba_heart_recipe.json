@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "1": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "2": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "3": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "4": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "5": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "6": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "7": {
+      "item": "kirbymodremorphed:jamba_piece"
+    },
+    "8": {
+      "item": "kirbymodremorphed:jamba_piece"
+    }
+  },
+  "result": {
+    "item": "kirbymodremorphed:jamba_heart",
+    "count": 1
+  }
+}

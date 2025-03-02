@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kirbymodremorphed:cloudwood_log"
+    }
+  ],
+  "result": {
+    "item": "kirbymodremorphed:cloudwood_planks",
+    "count": 4
+  }
+}

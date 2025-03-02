@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "kirbymodremorphed:block/cloudwood_planks",
+    "side": "kirbymodremorphed:block/cloudwood_planks",
+    "top": "kirbymodremorphed:block/cloudwood_planks"
+  }
+}

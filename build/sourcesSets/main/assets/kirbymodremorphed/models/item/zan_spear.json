@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "kirbymodremorphed:custom/zan_spear_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "kirbymodremorphed:item/zan_spear_2d"
+    },
+    "ground": {
+      "parent": "kirbymodremorphed:item/zan_spear_2d"
+    },
+    "fixed": {
+      "parent": "kirbymodremorphed:item/zan_spear_2d"
+    }
+  }
+}

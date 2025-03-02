@@ -1,0 +1,7 @@
+// 1.20.1	2024-10-25T19:20:19.595796	Tags for minecraft:item mod id kirbymodremorphed
+97a95db5cedf461e7c51ada4b062f6bafdc58256 data/kirbymodremorphed/tags/items/kirby_food.json
+d62bff67ed6e793b2969da5389ccedec2c674ee8 data/minecraft/tags/items/axes.json
+ca8658791177f112e853cfa01f42871137dc531c data/minecraft/tags/items/beacon_payment_items.json
+81b3cabfc177bf388b1e0bfa06ecaa2202ba566c data/minecraft/tags/items/logs_that_burn.json
+2deb25f3f068aed565f69fefa930e28dd3ce4455 data/minecraft/tags/items/planks.json
+ec40df25d9b377676269cc5e86e133cc9d8fe2b6 data/minecraft/tags/items/swords.json

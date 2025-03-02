@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "kirbymodremorphed:item/fighting_glove2d"
+  }
+}

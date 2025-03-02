@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "kirbymodremorphed:jamba_crystal"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "result": {
+    "item": "kirbymodremorphed:jamba_heart"
+  },
+  "show_notification": true
+}

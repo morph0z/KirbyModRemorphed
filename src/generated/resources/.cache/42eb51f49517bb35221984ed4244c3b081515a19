@@ -1,0 +1,10 @@
+// 1.20.1	2024-10-25T19:20:19.5918073	Tags for minecraft:block mod id kirbymodremorphed
+3e3eeeaf9aeca90f09f6341a67a6a95ebd41c70a data/minecraft/tags/blocks/dirt.json
+8cbcc87ce25926c49904330e94e08978f52a6655 data/minecraft/tags/blocks/fences.json
+4d0edafb1f3a9a9b061b67797e74fd5dc7bff6c4 data/minecraft/tags/blocks/fence_gates.json
+cd5fc193e4184b1e3788b82c23edac90fbaf9e2a data/minecraft/tags/blocks/leaves.json
+81b3cabfc177bf388b1e0bfa06ecaa2202ba566c data/minecraft/tags/blocks/logs_that_burn.json
+e173e95847edc01c255405dde2a57558ab9a99f0 data/minecraft/tags/blocks/mineable/pickaxe.json
+a4fbdba227f56760e30f1460574057f2eb101d48 data/minecraft/tags/blocks/mineable/shovel.json
+ca3678a7b91792caff67747276bc912d1f9be93f data/minecraft/tags/blocks/needs_diamond_tool.json
+2deb25f3f068aed565f69fefa930e28dd3ce4455 data/minecraft/tags/blocks/planks.json
