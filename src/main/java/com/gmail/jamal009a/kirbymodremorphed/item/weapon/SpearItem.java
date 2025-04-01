@@ -36,10 +36,4 @@ public class SpearItem extends SwordItem {
 			}
 		}, 3, -3.2f, new Properties());
 	}
-
-	@Override
-	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("§7A waddle dee's spear, they never let go of these... §lHow did you get this"));
-	}
 }

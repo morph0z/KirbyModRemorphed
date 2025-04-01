@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kirbymodremorphed:item/armor/cupid_ability2d"
+  }
+}

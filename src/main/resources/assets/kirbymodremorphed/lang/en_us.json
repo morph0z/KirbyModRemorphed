@@ -82,6 +82,10 @@
 
   "item.kirbymodremorphed.kirby_spawn_egg": "Kirby Spawn Egg",
 
+  "item.kirbymodremorphed.beam_ability": "Beam Ability",
+  "item.kirbymodremorphed.microphone_ability": "Microphone Ability",
+  "item.kirbymodremorphed.cupid_ability": "Cupid Ability",
+
   "creative.abilities_tab": "§dKirby §7Abilities",
   "creative.abilities_items_tab":"§dKirby §7Ability Items",
   "creative.mob_tab": "§dKirby §7Mobs",

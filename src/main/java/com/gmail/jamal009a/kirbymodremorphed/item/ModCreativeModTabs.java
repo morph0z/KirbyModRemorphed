@@ -14,10 +14,12 @@ public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, KirbyModRemorphed.MODID);
     public  static  final RegistryObject<CreativeModeTab> ABILITIES_TAB = CREATIVE_MODE_TABS.register("abilities_tab",
-            () -> CreativeModeTab.builder().icon((() -> new ItemStack(ModItems.SAPPHIRE.get())))
+            () -> CreativeModeTab.builder().icon((() -> new ItemStack(ModItems.BEAM_ABILITY.get())))
                     .title(Component.translatable("creative.abilities_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        //pOutput.accept(ModItems.BEAM_ABILITY_HELM.get());
+                        pOutput.accept(ModItems.BEAM_ABILITY.get());
+                        pOutput.accept(ModItems.MICROPHONE_ABILITY.get());
+                        pOutput.accept(ModItems.CUPID_ABILITY.get());
                     })
                     .build());
     public  static  final RegistryObject<CreativeModeTab> ABILITIES_ITEMS_TAB = CREATIVE_MODE_TABS.register("abilities_items_tab",

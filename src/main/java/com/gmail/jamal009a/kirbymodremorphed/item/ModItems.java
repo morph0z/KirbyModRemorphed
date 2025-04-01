@@ -3,6 +3,9 @@ package com.gmail.jamal009a.kirbymodremorphed.item;
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 //import com.gmail.jamal009a.kirbymodremorphed.item.armor.*;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.CupidAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.MicrophoneAbility;
 import com.gmail.jamal009a.kirbymodremorphed.item.food.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.simple.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.*;
@@ -85,7 +88,7 @@ public class ModItems {
     public static final RegistryObject<Item> META_KNIGHTS_SWORD = ITEMS.register("meta_knights_sword",
             MetaKnightsSwordItem::new);
     public static final RegistryObject<Item> META_KNIGHTS_MASK = ITEMS.register("meta_knights_mask",
-            () -> new ArmorItem(ModArmorMaterials.MASK_META_KNIGHT, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new ArmorItem(ModArmorMaterials.META_KNIGHT_MASK, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> DARK_META_KNIGHT_SWORD = ITEMS.register("dark_meta_knights_sword",
             DarkMetaKightSwordItem::new);
     public static final RegistryObject<Item> FIGHTER_GLOVE = ITEMS.register("fighter_glove",
@@ -108,6 +111,9 @@ public class ModItems {
             RockFistItem::new);
     public static final RegistryObject<Item> BASIC_SPEAR = ITEMS.register("basic_spear",
             SpearItem::new);
+    public static final RegistryObject<Item> BEAM_ABILITY = ITEMS.register("beam_ability", () -> new BeamAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> MICROPHONE_ABILITY = ITEMS.register("microphone_ability", () -> new MicrophoneAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> CUPID_ABILITY = ITEMS.register("cupid_ability", () -> new CupidAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));

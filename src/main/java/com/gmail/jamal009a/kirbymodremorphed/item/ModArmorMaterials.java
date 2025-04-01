@@ -13,8 +13,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    MASK_META_KNIGHT("metaknightmask",26, new int[]{10,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE,1, 0, () -> Ingredient.of(ModBlocks.COMPRESSEDIRON.get())),
-    ABILITY("ability",26, new int[]{5,0,0,0}, 25, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("kirbymodremorphed:power_up")),1, 0, ()->Ingredient.of(ModItems.STARR.get()));;
+    //MASK_META_KNIGHT("metaknightmask",26, new int[]{10,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE,1, 0, () -> Ingredient.of(ModBlocks.COMPRESSEDIRON.get())),
+    //ABILITY("ability",26, new int[]{5,0,0,0}, 25, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("kirbymodremorphed:power_up")),1, 0, ()->Ingredient.of(ModItems.STARR.get()));;
+    META_KNIGHT_MASK("meta_knight_mask",15, new int[]{10,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 1, 0.2F, ()->Ingredient.of(ModItems.BAGEL.get()) ),
+    ABILITY("ability", 15, new int[]{4,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 1, 0, ()->Ingredient.of(ModItems.BAGEL.get()) );
 
     private final String name;
     private final int durabilityMultiplier;
