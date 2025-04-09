@@ -5,6 +5,8 @@ import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModCreativeModTabs;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
+import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
+import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -52,6 +54,7 @@ public class KirbyModRemorphed {
         ModItems.register((modEventBus));
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -60,7 +63,9 @@ public class KirbyModRemorphed {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            ModMessages.register();
+        });
     }
 
     // Add the example block item to the building blocks tab

@@ -1,0 +1,85 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.fighterAbility",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorHead",
+					"parent": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "Head",
+					"parent": "armorHead",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4.1, 29, -4.1], "size": [8.2, 2, 0], "uv": [3, 2]},
+						{"origin": [-4.1, 29, -4.1], "size": [0, 2, 8.2], "uv": [40, -2]},
+						{"origin": [4.1, 29, -4.1], "size": [0, 2, 8.2], "uv": [14, -8], "mirror": true},
+						{"origin": [-4.1, 29, 4.1], "size": [8.2, 2, 0], "uv": [14, 39]}
+					]
+				},
+				{
+					"name": "RKnot",
+					"parent": "Head",
+					"pivot": [-1.1, 29.1, 4.1],
+					"cubes": [
+						{"origin": [-2.1, 26.1, 4.1], "size": [2, 3, 0], "pivot": [-1.1, 29.1, 4.1], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "RKnot1",
+					"parent": "RKnot",
+					"pivot": [-1.1, 29.1, 7.1],
+					"cubes": [
+						{"origin": [-2.1, 25.1, 7.1], "size": [2, 4, 0], "pivot": [-1.1, 29.1, 7.1], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "RKnot2",
+					"parent": "RKnot1",
+					"pivot": [-1.1, 29.1, 11.1],
+					"cubes": [
+						{"origin": [-2.1, 24.1, 11.1], "size": [2, 5, 0], "pivot": [-1.1, 29.1, 11.1], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "LKnot",
+					"parent": "Head",
+					"pivot": [1.2, 29.2, 4.1],
+					"cubes": [
+						{"origin": [0.2, 26.7, 6.4], "size": [2, 5, 0], "pivot": [1.2, 29.2, 6.4], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "LKnot1",
+					"parent": "LKnot",
+					"pivot": [1.2, 29.2, 8.9],
+					"cubes": [
+						{"origin": [0.2, 28.7, 11.4], "size": [2, 3, 0], "pivot": [1.2, 29.2, 11.4], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "LKnot2",
+					"parent": "LKnot1",
+					"pivot": [1.2, 29.2, 11.9],
+					"cubes": [
+						{"origin": [0.2, 25.7, 14.4], "size": [2, 6, 0], "pivot": [1.2, 29.2, 14.4], "rotation": [90, 0, 0], "uv": [52, 0]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,6 +1,5 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;

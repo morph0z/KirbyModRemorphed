@@ -2,6 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.item;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.block.ModBlocks;
+import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -16,7 +17,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
     //MASK_META_KNIGHT("metaknightmask",26, new int[]{10,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE,1, 0, () -> Ingredient.of(ModBlocks.COMPRESSEDIRON.get())),
     //ABILITY("ability",26, new int[]{5,0,0,0}, 25, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("kirbymodremorphed:power_up")),1, 0, ()->Ingredient.of(ModItems.STARR.get()));;
     META_KNIGHT_MASK("meta_knight_mask",15, new int[]{10,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 1, 0.2F, ()->Ingredient.of(ModItems.BAGEL.get()) ),
-    ABILITY("ability", 15, new int[]{4,0,0,0}, 25, SoundEvents.ARMOR_EQUIP_NETHERITE, 1, 0, ()->Ingredient.of(ModItems.BAGEL.get()) );
+    ABILITY("ability", 15, new int[]{4,0,0,0}, 25, ModSounds.POWER_UP.get(), 1, 0, ()->Ingredient.of(ModItems.BAGEL.get()) );
 
     private final String name;
     private final int durabilityMultiplier;

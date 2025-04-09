@@ -5,11 +5,11 @@ import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.CupidAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.FighterAbility;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.MicrophoneAbility;
 import com.gmail.jamal009a.kirbymodremorphed.item.food.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.simple.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.*;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -110,10 +110,11 @@ public class ModItems {
     public static final RegistryObject<Item> ROCK_FIST = ITEMS.register("rock_fist",
             RockFistItem::new);
     public static final RegistryObject<Item> BASIC_SPEAR = ITEMS.register("basic_spear",
-            SpearItem::new);
+            BasicSpearItem::new);
     public static final RegistryObject<Item> BEAM_ABILITY = ITEMS.register("beam_ability", () -> new BeamAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> MICROPHONE_ABILITY = ITEMS.register("microphone_ability", () -> new MicrophoneAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> CUPID_ABILITY = ITEMS.register("cupid_ability", () -> new CupidAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> FIGHTER_ABILITY = ITEMS.register("fighter_ability", () -> new FighterAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));

@@ -97,7 +97,7 @@
 				}
 			}
 		},
-		"misc.fly": {
+		"move.fly": {
 			"loop": true,
 			"animation_length": 0.6452,
 			"bones": {

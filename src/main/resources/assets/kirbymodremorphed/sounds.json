@@ -1,11 +1,8 @@
 {
   "power_up": {
-    "subtitle": "subtitles.Power Up",
+    "subtitle": "sounds.kirbymodremorphed.power_up",
     "sounds": [
-      {
-        "name": "power_up",
-        "stream": false
-      }
+      "kirbymodremorphed:power_up"
     ]
   }
 }

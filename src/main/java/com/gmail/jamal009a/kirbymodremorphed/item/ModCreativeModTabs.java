@@ -20,6 +20,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.BEAM_ABILITY.get());
                         pOutput.accept(ModItems.MICROPHONE_ABILITY.get());
                         pOutput.accept(ModItems.CUPID_ABILITY.get());
+                        pOutput.accept(ModItems.FIGHTER_ABILITY.get());
                     })
                     .build());
     public  static  final RegistryObject<CreativeModeTab> ABILITIES_ITEMS_TAB = CREATIVE_MODE_TABS.register("abilities_items_tab",

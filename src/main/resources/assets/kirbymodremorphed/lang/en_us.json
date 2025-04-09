@@ -85,11 +85,18 @@
   "item.kirbymodremorphed.beam_ability": "Beam Ability",
   "item.kirbymodremorphed.microphone_ability": "Microphone Ability",
   "item.kirbymodremorphed.cupid_ability": "Cupid Ability",
+  "item.kirbymodremorphed.fighter_ability": "Fighter Ability",
+
+  "sounds.kirbymodremorphed.power_up": "Power up",
 
   "creative.abilities_tab": "§dKirby §7Abilities",
   "creative.abilities_items_tab":"§dKirby §7Ability Items",
   "creative.mob_tab": "§dKirby §7Mobs",
   "creative.block_tab": "§dKirby §7Blocks",
   "creative.items_tab": "§dKirby §7Items",
-  "creative.food_tab": "§dKirby §7Foodstuff"
+  "creative.food_tab": "§dKirby §7Foodstuff",
+
+  "key.catagories.kirbymodremorphed": "Kirby mod",
+  "key.kirbymodremorphed.primary_ability_use": "Primary Ability",
+  "key.kirbymodremorphed.secondary_ability_use": "Secondary Ability"
 }

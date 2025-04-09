@@ -1,0 +1,83 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.basic_spear",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "spear",
+					"pivot": [8, 0, -8.5],
+					"cubes": [
+						{"origin": [-0.5, 0, -0.5], "size": [1, 20, 1], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "point",
+					"parent": "spear",
+					"pivot": [0, 10.8, 0],
+					"cubes": [
+						{"origin": [-7.45736, 20.10736, -0.55], "size": [2.35, 2.35, 1.25], "pivot": [0, 15, 0], "rotation": [0, 0, 45], "uv": [14, 0]},
+						{"origin": [-1.1, 19.55, -0.55], "size": [3, 4.15, 1.25], "pivot": [0.4, 22.175, 0.075], "rotation": [0, 0, -7.5], "uv": [5, 6]},
+						{"origin": [-1.9, 19.55, -0.55], "size": [3, 4.15, 1.25], "pivot": [-0.4, 22.175, 0.075], "rotation": [0, 0, 7.5], "uv": [5, 0]},
+						{"origin": [-7.85736, 15.50736, -0.55], "size": [3.15, 3.15, 1.25], "pivot": [0, 10.8, 0], "rotation": [0, 0, 45], "uv": [5, 12]}
+					]
+				},
+				{
+					"name": "TopDangleBit",
+					"parent": "spear",
+					"pivot": [-0.5, 17.5, 0],
+					"cubes": [
+						{"origin": [-1.4, 17, 0], "size": [1, 1, 0], "uv": [14, 10]}
+					]
+				},
+				{
+					"name": "TopDangleBit2",
+					"parent": "TopDangleBit",
+					"pivot": [-1.4, 17.5, 0],
+					"cubes": [
+						{"origin": [-2.4, 17, 0], "size": [1, 1, 0], "uv": [14, 12]}
+					]
+				},
+				{
+					"name": "TopDangleBit3",
+					"parent": "TopDangleBit2",
+					"pivot": [-2.4, 17.5, 0],
+					"cubes": [
+						{"origin": [-4.4, 17, 0], "size": [2, 1, 0], "uv": [14, 4]}
+					]
+				},
+				{
+					"name": "BottomDangleBit",
+					"parent": "spear",
+					"pivot": [-0.5, 16.5, 0],
+					"cubes": [
+						{"origin": [-1.4, 16, 0], "size": [1, 1, 0], "uv": [14, 14]}
+					]
+				},
+				{
+					"name": "BottomDangleBit2",
+					"parent": "BottomDangleBit",
+					"pivot": [-1.4, 16.5, 0],
+					"cubes": [
+						{"origin": [-3.4, 16, 0], "size": [2, 1, 0], "uv": [14, 6]}
+					]
+				},
+				{
+					"name": "BottomDangleBit3",
+					"parent": "BottomDangleBit2",
+					"pivot": [-3.4, 16.5, 0],
+					"cubes": [
+						{"origin": [-5.4, 16, 0], "size": [2, 1, 0], "uv": [14, 8]}
+					]
+				}
+			]
+		}
+	]
+}

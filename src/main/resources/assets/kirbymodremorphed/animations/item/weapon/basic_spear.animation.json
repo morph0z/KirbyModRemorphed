@@ -1,0 +1,108 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 2.1296,
+			"bones": {
+				"TopDangleBit": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 45, 0],
+							"easing": "easeOutSine"
+						},
+						"1.2037": {
+							"vector": [0, -15, 0],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [0, 46, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"TopDangleBit2": {
+					"rotation": {
+						"0.0": {
+							"vector": [1.31845, -9.91358, -7.61435],
+							"easing": "easeInOutSine"
+						},
+						"0.8333": {
+							"vector": [1.30388, 5.08254, -7.27179],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [1.31845, -9.91358, -7.61435],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"TopDangleBit3": {
+					"rotation": {
+						"0.0": {
+							"vector": [-1.54125, -31.57444, -6.55738],
+							"easing": "easeInOutSine"
+						},
+						"0.7407": {
+							"vector": [-1.58374, 35.90588, -8.29374],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [-1.54125, -32.57444, -6.55738],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"BottomDangleBit": {
+					"rotation": {
+						"0.0": {
+							"vector": [-0.68334, 17.47062, -5.1626],
+							"easing": "easeOutSine"
+						},
+						"0.9259": {
+							"vector": [-0.68355, -17.52705, -4.75157],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [-0.68334, 17.47062, -5.1626],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"BottomDangleBit2": {
+					"rotation": {
+						"0.0": {
+							"vector": [-1.62481, 4.89442, -7.46284],
+							"easing": "easeInOutSine"
+						},
+						"0.7407": {
+							"vector": [-1.67515, 14.8903, -7.75475],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [-1.62481, 4.89442, -7.46284],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"BottomDangleBit3": {
+					"rotation": {
+						"0.0": {
+							"vector": [-0.92304, -20.0349, -4.60817],
+							"easing": "easeInOutSine"
+						},
+						"0.463": {
+							"vector": [-1.00092, 32.95893, -5.42429],
+							"easing": "easeInOutSine"
+						},
+						"2.1296": {
+							"vector": [-0.92304, -20.0349, -4.60817],
+							"easing": "easeInOutSine"
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

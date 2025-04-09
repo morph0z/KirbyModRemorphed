@@ -17,6 +17,7 @@ public class ModTags {
     }
     public static class Items{
         public static final TagKey<Item> KIRBY_FOOD = tag("kirby_food");
+        public static final TagKey<Item> KIRBY_ABILITIES = tag("kirby_abilities");
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(KirbyModRemorphed.MODID, name));
         }

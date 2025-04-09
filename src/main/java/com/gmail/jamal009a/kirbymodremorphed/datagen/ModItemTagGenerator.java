@@ -49,6 +49,12 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ItemTags.PLANKS)
                 .add(ModBlocks.CLOUDWOOD_PLANKS.get().asItem());
 
+        this.tag(ModTags.Items.KIRBY_ABILITIES)
+                .add(ModItems.CUPID_ABILITY.get())
+                .add(ModItems.BEAM_ABILITY.get())
+                .add(ModItems.FIGHTER_ABILITY.get())
+                .add(ModItems.MICROPHONE_ABILITY.get());
+
         this.tag(ModTags.Items.KIRBY_FOOD)
                 .add(ModItems.CANDY.get())
                 .add(ModItems.INVINCIBLE_CANDY.get())

@@ -1,18 +1,109 @@
 {
-  "parent": "minecraft:item/handheld",
-  "loader": "forge:separate_transforms",
-  "base": {
-    "parent": "kirbymodremorphed:custom/basic_spear_3d"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "kirbymodremorphed:item/basic_spear_2d"
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "texture_size": [
+    32,
+    32
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        -7,
+        2
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        -7,
+        2
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -70.25,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        -3,
+        9.75
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        -70.25,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        -3,
+        9.75
+      ]
     },
     "ground": {
-      "parent": "kirbymodremorphed:item/basic_spear_2d"
+      "rotation": [
+        82.49,
+        -16.13,
+        -1.07
+      ],
+      "translation": [
+        0,
+        0,
+        -12.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        -44.5
+      ],
+      "translation": [
+        -6.5,
+        -6.75,
+        0
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
+    },
+    "head": {
+      "rotation": [
+        -42.25,
+        -90,
+        0
+      ],
+      "translation": [
+        0,
+        -5.25,
+        4.75
+      ]
     },
     "fixed": {
-      "parent": "kirbymodremorphed:item/basic_spear_2d"
+      "rotation": [
+        0,
+        0,
+        37.5
+      ],
+      "translation": [
+        5,
+        -7.25,
+        0
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
     }
+  },
+  "textures": {
+    "layer0": "kirbymodremorphed:item/weapon/basic_spear"
   }
 }

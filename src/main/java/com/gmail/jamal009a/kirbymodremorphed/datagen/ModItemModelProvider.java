@@ -32,9 +32,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MIRROR_SHARD);
         simpleItem(ModItems.JAMBA_CRYSTAL);
 
-        armorItem(ModItems.BEAM_ABILITY);
-        armorItem(ModItems.CUPID_ABILITY);
-        armorItem(ModItems.MICROPHONE_ABILITY);
+        armorItemWith2D(ModItems.BEAM_ABILITY);
+        armorItemWith2D(ModItems.CUPID_ABILITY);
+        armorItemWith2D(ModItems.MICROPHONE_ABILITY);
+        armorItemWith2D(ModItems.FIGHTER_ABILITY);
 
         foodItem(ModItems.MAXIM_TOMATO);
         foodItem(ModItems.BANANA_BUNCH);
@@ -66,7 +67,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KirbyModRemorphed.MODID,"item/" + item.getId().getPath()));
     }
-    private ItemModelBuilder armorItem(RegistryObject<Item> item){
+    private ItemModelBuilder armorItemWith2D(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KirbyModRemorphed.MODID,"item/armor/" + item.getId().getPath() + "2d"));
