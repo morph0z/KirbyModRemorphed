@@ -34,6 +34,7 @@
   "item.kirbymodremorphed.invincible_candy": "§6In§9vi§anc§bib§cle §dCandy",
 
   "item.kirbymodremorphed.meta_knights_mask": "§6Meta Knight §4Mask",
+  "item.kirbymodremorphed.meta_knights_wings": "§6Meta Knight §4Wings",
 
   "item.kirbymodremorphed.meta_knights_sword": "§6Gala§4xia",
   "item.kirbymodremorphed.dark_meta_knights_sword": "§7Dark Gala§9xia",
@@ -48,8 +49,6 @@
   "item.kirbymodremorphed.kirby_sword": "§dKirby's §fSword",
   "item.kirbymodremorphed.rock_fist": "§4Rock §fFist",
   "item.kirbymodremorphed.iron_fist": "§3Mech §fFist",
-
-  "item.kirbymodremorphed.beam_ability_helm": "Beam Ability",
 
   "block.kirbymodremorphed.cloud": "§lCloud §rBlock",
   "block.kirbymodremorphed.cloudwood_planks": "§lCloudwood §rPlanks",

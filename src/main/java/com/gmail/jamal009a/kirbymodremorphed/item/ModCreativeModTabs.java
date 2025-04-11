@@ -116,9 +116,10 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.REDSTONE_GEM.get());
                         pOutput.accept(ModItems.LAPIS_GEM.get());
                         pOutput.accept(ModItems.MIRROR_SHARD.get());
+                        pOutput.accept(ModItems.META_KNIGHTS_MASK.get());
+                        pOutput.accept(ModItems.META_KNIGHTS_WINGS.get());
                         pOutput.accept(ModItems.META_KNIGHTS_SWORD.get());
                         pOutput.accept(ModItems.DARK_META_KNIGHT_SWORD.get());
-                        pOutput.accept(ModItems.META_KNIGHTS_MASK.get());
                         pOutput.accept(ModItems.FLAM_SWORD.get());
                         pOutput.accept(ModItems.FRAN_AXE.get());
                         pOutput.accept(ModItems.ZAN_SPEAR.get());

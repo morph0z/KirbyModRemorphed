@@ -3,10 +3,11 @@ package com.gmail.jamal009a.kirbymodremorphed.item;
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 //import com.gmail.jamal009a.kirbymodremorphed.item.armor.*;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.CupidAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.FighterAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.MicrophoneAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.MetaKnightArmor;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.CupidAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.FighterAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.MicrophoneAbility;
 import com.gmail.jamal009a.kirbymodremorphed.item.food.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.simple.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.*;
@@ -87,8 +88,8 @@ public class ModItems {
             InvincibleCandy::new);
     public static final RegistryObject<Item> META_KNIGHTS_SWORD = ITEMS.register("meta_knights_sword",
             MetaKnightsSwordItem::new);
-    public static final RegistryObject<Item> META_KNIGHTS_MASK = ITEMS.register("meta_knights_mask",
-            () -> new ArmorItem(ModArmorMaterials.META_KNIGHT_MASK, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> META_KNIGHTS_MASK = ITEMS.register("meta_knights_mask", () -> new MetaKnightArmor(ModArmorMaterials.META_KNIGHT, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> META_KNIGHTS_WINGS = ITEMS.register("meta_knights_wings", () -> new MetaKnightArmor(ModArmorMaterials.META_KNIGHT, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> DARK_META_KNIGHT_SWORD = ITEMS.register("dark_meta_knights_sword",
             DarkMetaKightSwordItem::new);
     public static final RegistryObject<Item> FIGHTER_GLOVE = ITEMS.register("fighter_glove",

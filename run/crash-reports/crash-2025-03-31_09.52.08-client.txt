@@ -7,8 +7,8 @@ Description: Rendering entity in world
 net.minecraft.ResourceLocationException: Non [a-z0-9/._-] character in path of location: kirbymodremorphed:geo/armor/BeamAbility.geo.json
 	at net.minecraft.resources.ResourceLocation.assertValidPath(ResourceLocation.java:236) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
 	at net.minecraft.resources.ResourceLocation.<init>(ResourceLocation.java:38) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:11) ~[main/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:8) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:11) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:8) ~[main/:?] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoRenderer.defaultRender(GeoRenderer.java:130) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoArmorRenderer.renderToBuffer(GeoArmorRenderer.java:277) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer.renderModel(HumanoidArmorLayer.java:110) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
@@ -52,8 +52,8 @@ Thread: Render thread
 Stacktrace:
 	at net.minecraft.resources.ResourceLocation.assertValidPath(ResourceLocation.java:236) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
 	at net.minecraft.resources.ResourceLocation.<init>(ResourceLocation.java:38) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:11) ~[%23196!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:8) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:11) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityModel.getModelResource(BeamAbilityModel.java:8) ~[%23196!/:?] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoRenderer.defaultRender(GeoRenderer.java:130) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoArmorRenderer.renderToBuffer(GeoArmorRenderer.java:277) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer.renderModel(HumanoidArmorLayer.java:110) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:runtimedistcleaner:A}

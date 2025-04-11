@@ -7,8 +7,8 @@ Description: Rendering entity in world
 net.minecraft.ResourceLocationException: Non [a-z0-9/._-] character in path of location: kirbymodremorphed:armor/beam_abilityArmor
 	at net.minecraft.resources.ResourceLocation.assertValidPath(ResourceLocation.java:236) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
 	at net.minecraft.resources.ResourceLocation.<init>(ResourceLocation.java:38) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityRenderer.<init>(BeamAbilityRenderer.java:11) ~[main/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility$1.getHumanoidArmorModel(BeamAbility.java:46) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityRenderer.<init>(BeamAbilityRenderer.java:11) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility$1.getHumanoidArmorModel(BeamAbility.java:46) ~[main/:?] {re:classloading}
 	at net.minecraftforge.client.extensions.common.IClientItemExtensions.getGenericArmorModel(IClientItemExtensions.java:129) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading}
 	at net.minecraftforge.client.ForgeHooksClient.getArmorModel(ForgeHooksClient.java:326) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading}
 	at net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer.getArmorModelHook(HumanoidArmorLayer.java:149) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:runtimedistcleaner:A}
@@ -61,8 +61,8 @@ Thread: Render thread
 Stacktrace:
 	at net.minecraft.resources.ResourceLocation.assertValidPath(ResourceLocation.java:236) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
 	at net.minecraft.resources.ResourceLocation.<init>(ResourceLocation.java:38) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.client.BeamAbilityRenderer.<init>(BeamAbilityRenderer.java:11) ~[%23196!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility$1.getHumanoidArmorModel(BeamAbility.java:46) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityRenderer.<init>(BeamAbilityRenderer.java:11) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility$1.getHumanoidArmorModel(BeamAbility.java:46) ~[%23196!/:?] {re:classloading}
 	at net.minecraftforge.client.extensions.common.IClientItemExtensions.getGenericArmorModel(IClientItemExtensions.java:129) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23190%23197!/:?] {re:classloading}
 	at net.minecraftforge.client.ForgeHooksClient.getArmorModel(ForgeHooksClient.java:326) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23190%23197!/:?] {re:classloading}
 	at net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer.getArmorModelHook(HumanoidArmorLayer.java:149) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:runtimedistcleaner:A}

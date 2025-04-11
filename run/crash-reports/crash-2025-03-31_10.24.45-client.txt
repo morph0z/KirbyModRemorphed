@@ -9,7 +9,7 @@ software.bernie.geckolib.GeckoLibException: kirbymodremorphed:animations/item/ar
 	at software.bernie.geckolib.core.animation.AnimationProcessor.buildAnimationQueue(AnimationProcessor.java:45) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.setAnimation(AnimationController.java:338) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationState.setAnimation(AnimationState.java:122) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility.lambda$registerControllers$0(BeamAbility.java:62) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility.lambda$registerControllers$0(BeamAbility.java:62) ~[main/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
@@ -61,7 +61,7 @@ Stacktrace:
 	at software.bernie.geckolib.core.animation.AnimationProcessor.buildAnimationQueue(AnimationProcessor.java:45) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.setAnimation(AnimationController.java:338) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationState.setAnimation(AnimationState.java:122) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.item.armor.BeamAbility.lambda$registerControllers$0(BeamAbility.java:62) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility.lambda$registerControllers$0(BeamAbility.java:62) ~[%23196!/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}

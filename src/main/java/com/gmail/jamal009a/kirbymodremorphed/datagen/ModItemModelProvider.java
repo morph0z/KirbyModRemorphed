@@ -32,10 +32,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MIRROR_SHARD);
         simpleItem(ModItems.JAMBA_CRYSTAL);
 
-        armorItemWith2D(ModItems.BEAM_ABILITY);
-        armorItemWith2D(ModItems.CUPID_ABILITY);
-        armorItemWith2D(ModItems.MICROPHONE_ABILITY);
-        armorItemWith2D(ModItems.FIGHTER_ABILITY);
+        abilityItemWith2D(ModItems.BEAM_ABILITY);
+        abilityItemWith2D(ModItems.CUPID_ABILITY);
+        abilityItemWith2D(ModItems.MICROPHONE_ABILITY);
+        abilityItemWith2D(ModItems.FIGHTER_ABILITY);
+
+        armorItemWith2D(ModItems.META_KNIGHTS_MASK);
+        armorItemWith2D(ModItems.META_KNIGHTS_WINGS);
 
         foodItem(ModItems.MAXIM_TOMATO);
         foodItem(ModItems.BANANA_BUNCH);
@@ -67,10 +70,15 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(KirbyModRemorphed.MODID,"item/" + item.getId().getPath()));
     }
+    private ItemModelBuilder abilityItemWith2D(RegistryObject<Item> item){
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(KirbyModRemorphed.MODID,"item/armor/ability/2d/" + item.getId().getPath() + "2d"));
+    }
     private ItemModelBuilder armorItemWith2D(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(KirbyModRemorphed.MODID,"item/armor/" + item.getId().getPath() + "2d"));
+                new ResourceLocation(KirbyModRemorphed.MODID,"item/armor/2d/" + item.getId().getPath() + "2d"));
     }
     private ItemModelBuilder foodItem(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),

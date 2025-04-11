@@ -24,7 +24,7 @@ hideLightningFlashes:false
 mouseSensitivity:0.5
 fov:1.0
 screenEffectScale:1.0
-fovEffectScale:0.0
+fovEffectScale:1.0
 darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
@@ -40,7 +40,7 @@ maxFps:50
 graphicsMode:0
 ao:true
 prioritizeChunkUpdates:0
-biomeBlendRadius:3
+biomeBlendRadius:0
 renderClouds:"false"
 resourcePacks:["vanilla","mod_resources"]
 incompatibleResourcePacks:[]
