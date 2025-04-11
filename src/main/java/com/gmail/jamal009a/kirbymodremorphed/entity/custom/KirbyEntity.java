@@ -16,6 +16,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -26,7 +27,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class KirbyEntity extends Animal implements GeoEntity {
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
     public KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -61,7 +62,7 @@ public class KirbyEntity extends Animal implements GeoEntity {
 //        //return ModEntities.KIRBY.get().create(level());
 //        return ModEntities.KIRBY.get().create(level);
 //    }
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob ageableMob) {
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob ageableMob) {
         return null;
     }
 

@@ -4,10 +4,7 @@ import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 //import com.gmail.jamal009a.kirbymodremorphed.item.armor.*;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.MetaKnightArmor;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.BeamAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.CupidAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.FighterAbility;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.MicrophoneAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.food.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.simple.*;
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.*;
@@ -116,6 +113,7 @@ public class ModItems {
     public static final RegistryObject<Item> MICROPHONE_ABILITY = ITEMS.register("microphone_ability", () -> new MicrophoneAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> CUPID_ABILITY = ITEMS.register("cupid_ability", () -> new CupidAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> FIGHTER_ABILITY = ITEMS.register("fighter_ability", () -> new FighterAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> JET_ABILITY = ITEMS.register("jet_ability", () -> new JetAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));

@@ -3,11 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.client;
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.model.data.EntityModelData;
 
 public class KirbyModel extends GeoModel<KirbyEntity> {
     @Override
