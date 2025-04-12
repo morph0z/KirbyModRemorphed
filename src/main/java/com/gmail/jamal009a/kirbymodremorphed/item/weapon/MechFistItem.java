@@ -1,6 +1,7 @@
 
 package com.gmail.jamal009a.kirbymodremorphed.item.weapon;
 
+import com.gmail.jamal009a.kirbymodremorphed.item.weapon.KirbyAbilityItems.KirbyAbilityAxeItem;
 import com.gmail.jamal009a.kirbymodremorphed.procedures.IronfistLivingEntityIsHitWithToolProcedure;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class MechFistItem extends AxeItem {
+public class MechFistItem extends KirbyAbilityAxeItem {
 	public MechFistItem() {
 		super(new Tier() {
 			public int getUses() {

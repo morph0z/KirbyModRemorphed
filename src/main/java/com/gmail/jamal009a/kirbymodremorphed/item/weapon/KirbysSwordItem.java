@@ -1,6 +1,7 @@
 
 package com.gmail.jamal009a.kirbymodremorphed.item.weapon;
 
+import com.gmail.jamal009a.kirbymodremorphed.item.weapon.KirbyAbilityItems.KirbyAbilitySwordItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class KirbysSwordItem extends SwordItem {
+public class KirbysSwordItem extends KirbyAbilitySwordItem {
 	public KirbysSwordItem() {
 		super(new Tier() {
 			public int getUses() {

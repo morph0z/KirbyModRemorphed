@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-11T04:24:58.4328342	Item Models: kirbymodremorphed
+// 1.20.1	2025-04-11T08:19:08.6038594	Item Models: kirbymodremorphed
 5024106c5ef31580206f40b05eff32ee5d97ad09 assets/kirbymodremorphed/models/item/banana_bunch.json
 0b12a3d301c2aaa3dc4f1865c4fecb3cde6deb2b assets/kirbymodremorphed/models/item/beam_ability.json
 c5a330d5164cf64c095c98bcb481beb71c6cf787 assets/kirbymodremorphed/models/item/candy.json
@@ -19,6 +19,7 @@ de74e7c7f2cbab587c117ff4f540b19252de6ce5 assets/kirbymodremorphed/models/item/es
 79d840c2fff4bd5351055143dd0a3061535a603c assets/kirbymodremorphed/models/item/fighter_ability.json
 25b78a4380c55ea0c2923abc7678989a31ac9ee0 assets/kirbymodremorphed/models/item/hot_dog.json
 a083efab8f35b9424bca10a50b020c24ce832dd1 assets/kirbymodremorphed/models/item/jamba_crystal.json
+205393ff44cf5e1dff451acc81a7260e52742405 assets/kirbymodremorphed/models/item/jet_ability.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/kirbymodremorphed/models/item/kirby_spawn_egg.json
 4e353a33d37627bd4db531ef01a100e293e723bf assets/kirbymodremorphed/models/item/lapis_gem.json
 a59ec260f9b6756dccd53dd4e8a2ce1c4acf9ac6 assets/kirbymodremorphed/models/item/maxim_tomato.json
