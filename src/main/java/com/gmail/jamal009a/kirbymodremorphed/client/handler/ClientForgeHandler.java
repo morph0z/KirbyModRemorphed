@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -56,10 +57,12 @@ public class ClientForgeHandler {
             if (!animation.isActive()) {
                 if (holdTime <= 1) {
                     if (animation != null) {
+                        ModMessages.sendToServer(new SecondaryAbilityC2SPacket());
                         // if has fighter ability
                         if ((player.getItemBySlot(EquipmentSlot.HEAD)).getItem() == ModItems.FIGHTER_ABILITY.get()) {
                             animation.setAnimation(new KeyframeAnimationPlayer(Objects.requireNonNull(PlayerAnimationRegistry.getAnimation(new ResourceLocation("kirbymodremorphed", "haduken")))));
-                            ModMessages.sendToServer(new SecondaryAbilityC2SPacket());
+                        } else if ((player.getItemBySlot(EquipmentSlot.HEAD)).getItem() == ModItems.JET_ABILITY.get()) {
+                            animation.setAnimation(new KeyframeAnimationPlayer(Objects.requireNonNull(PlayerAnimationRegistry.getAnimation(new ResourceLocation("kirbymodremorphed", "jetfly")))));
                         }
                     }
                 }
