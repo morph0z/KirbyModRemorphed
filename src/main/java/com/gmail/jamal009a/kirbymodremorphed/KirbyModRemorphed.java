@@ -6,11 +6,14 @@ import com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModCreativeModTabs;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
+import com.gmail.jamal009a.kirbymodremorphed.particle.ModParticles;
+import com.gmail.jamal009a.kirbymodremorphed.particle.custom.HadukenParticles;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -41,7 +44,9 @@ public class KirbyModRemorphed {
         ModItems.register((modEventBus));
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModParticles.register(modEventBus);
         ModSounds.register(modEventBus);
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -75,6 +80,11 @@ public class KirbyModRemorphed {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.KIRBY.get(), KirbyRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerParticleProvider(RegisterParticleProvidersEvent event){
+            event.registerSpriteSet(ModParticles.HADUKEN_PARTICLES.get(), HadukenParticles.Provider::new);
         }
     }
 }

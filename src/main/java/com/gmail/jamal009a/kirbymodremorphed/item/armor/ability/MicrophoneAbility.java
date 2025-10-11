@@ -26,10 +26,21 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class MicrophoneAbility extends ArmorItem implements GeoItem {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class MicrophoneAbility extends AbilityClass implements GeoItem {
     public MicrophoneAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(ModArmorMaterials.ABILITY, pType, pProperties);
+        super(pMaterial, pType, pProperties);
+        TextColor = "\u00A75";
+
+        HasPrimary = true;
+        HasSecondary = false;
+        HasPassive = false;
+
+        PrimaryName = "Microphone Shout";
+        SecondaryName = "";
+        PassiveName = "";
+
+        HasFlyingAnimation = false;
+        HasFallingAnimation = true;
     }
 
     @Override
@@ -50,51 +61,4 @@ public class MicrophoneAbility extends ArmorItem implements GeoItem {
             }
         });
     }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, 3, state -> {
-            // Apply our generic idle animation.
-            // Whether it plays or not is decided down below.
-            state.setAnimation(DefaultAnimations.IDLE);
-
-            // Let's gather some data from the state to use below
-            // This is the entity that is currently wearing/holding the item
-            Entity entity = state.getData(DataTickets.ENTITY);
-            if (!entity.onGround()) {
-                state.setAnimation(DefaultAnimations.FLY);
-            }
-
-            // We'll just have ArmorStands always animate, so we can return here
-            if (entity instanceof ArmorStand)
-                return PlayState.CONTINUE;
-
-            // For this example, we only want the animation to play if the entity is wearing all pieces of the armor
-            // Let's collect the armor pieces the entity is currently wearing
-            Set<Item> wornArmor = new ObjectOpenHashSet<>();
-
-            for (ItemStack stack : entity.getArmorSlots()) {
-                // We can stop immediately if any of the slots are empty
-                wornArmor.add(stack.getItem());
-            }
-
-            // Check each of the pieces match our set
-            boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
-                    ModItems.MICROPHONE_ABILITY.get()));
-
-            // Play the animation if the full set is being worn, otherwise stop
-            return PlayState.CONTINUE;
-        }));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
-
-//    @Override
-//    public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-//        super.appendHoverText(itemstack, world, list, flag);
-//        list.add(Component.literal("§7jazzy headphones"));
-//    }
 }

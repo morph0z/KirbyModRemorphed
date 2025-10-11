@@ -3,6 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.FighterAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -33,10 +34,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FighterAbility extends ArmorItem implements GeoItem {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class FighterAbility extends AbilityClass implements GeoItem {
     public FighterAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(ModArmorMaterials.ABILITY, pType, pProperties);
+        super(pMaterial, pType, pProperties);
+        TextColor = "\u00A74";
+
+        HasPrimary = true;
+        HasSecondary = true;
+        HasPassive = true;
+
+        PrimaryName = "Fighter Glove";
+        SecondaryName = "Energy Shot";
+        PassiveName = "Strength";
+
+        HasFlyingAnimation = false;
+        HasFallingAnimation = true;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
+        if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), itemstack)) {
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1, 0, true, false));
+        }
+        super.inventoryTick(itemstack, world, entity, slot, selected);
     }
 
     @Override
@@ -57,71 +77,4 @@ public class FighterAbility extends ArmorItem implements GeoItem {
             }
         });
     }
-
-    public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-        super.appendHoverText(itemstack, world, list, flag);
-        list.add(Component.literal("\u00A7c-Primary"));
-        list.add(Component.literal("  Get fighter glove"));
-        list.add(Component.literal("\u00A7c-Secondary"));
-        list.add(Component.literal("  Energy shot"));
-        list.add(Component.literal("\u00A7c-Passive"));
-        list.add(Component.literal("  Strength"));
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, 3, state -> {
-            // Apply our generic idle animation.
-            // Whether it plays or not is decided down below.
-
-            // Let's gather some data from the state to use below
-            // This is the entity that is currently wearing/holding the item
-            Entity entity = state.getData(DataTickets.ENTITY);
-
-            // We'll just have ArmorStands always animate, so we can return here
-            if (entity instanceof ArmorStand)
-                return PlayState.CONTINUE;
-            if (!entity.onGround()) {
-                if (entity.fallDistance > 1) {
-                    state.setAnimation(DefaultAnimations.FLY);
-                } else {
-                    if ((entity.fallDistance < 1) && (entity.fallDistance > 0)) {
-                        state.setAnimation(DefaultAnimations.SIT);
-                    }
-                }
-            }else {
-                state.setAnimation(DefaultAnimations.IDLE);
-            }
-            // For this example, we only want the animation to play if the entity is wearing all pieces of the armor
-            // Let's collect the armor pieces the entity is currently wearing
-            Set<Item> wornArmor = new ObjectOpenHashSet<>();
-
-            for (ItemStack stack : entity.getArmorSlots()) {
-                // We can stop immediately if any of the slots are empty
-                wornArmor.add(stack.getItem());
-            }
-
-            // Check each of the pieces match our set
-            boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
-                    ModItems.FIGHTER_ABILITY.get()));
-
-            // Play the animation if the full set is being worn, otherwise stop
-            return PlayState.CONTINUE;
-        }));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
-
-
-    @Override
-    public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), itemstack)) {
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1, 0, true, false));
-        }
-        super.inventoryTick(itemstack, world, entity, slot, selected);
-    }
-
 }
