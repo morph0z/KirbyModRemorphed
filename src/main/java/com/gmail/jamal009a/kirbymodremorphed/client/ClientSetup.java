@@ -2,8 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.client;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.KiBlastProjectileRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.KiBlastProjectileRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

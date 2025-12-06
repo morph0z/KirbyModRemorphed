@@ -19,8 +19,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, KirbyModRemorphed.MODID);
-    public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
-            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> VOID_FLESH = ITEMS.register("void_flesh",
             VOIDFleshItem::new);
     public static final RegistryObject<Item> JAMBA_CRYSTAL = ITEMS.register("jamba_crystal",
@@ -114,6 +112,7 @@ public class ModItems {
     public static final RegistryObject<Item> CUPID_ABILITY = ITEMS.register("cupid_ability", () -> new CupidAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> FIGHTER_ABILITY = ITEMS.register("fighter_ability", () -> new FighterAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> JET_ABILITY = ITEMS.register("jet_ability", () -> new JetAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> CRASH_ABILITY = ITEMS.register("crash_ability", () -> new CrashAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));

@@ -30,7 +30,7 @@ public class KirbyEntity extends Animal implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
 
-    public KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public  KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

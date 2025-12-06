@@ -86,8 +86,12 @@
   "item.kirbymodremorphed.cupid_ability": "Cupid Ability",
   "item.kirbymodremorphed.fighter_ability": "Fighter Ability",
   "item.kirbymodremorphed.jet_ability": "Jet Ability",
+  "item.kirbymodremorphed.crash_ability": "Crash Ability",
 
   "sounds.kirbymodremorphed.power_up": "Power up",
+  "sounds.kirbymodremorphed.mic_shout_1": "Microphone Shout 1",
+  "sounds.kirbymodremorphed.mic_shout_2": "Microphone Shout 2",
+  "sounds.kirbymodremorphed.mic_shout_3": "Microphone Shout 3",
 
   "creative.abilities_tab": "§dKirby §7Abilities",
   "creative.abilities_items_tab":"§dKirby §7Ability Items",

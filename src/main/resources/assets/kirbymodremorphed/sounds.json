@@ -4,5 +4,23 @@
     "sounds": [
       "kirbymodremorphed:power_up"
     ]
+  },
+  "mic_shout_1": {
+    "subtitle": "sounds.kirbymodremorphed.mic_shout_1",
+    "sounds": [
+      "kirbymodremorphed:mic_shout_1"
+    ]
+  },
+  "mic_shout_2": {
+    "subtitle": "sounds.kirbymodremorphed.mic_shout_2",
+    "sounds": [
+      "kirbymodremorphed:mic_shout_2"
+    ]
+  },
+  "mic_shout_3": {
+    "subtitle": "sounds.kirbymodremorphed.mic_shout_3",
+    "sounds": [
+      "kirbymodremorphed:mic_shout_3"
+    ]
   }
 }

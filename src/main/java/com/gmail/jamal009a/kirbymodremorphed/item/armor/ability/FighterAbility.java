@@ -1,14 +1,20 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
+import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.FighterAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.particle.ModParticles;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -47,7 +53,6 @@ public class FighterAbility extends AbilityClass implements GeoItem {
         SecondaryName = "Energy Shot";
         PassiveName = "Strength";
 
-        HasFlyingAnimation = false;
         HasFallingAnimation = true;
     }
 
@@ -76,5 +81,49 @@ public class FighterAbility extends AbilityClass implements GeoItem {
                 return this.renderer;
             }
         });
+    }
+
+    @Override
+    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+        player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
+        return true;
+    }
+
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        //                    KiBlastProjectileEntity projectile = new KiBlastProjectileEntity(ModEntities.KI_BLAST_PROJECTILE.get(), level);
+//                    projectile.setPos(player.xo, player.yo + 0.65, player.zo);
+//                    projectile.setDeltaMovement(Vec3.directionFromRotation(player.getRotationVector()));
+//                    //Note: Set rotation of projectile to be player rotation
+//                    projectile.setYRot(player.getYHeadRot());
+        double projectileOffsetX = 0;
+        double projectileOffsetY = 1;
+        double projectileOffsetZ = 0;
+
+        double d0 = player.getX();
+        double d1 = player.getY();
+        double d2 = player.getZ();
+
+        double d3 = projectileOffsetX - d0;
+        double d4 = projectileOffsetY - d1;
+        double d5 = projectileOffsetZ - d2;
+//                    KiBlastProjectileEntity kiblast = new KiBlastProjectileEntity(ModEntities.KI_BLAST_PROJECTILE.get(), player, 0, 0, 0, player.level());
+//                    kiblast.setOwner(player);
+//                    kiblast.setDangerous(true);
+//
+//                    kiblast.setPosRaw(d0, d1, d2);
+
+        if (ClientForgeHandler.holdTimeSecondary < 80) {
+            level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(),
+                    player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0,
+                    30, 0, 0, 0, 1);
+        }
+        if (ClientForgeHandler.holdTimeSecondary >= 80) {
+            if (ClientForgeHandler.holdTimeSecondary <= 81) {
+                //player.level().addFreshEntity(projectile);
+                //player.level().addFreshEntity(kiblast);
+            }
+        }
+
+        return true;
     }
 }

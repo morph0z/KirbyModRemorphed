@@ -19,9 +19,16 @@ public class KirbyAbilityMiscItem extends TieredItem {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         amountOfInvTicks += 1;
         if(amountOfInvTicks >= ticksBeforeRemove){
-            Player player = pLevel.getNearestPlayer(pEntity,1); player.getInventory().removeItem(pStack);
-        amountOfInvTicks = 0;}
+            pStack.setDamageValue(pStack.getDamageValue()-1);
+            //Player player = pLevel.getNearestPlayer(pEntity,1); player.getInventory().removeItem(pStack);
+            amountOfInvTicks = 0;
+        }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
+    @Override
+    public boolean onDroppedByPlayer(ItemStack item, Player player) {
+        player.getInventory().removeItem(item);
+        return true;
+    }
 }

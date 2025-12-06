@@ -1,37 +1,27 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
-import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
-import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.JetAbilityRenderer;
-import com.google.common.collect.Iterables;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.network.chat.Component;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
+
+import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler.*;
 
 public class JetAbility extends AbilityClass implements GeoItem {
     public JetAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
@@ -46,7 +36,6 @@ public class JetAbility extends AbilityClass implements GeoItem {
         SecondaryName = "Rocket Fly";
         PassiveName = "";
 
-        HasFlyingAnimation = false;
         HasFallingAnimation = false;
     }
 
@@ -67,5 +56,41 @@ public class JetAbility extends AbilityClass implements GeoItem {
                 return this.renderer;
             }
         });
+    }
+
+    @Override
+    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+        if (amountPressed <= 3) {
+            if (holdTimePrimary <= 10) {
+                if (player.getDirection() == Direction.NORTH) {
+                    player.addDeltaMovement(new Vec3(0, 0.5, -1));
+                } else if (player.getDirection() == Direction.SOUTH) {
+                    player.addDeltaMovement(new Vec3(0, 0.5, 1));
+                } else if (player.getDirection() == Direction.EAST) {
+                    player.addDeltaMovement(new Vec3(1, 0.5, 0));
+                } else if (player.getDirection() == Direction.WEST) {
+                    player.addDeltaMovement(new Vec3(-1, 0.5, 0));
+                }
+                playerAnimationPlay(player, "jetdashmove");
+                level.addParticle(ParticleTypes.FLAME, player.getX(), player.getY() + 1, player.getZ(), 0, 0, 0);
+                level.addParticle(ParticleTypes.FLAME, player.getX() + 1, player.getY() + 1, player.getZ(), 0, 0, 0);
+                level.addParticle(ParticleTypes.FLAME, player.getX() - 1, player.getY() + 1, player.getZ(), 0, 0, 0);
+                level.addParticle(ParticleTypes.FLAME, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            }
+        }
+        if (amountPressed > 3){
+            if (holdTimePrimary >= 50) {
+                amountPressed = 0;
+            }
+        }
+        return true;
+    }
+
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
+        level.sendParticles(ParticleTypes.FLAME,
+                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
+                5, 0, -0.3, 0, 0.4);
+        return true;
     }
 }

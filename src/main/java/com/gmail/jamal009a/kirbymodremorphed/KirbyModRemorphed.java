@@ -2,7 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed;
 
 import com.gmail.jamal009a.kirbymodremorphed.block.ModBlocks;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModCreativeModTabs;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
@@ -61,7 +61,6 @@ public class KirbyModRemorphed {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
-            event.accept(ModItems.SAPPHIRE);
             event.accept(ModItems.VOID_FLESH);
         }
     }

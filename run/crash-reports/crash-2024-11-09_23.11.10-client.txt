@@ -17,8 +17,8 @@ software.bernie.geckolib.GeckoLibException: kirbymodremorphed:animations/kirbyan
 	at software.bernie.geckolib.renderer.GeoEntityRenderer.actuallyRender(GeoEntityRenderer.java:49) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoRenderer.defaultRender(GeoRenderer.java:142) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoEntityRenderer.render(GeoEntityRenderer.java:151) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer.render(KirbyRenderer.java:28) ~[main/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer.render(KirbyRenderer.java:11) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer.render(KirbyRenderer.java:28) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer.render(KirbyRenderer.java:11) ~[main/:?] {re:classloading}
 	at net.minecraft.client.renderer.entity.EntityRenderDispatcher.render(EntityRenderDispatcher.java:140) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 	at net.minecraft.client.renderer.LevelRenderer.renderEntity(LevelRenderer.java:1440) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 	at net.minecraft.client.renderer.LevelRenderer.renderLevel(LevelRenderer.java:1223) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
@@ -63,8 +63,8 @@ Stacktrace:
 	at software.bernie.geckolib.renderer.GeoEntityRenderer.actuallyRender(GeoEntityRenderer.java:49) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoRenderer.defaultRender(GeoRenderer.java:142) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.renderer.GeoEntityRenderer.render(GeoEntityRenderer.java:151) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer.render(KirbyRenderer.java:28) ~[%23196!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer.render(KirbyRenderer.java:11) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer.render(KirbyRenderer.java:28) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer.render(KirbyRenderer.java:11) ~[%23196!/:?] {re:classloading}
 	at net.minecraft.client.renderer.entity.EntityRenderDispatcher.render(EntityRenderDispatcher.java:140) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 	at net.minecraft.client.renderer.LevelRenderer.renderEntity(LevelRenderer.java:1440) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 	at net.minecraft.client.renderer.LevelRenderer.renderLevel(LevelRenderer.java:1223) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
@@ -108,7 +108,7 @@ Stacktrace:
 
 -- Renderer details --
 Details:
-	Assigned renderer: com.gmail.jamal009a.kirbymodremorphed.entity.client.KirbyRenderer@c4c4852
+	Assigned renderer: com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer@c4c4852
 	Location: -1.21,-1.62,-1.41 - World: (-2,-2,-2), Section: (at 14,14,14 in -1,-1,-1; chunk contains blocks -16,-64,-16 to -1,319,-1), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,-64,-512 to -1,319,-1)
 	Rotation: -116.71875
 	Delta: 0.74000025

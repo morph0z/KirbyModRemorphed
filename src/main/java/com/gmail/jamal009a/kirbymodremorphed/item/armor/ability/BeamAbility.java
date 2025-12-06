@@ -7,7 +7,11 @@ import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -47,7 +51,6 @@ public class BeamAbility extends AbilityClass implements GeoItem {
         SecondaryName = "Beam Blast";
         PassiveName = "Speed";
 
-        HasFlyingAnimation = false;
         HasFallingAnimation = false;
     }
 
@@ -76,5 +79,14 @@ public class BeamAbility extends AbilityClass implements GeoItem {
                 return this.renderer;
             }
         });
+    }
+
+    @Override
+    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+        return true;
+    }
+
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        return true;
     }
 }
