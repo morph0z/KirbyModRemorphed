@@ -1,18 +1,29 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
+import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.JetAbilityRenderer;
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -59,34 +70,38 @@ public class JetAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
-        if (amountPressed <= 3) {
-            if (holdTimePrimary <= 10) {
-                if (player.getDirection() == Direction.NORTH) {
-                    player.addDeltaMovement(new Vec3(0, 0.5, -1));
-                } else if (player.getDirection() == Direction.SOUTH) {
-                    player.addDeltaMovement(new Vec3(0, 0.5, 1));
-                } else if (player.getDirection() == Direction.EAST) {
-                    player.addDeltaMovement(new Vec3(1, 0.5, 0));
-                } else if (player.getDirection() == Direction.WEST) {
-                    player.addDeltaMovement(new Vec3(-1, 0.5, 0));
-                }
-                playerAnimationPlay(player, "jetdashmove");
-                level.addParticle(ParticleTypes.FLAME, player.getX(), player.getY() + 1, player.getZ(), 0, 0, 0);
-                level.addParticle(ParticleTypes.FLAME, player.getX() + 1, player.getY() + 1, player.getZ(), 0, 0, 0);
-                level.addParticle(ParticleTypes.FLAME, player.getX() - 1, player.getY() + 1, player.getZ(), 0, 0, 0);
-                level.addParticle(ParticleTypes.FLAME, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player) {
+        if ((holdTimePrimary <= 1) && (amountPrimaryPressed <= 2)) {
+            amountPrimaryPressed ++;
+            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+            if (player.getDirection() == Direction.NORTH) {
+                ClientPlayer.addDeltaMovement(new Vec3(0, 0.5, -1));
+            } else if (player.getDirection() == Direction.SOUTH) {
+                ClientPlayer.addDeltaMovement(new Vec3(0, 0.5, 1));
+            } else if (player.getDirection() == Direction.EAST) {
+                ClientPlayer.addDeltaMovement(new Vec3(1, 0.5, 0));
+            } else if (player.getDirection() == Direction.WEST) {
+                ClientPlayer.addDeltaMovement(new Vec3(-1, 0.5, 0));
             }
-        }
-        if (amountPressed > 3){
-            if (holdTimePrimary >= 50) {
-                amountPressed = 0;
+            level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
+            ClientPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1);
+
+            playerAnimationPlay(ClientPlayer, "jetdashmove");
+            level.sendParticles(player, ParticleTypes.FLAME, false, player.getX(), player.getY(), player.getZ(), 40, 0, 0, 0, 1);
+        } else if (amountPrimaryPressed > 2) {
+            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+            if (holdTimePrimary > 20){
+                level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
+                ClientPlayer.playSound(SoundEvents.FIRE_EXTINGUISH, 1, 1);
+                amountPrimaryPressed = 0;
             }
         }
         return true;
     }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
+        player.addDeltaMovement(new Vec3(0, 1.5,0));
         player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
         level.sendParticles(ParticleTypes.FLAME,
                 player.getX() + 0, player.getY() + 0, player.getZ() + 0,

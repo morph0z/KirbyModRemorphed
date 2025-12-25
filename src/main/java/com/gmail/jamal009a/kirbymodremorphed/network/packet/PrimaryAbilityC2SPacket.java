@@ -51,7 +51,17 @@ public class PrimaryAbilityC2SPacket {
             ServerPlayer player = context.getSender();
             ServerLevel level = (ServerLevel) context.getSender().level();
             assert player != null;
+            if (player.hasItemInSlot(EquipmentSlot.HEAD)) {
+                if (AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) {
+                    AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
+                    if (playersHead.PrimaryAbility(level, player)) {
+                        playersHead.PrimaryAbility(level, player);
+                    }
+                }
+            }
         });
         return true;
     }
+
+    public static void serverExplotion(){}
 }

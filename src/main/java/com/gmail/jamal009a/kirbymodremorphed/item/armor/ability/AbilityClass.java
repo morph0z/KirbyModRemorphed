@@ -7,6 +7,7 @@ import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.FighterAb
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -48,6 +49,8 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     public String PassiveName;
 
     public boolean HasFallingAnimation;
+
+    public int amountPrimaryPressed = 0;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public AbilityClass(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
@@ -98,7 +101,7 @@ public class AbilityClass extends ArmorItem implements GeoItem {
 
     }
 
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){ return false; }
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){ return false; }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
         return false;

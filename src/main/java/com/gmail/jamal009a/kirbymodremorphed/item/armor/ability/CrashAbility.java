@@ -3,13 +3,17 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CrashAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import com.mojang.blaze3d.shaders.Effect;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,6 +27,8 @@ import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
+
+import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler.holdTimePrimary;
 
 public class CrashAbility extends AbilityClass implements GeoItem {
     public CrashAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
@@ -60,15 +66,17 @@ public class CrashAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
         int ChargeTime = 380;
-        if (ClientForgeHandler.holdTimePrimary < ChargeTime) {
+        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+        if (holdTimePrimary <= 1) {
+            ClientPlayer.playSound(SoundEvents.BEACON_AMBIENT, 1, holdTimePrimary/4);
             player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 1, 0, true, false, false));
-            ClientForgeHandler.playerAnimationPlay(player, "crashcharge");
+            ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");
         }
-        if (ClientForgeHandler.holdTimePrimary >= ChargeTime) {
-            level.explode(player, player.getX(), player.getY(), player.getZ(), 30, Level.ExplosionInteraction.NONE);
-            ClientForgeHandler.playerAnimationPlay(player, "crashexplode");
+        if (holdTimePrimary >= ChargeTime) {
+            level.explode(player, player.getX(), player.getY(), player.getZ(), 20, Level.ExplosionInteraction.MOB);
+            ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashexplode");
             player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
         }
         return true;

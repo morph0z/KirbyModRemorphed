@@ -9,6 +9,7 @@ import com.gmail.jamal009a.kirbymodremorphed.particle.ModParticles;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -84,7 +85,7 @@ public class FighterAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
         player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
         return true;
     }
@@ -111,7 +112,7 @@ public class FighterAbility extends AbilityClass implements GeoItem {
 //                    kiblast.setDangerous(true);
 //
 //                    kiblast.setPosRaw(d0, d1, d2);
-
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "haduken");
         if (ClientForgeHandler.holdTimeSecondary < 80) {
             level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(),
                     player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0,

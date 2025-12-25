@@ -3,9 +3,12 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
@@ -55,21 +58,21 @@ public class MicrophoneAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
-        if (amountPressed <= 3) {
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
+        if (holdTimePrimary <= 1) {
+            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+            amountPrimaryPressed++;
             level.explode(player, player.getX(), player.getY(), player.getZ(), 10, Level.ExplosionInteraction.MOB);
-            playerAnimationPlay(player, "micshout");
-            if (amountPressed == 1){
-                player.playSound(ModSounds.MIC_SHOUT_1.get());
-            } else if (amountPressed == 2) {
-                player.playSound(ModSounds.MIC_SHOUT_2.get());
-            } else if (amountPressed == 3) {
-                player.playSound(ModSounds.MIC_SHOUT_3.get());
+            playerAnimationPlay(Minecraft.getInstance().player, "micshout");
+            if (amountPrimaryPressed == 1) {
+                ClientPlayer.playSound(ModSounds.MIC_SHOUT_1.get(), 1, 1);
+            } else if (amountPrimaryPressed == 2) {
+                ClientPlayer.playSound(ModSounds.MIC_SHOUT_2.get(), 1, 1);
+            } else if (amountPrimaryPressed == 3) {
+                ClientPlayer.playSound(ModSounds.MIC_SHOUT_3.get(), 1, 1);
+                player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                amountPrimaryPressed = 0;
             }
-        }else if (amountPressed < 3){
-            //add shout animation
-            player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-            amountPressed = 0;
         }
         return true;
     }

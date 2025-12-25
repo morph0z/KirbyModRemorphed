@@ -39,13 +39,14 @@ public class SecondaryAbilityC2SPacket {
             //SERVER SIDE SHENANIGANS
             ServerPlayer player = context.getSender();
             ServerLevel level = (ServerLevel) context.getSender().level();
-
             assert player != null;
-
-            AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
-
-            if (playersHead.SecondaryAbility(level, player)) {
-                playersHead.SecondaryAbility(level, player);
+            if (player.hasItemInSlot(EquipmentSlot.HEAD)) {
+                if (AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) {
+                    AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
+                    if (playersHead.SecondaryAbility(level, player)) {
+                        playersHead.SecondaryAbility(level, player);
+                    }
+                }
             }
         });
         return true;

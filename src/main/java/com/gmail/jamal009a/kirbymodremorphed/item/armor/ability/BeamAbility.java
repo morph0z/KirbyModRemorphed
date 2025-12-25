@@ -82,7 +82,7 @@ public class BeamAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ClientLevel level, AbstractClientPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
         return true;
     }
 
