@@ -67,7 +67,7 @@ public class CrashAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
-        int ChargeTime = 380;
+        int ChargeTime = 20;
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
         if (holdTimePrimary <= 1) {
             ClientPlayer.playSound(SoundEvents.BEACON_AMBIENT, 1, holdTimePrimary/4);

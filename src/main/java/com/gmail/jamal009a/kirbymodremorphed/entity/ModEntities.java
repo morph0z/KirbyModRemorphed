@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +25,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<KiBlastProjectileEntity>> KI_BLAST_PROJECTILE =
             ENTITY_TYPES.register("ki_blast_projectile",
-                () -> EntityType.Builder.of(KiBlastProjectileEntity::new, MobCategory.MISC)
+                () -> EntityType.Builder.of((EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) -> new KiBlastProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .build("ki_blast_projectile"));
 

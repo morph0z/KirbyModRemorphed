@@ -1,11 +1,19 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
+import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.registries.RegistryObject;
 
 public abstract class AbstractAbilityProjectile extends Projectile {
@@ -40,4 +48,6 @@ public abstract class AbstractAbilityProjectile extends Projectile {
         }
 
     }
+
+    protected abstract void onHitEntity(EntityHitResult result);
 }

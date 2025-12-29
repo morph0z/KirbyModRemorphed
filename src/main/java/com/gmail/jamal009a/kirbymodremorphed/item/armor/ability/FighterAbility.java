@@ -1,6 +1,9 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
+import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.FighterAbilityRenderer;
@@ -13,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.core.Rotations;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,8 +27,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -91,27 +97,19 @@ public class FighterAbility extends AbilityClass implements GeoItem {
     }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
-        //                    KiBlastProjectileEntity projectile = new KiBlastProjectileEntity(ModEntities.KI_BLAST_PROJECTILE.get(), level);
-//                    projectile.setPos(player.xo, player.yo + 0.65, player.zo);
-//                    projectile.setDeltaMovement(Vec3.directionFromRotation(player.getRotationVector()));
-//                    //Note: Set rotation of projectile to be player rotation
-//                    projectile.setYRot(player.getYHeadRot());
-        double projectileOffsetX = 0;
-        double projectileOffsetY = 1;
-        double projectileOffsetZ = 0;
+        Vec3 playerLookDirection = player.getLookAngle();
+        double lookX = playerLookDirection.x;
+        double lookY = playerLookDirection.y;
+        double lookZ = playerLookDirection.z;
+        KiBlastProjectileEntity KiBlast = new KiBlastProjectileEntity(player, player.level(), lookX, lookY, lookZ);
+        KiBlast.lerpMotion(lookX, lookY, lookZ);
+        KiBlast.setOwner(player);
+        //KiBlast.setDangerous(true);
 
-        double d0 = player.getX();
-        double d1 = player.getY();
-        double d2 = player.getZ();
+        KiBlast.setPosRaw(player.getX() + lookX * 1.5,
+                              player.getEyeY() - 0.1,
+                              player.getZ() + lookZ * 1.5);
 
-        double d3 = projectileOffsetX - d0;
-        double d4 = projectileOffsetY - d1;
-        double d5 = projectileOffsetZ - d2;
-//                    KiBlastProjectileEntity kiblast = new KiBlastProjectileEntity(ModEntities.KI_BLAST_PROJECTILE.get(), player, 0, 0, 0, player.level());
-//                    kiblast.setOwner(player);
-//                    kiblast.setDangerous(true);
-//
-//                    kiblast.setPosRaw(d0, d1, d2);
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "haduken");
         if (ClientForgeHandler.holdTimeSecondary < 80) {
             level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(),
@@ -121,7 +119,8 @@ public class FighterAbility extends AbilityClass implements GeoItem {
         if (ClientForgeHandler.holdTimeSecondary >= 80) {
             if (ClientForgeHandler.holdTimeSecondary <= 81) {
                 //player.level().addFreshEntity(projectile);
-                //player.level().addFreshEntity(kiblast);
+                level.addFreshEntity(KiBlast);
+
             }
         }
 
