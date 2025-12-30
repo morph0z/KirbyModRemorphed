@@ -9,6 +9,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -36,6 +37,10 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         super(ModEntities.KI_BLAST_PROJECTILE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
         this.setOwner(pShooter);
         this.setRot(pShooter.getYRot(), pShooter.getXRot());
+    }
+
+    public KiBlastProjectileEntity(Level level) {
+        super(ModEntities.KI_BLAST_PROJECTILE.get(), level);
     }
 
 

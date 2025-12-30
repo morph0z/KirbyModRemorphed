@@ -2,6 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.client;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.CupidArrowProjectileRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.KiBlastProjectileRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,5 +16,6 @@ public class ClientSetup {
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntities.KI_BLAST_PROJECTILE.get(), KiBlastProjectileRenderer::new);
+        EntityRenderers.register(ModEntities.CUPID_ARROW.get(), CupidArrowProjectileRenderer::new);
     }
 }

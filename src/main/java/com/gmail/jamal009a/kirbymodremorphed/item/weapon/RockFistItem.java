@@ -3,7 +3,6 @@ package com.gmail.jamal009a.kirbymodremorphed.item.weapon;
 
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.KirbyAbilityItems.KirbyAbilityAxeItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;

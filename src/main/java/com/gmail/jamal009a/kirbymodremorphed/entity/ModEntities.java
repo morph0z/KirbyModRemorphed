@@ -2,6 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.entity;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.CupidArrowProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -28,6 +29,12 @@ public class ModEntities {
                 () -> EntityType.Builder.of((EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) -> new KiBlastProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .build("ki_blast_projectile"));
+
+    public static final RegistryObject<EntityType<CupidArrowProjectileEntity>> CUPID_ARROW =
+            ENTITY_TYPES.register("cupid_arrow",
+                    () -> EntityType.Builder.of((EntityType<CupidArrowProjectileEntity> pEntityType, Level pLevel) -> new CupidArrowProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .build("cupid_arrow"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

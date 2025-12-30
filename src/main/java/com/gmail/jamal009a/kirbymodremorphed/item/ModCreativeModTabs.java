@@ -35,6 +35,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.FIGHTER_GLOVE.get());
                         pOutput.accept(ModItems.MECH_FIST.get());
                         pOutput.accept(ModItems.ROCK_FIST.get());
+                        pOutput.accept(ModItems.CUPID_BOW.get());
                     })
                     .build());
     public  static  final RegistryObject<CreativeModeTab> FOOD_TAB = CREATIVE_MODE_TABS.register("food_tab",

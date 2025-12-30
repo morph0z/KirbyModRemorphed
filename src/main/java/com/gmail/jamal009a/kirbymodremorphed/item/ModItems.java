@@ -41,6 +41,7 @@ public class ModItems {
             LapisgemaItem::new);
     public static final RegistryObject<Item> MIRROR_SHARD = ITEMS.register("mirror_shard",
             MirrorShardItem::new);
+
     public static final RegistryObject<Item> MAXIM_TOMATO = ITEMS.register("maxim_tomato",
             () -> new Item(new Item.Properties().food(ModFoods.MAXIM_TOMATO)));
     public static final RegistryObject<Item> BAGEL = ITEMS.register("bagel",
@@ -81,12 +82,15 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoods.SUSHI)));
     public static final RegistryObject<Item> INVINCIBLE_CANDY = ITEMS.register("invincible_candy",
             InvincibleCandy::new);
+
     public static final RegistryObject<Item> META_KNIGHTS_SWORD = ITEMS.register("meta_knights_sword",
             MetaKnightsSwordItem::new);
     public static final RegistryObject<Item> META_KNIGHTS_MASK = ITEMS.register("meta_knights_mask", () -> new MetaKnightArmor(ModArmorMaterials.META_KNIGHT, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> META_KNIGHTS_WINGS = ITEMS.register("meta_knights_wings", () -> new MetaKnightArmor(ModArmorMaterials.META_KNIGHT, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
     public static final RegistryObject<Item> DARK_META_KNIGHT_SWORD = ITEMS.register("dark_meta_knights_sword",
             DarkMetaKightSwordItem::new);
+
     public static final RegistryObject<Item> FIGHTER_GLOVE = ITEMS.register("fighter_glove",
             FighterGloveItem::new);
     public static final RegistryObject<Item> FLAM_SWORD = ITEMS.register("flam_sword",
@@ -105,15 +109,22 @@ public class ModItems {
             MechFistItem::new);
     public static final RegistryObject<Item> ROCK_FIST = ITEMS.register("rock_fist",
             RockFistItem::new);
+
+    public static final RegistryObject<Item> CUPID_BOW = ITEMS.register("cupid_bow",
+            CupidBowItem::new);
+
     public static final RegistryObject<Item> BASIC_SPEAR = ITEMS.register("basic_spear",
             BasicSpearItem::new);
+
     public static final RegistryObject<Item> BEAM_ABILITY = ITEMS.register("beam_ability", () -> new BeamAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> MICROPHONE_ABILITY = ITEMS.register("microphone_ability", () -> new MicrophoneAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> CUPID_ABILITY = ITEMS.register("cupid_ability", () -> new CupidAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> FIGHTER_ABILITY = ITEMS.register("fighter_ability", () -> new FighterAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> JET_ABILITY = ITEMS.register("jet_ability", () -> new JetAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> CRASH_ABILITY = ITEMS.register("crash_ability", () -> new CrashAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));
     }

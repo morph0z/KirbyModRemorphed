@@ -1,14 +1,12 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
-import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
+import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
 import com.google.common.collect.Iterables;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,27 +14,16 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class CupidAbility extends AbilityClass implements GeoItem {
@@ -84,10 +71,17 @@ public class CupidAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
+        player.addItem(new ItemStack(ModItems.CUPID_BOW.get()));
         return true;
     }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
+        player.addDeltaMovement(new Vec3(0, 1.5,0));
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
+        level.sendParticles(ParticleTypes.CLOUD,
+                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
+                5, 0, -0.3, 0, 0.4);
         return true;
     }
 }
