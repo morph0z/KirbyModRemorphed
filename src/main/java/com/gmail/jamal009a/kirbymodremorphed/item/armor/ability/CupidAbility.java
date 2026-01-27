@@ -6,9 +6,13 @@ import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbil
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -71,17 +75,32 @@ public class CupidAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        if (stage != -1) {return true;}
+        if (player.getInventory().contains(new ItemStack(ModItems.CUPID_BOW.get()))){return false;}
         player.addItem(new ItemStack(ModItems.CUPID_BOW.get()));
         return true;
     }
 
-    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+    public void CupidFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
-        player.addDeltaMovement(new Vec3(0, 1.5,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
+        ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) (power*5), 3, false, false));
         level.sendParticles(ParticleTypes.CLOUD,
                 player.getX() + 0, player.getY() + 0, player.getZ() + 0,
-                5, 0, -0.3, 0, 0.4);
+                Math.round(5*power), 0, -0.3, 0, 0.4);
+    }
+
+    float secondaryLaunchPower = 5;
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
+        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+
+        if (stage == 1){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/3);}
+        if (stage == 2){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
+        if (stage == 3){
+            CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));
+            player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
+        }
         return true;
     }
 }

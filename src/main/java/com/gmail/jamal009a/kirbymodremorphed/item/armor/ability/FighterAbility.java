@@ -72,48 +72,32 @@ public class FighterAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        if (stage == -1) {
-            player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
-        }
+        if (stage != -1) {return true;}
+        if (player.getInventory().contains(new ItemStack(ModItems.FIGHTER_GLOVE.get()))){return false;}
+        player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
         return true;
     }
 
-    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
-        System.out.println(ClientForgeHandler.holdTimeSecondary);
-        player.displayClientMessage(
-                Component.literal(String.valueOf(ClientForgeHandler.holdTimeSecondary)),
-                true
-        );
+    public void shootKiBlast(ServerLevel level, ServerPlayer player, float power){
         Vec3 playerLookDirection = player.getLookAngle();
         double lookX = playerLookDirection.x;
         double lookY = playerLookDirection.y;
         double lookZ = playerLookDirection.z;
-        KiBlastProjectileEntity KiBlast = new KiBlastProjectileEntity(player, player.level(), lookX, lookY, lookZ);
+        KiBlastProjectileEntity KiBlast = new KiBlastProjectileEntity(player, player.level(), lookX, lookY, lookZ, power);
         KiBlast.lerpMotion(lookX, lookY, lookZ);
         KiBlast.setOwner(player);
-        //KiBlast.setDangerous(true);
+        KiBlast.setPosRaw(player.getX() + lookX * 1.5, player.getEyeY() - 0.1, player.getZ() + lookZ * 1.5);
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "hadukenshoot");
+        level.addFreshEntity(KiBlast);
+        level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(), player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0, Math.round(10*power), 0, 0, 0, 1);
+    }
 
-        KiBlast.setPosRaw(player.getX() + lookX * 1.5,
-                              player.getEyeY() - 0.1,
-                              player.getZ() + lookZ * 1.5);
-
-        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "haduken");
-        if (ClientForgeHandler.holdTimeSecondary < 80) {
-            level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(),
-                    player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0,
-                    30, 0, 0, 0, 1);
-        }
-        if (ClientForgeHandler.holdTimeSecondary >= 80) {
-            if (ClientForgeHandler.holdTimeSecondary <= 81) {
-                //player.level().addFreshEntity(projectile);
-                for (int i = 0; i < player.yHeadRot; i++){
-                    KiBlast.yRotO = i;
-                }
-                level.addFreshEntity(KiBlast);
-
-            }
-        }
-
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "hadukencharge");
+        level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(), player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0, 30, 0, 0, 0, 1);
+        if (stage == 1){shootKiBlast(level, player, 1);}
+        if (stage == 2){shootKiBlast(level, player, 2);}
+        if (stage == 3){shootKiBlast(level, player, 2.5F);}
         return true;
     }
 }

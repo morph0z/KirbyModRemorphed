@@ -33,9 +33,10 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         super(pEntityType, pLevel);
     }
 
-    public KiBlastProjectileEntity(LivingEntity pShooter, Level pLevel, double pOffsetX, double pOffsetY, double pOffsetZ) {
+    public KiBlastProjectileEntity(LivingEntity pShooter, Level pLevel, double pOffsetX, double pOffsetY, double pOffsetZ, float Damage) {
         super(ModEntities.KI_BLAST_PROJECTILE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
         this.setOwner(pShooter);
+        this.DamageMultiplyer = Damage;
         this.setRot(pShooter.getYRot(), pShooter.getXRot());
     }
 
@@ -43,6 +44,7 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         super(ModEntities.KI_BLAST_PROJECTILE.get(), level);
     }
 
+    float DamageMultiplyer;
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
@@ -52,7 +54,7 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
 
         DamageSource source = this.damageSources().indirectMagic(this, owner);
 
-        float damage = 8.0F; // your damage value here
+        float damage = 4.0F * DamageMultiplyer; // your damage value here
 
         target.hurt(source, damage);
     }

@@ -1,5 +1,6 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
+import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.client.Minecraft;
@@ -55,23 +56,27 @@ public class MicrophoneAbility extends AbilityClass implements GeoItem {
         });
     }
 
+    //Todo: always uses the third blast FIX
+    public void CrashOut(ServerLevel level, LocalPlayer ClientPlayer, ServerPlayer player, float power){
+        playerAnimationPlay(Minecraft.getInstance().player, "micshout");
+        level.explode(player, player.getX(), player.getY(), player.getZ(), 5*power, Level.ExplosionInteraction.MOB);
+        if (amountPrimaryPressed == 1) {
+            ClientPlayer.playSound(ModSounds.MIC_SHOUT_1.get(), 1, 1);
+        } else if (amountPrimaryPressed == 2) {
+            ClientPlayer.playSound(ModSounds.MIC_SHOUT_2.get(), 1, 1);
+        } else if (amountPrimaryPressed == 3) {
+            ClientPlayer.playSound(ModSounds.MIC_SHOUT_3.get(), 1, 1);
+            player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+            amountPrimaryPressed = 0;
+        }
+    }
+
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        if (holdTimePrimary <= 1) {
-            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-            amountPrimaryPressed++;
-            level.explode(player, player.getX(), player.getY(), player.getZ(), 10, Level.ExplosionInteraction.MOB);
-            playerAnimationPlay(Minecraft.getInstance().player, "micshout");
-            if (amountPrimaryPressed == 1) {
-                ClientPlayer.playSound(ModSounds.MIC_SHOUT_1.get(), 1, 1);
-            } else if (amountPrimaryPressed == 2) {
-                ClientPlayer.playSound(ModSounds.MIC_SHOUT_2.get(), 1, 1);
-            } else if (amountPrimaryPressed == 3) {
-                ClientPlayer.playSound(ModSounds.MIC_SHOUT_3.get(), 1, 1);
-                player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                amountPrimaryPressed = 0;
-            }
-        }
+        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+        if (stage == 1) {amountPrimaryPressed++; CrashOut(level, ClientPlayer, player, 1);}
+        if (stage == 2){amountPrimaryPressed++; CrashOut(level, ClientPlayer, player, 2);}
+        if (stage == 3){amountPrimaryPressed++; CrashOut(level, ClientPlayer, player, 3);}
         return true;
     }
 }

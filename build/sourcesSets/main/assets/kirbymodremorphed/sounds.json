@@ -22,5 +22,23 @@
     "sounds": [
       "kirbymodremorphed:mic_shout_3"
     ]
+  },
+  "ability_charge_1": {
+    "subtitle": "sounds.kirbymodremorphed.ability_charge_1",
+    "sounds": [
+      "kirbymodremorphed:ability_charge_1"
+    ]
+  },
+  "ability_charge_2": {
+    "subtitle": "sounds.kirbymodremorphed.ability_charge_2",
+    "sounds": [
+      "kirbymodremorphed:ability_charge_2"
+    ]
+  },
+  "ability_charge_3": {
+    "subtitle": "sounds.kirbymodremorphed.ability_charge_3",
+    "sounds": [
+      "kirbymodremorphed:ability_charge_3"
+    ]
   }
 }

@@ -87,7 +87,7 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     /// set stage to -1 if there are no stages
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){ return false; }
 
-    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         return false;
     }
 }

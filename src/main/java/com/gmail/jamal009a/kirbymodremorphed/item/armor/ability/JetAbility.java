@@ -62,62 +62,51 @@ public class JetAbility extends AbilityClass implements GeoItem {
         });
     }
 
-    float primaryLaunchPower = 1;
+    public void JetDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
+        if (player.getDirection() == Direction.NORTH) {
+            ClientPlayer.addDeltaMovement(new Vec3(0, power/5, -power));
+        } else if (player.getDirection() == Direction.SOUTH) {
+            ClientPlayer.addDeltaMovement(new Vec3(0, power/5, power));
+        } else if (player.getDirection() == Direction.EAST) {
+            ClientPlayer.addDeltaMovement(new Vec3(power, power/5, 0));
+        } else if (player.getDirection() == Direction.WEST) {
+            ClientPlayer.addDeltaMovement(new Vec3(-power, power/5, 0));
+        }
+        level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
+        ClientPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1);
+        level.sendParticles(ParticleTypes.FLAME,
+                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
+                Math.round(5*power), 0, -0.3, 0, 0.4);
+    }
+    public void JetFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
+        ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) (power*5), 3, false, false));
+        level.sendParticles(ParticleTypes.FLAME,
+                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
+                Math.round(5*power), 0, -0.3, 0, 0.4);
+    }
 
+    float primaryLaunchPower = 2;
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage) {
-        System.out.println(holdTimePrimary);
-        if (stage == 1){
-            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-            if (player.getDirection() == Direction.NORTH) {
-                ClientPlayer.addDeltaMovement(new Vec3(0, primaryLaunchPower/10, -primaryLaunchPower/5));
-            } else if (player.getDirection() == Direction.SOUTH) {
-                ClientPlayer.addDeltaMovement(new Vec3(0, primaryLaunchPower/10, primaryLaunchPower/5));
-            } else if (player.getDirection() == Direction.EAST) {
-                ClientPlayer.addDeltaMovement(new Vec3(primaryLaunchPower/5, primaryLaunchPower/10, 0));
-            } else if (player.getDirection() == Direction.WEST) {
-                ClientPlayer.addDeltaMovement(new Vec3(-primaryLaunchPower/5, primaryLaunchPower/10, 0));
-            }
-            level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
-            ClientPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1);
-        }
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetdash");
+        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
 
-
-//        if ((holdTimePrimary <= 1) && (amountPrimaryPressed <= 2)) {
-//            amountPrimaryPressed ++;
-//            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-//            if (player.getDirection() == Direction.NORTH) {
-//                ClientPlayer.addDeltaMovement(new Vec3(0, 0.5, -1));
-//            } else if (player.getDirection() == Direction.SOUTH) {
-//                ClientPlayer.addDeltaMovement(new Vec3(0, 0.5, 1));
-//            } else if (player.getDirection() == Direction.EAST) {
-//                ClientPlayer.addDeltaMovement(new Vec3(1, 0.5, 0));
-//            } else if (player.getDirection() == Direction.WEST) {
-//                ClientPlayer.addDeltaMovement(new Vec3(-1, 0.5, 0));
-//            }
-//            level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
-//            ClientPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1);
-//
-//            playerAnimationPlay(ClientPlayer, "jetdashmove");
-//            level.sendParticles(player, ParticleTypes.FLAME, false, player.getX(), player.getY(), player.getZ(), 40, 0, 0, 0, 1);
-//        } else if (amountPrimaryPressed > 2) {
-//            LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-//            if (holdTimePrimary > 20){
-//                level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
-//                ClientPlayer.playSound(SoundEvents.FIRE_EXTINGUISH, 1, 1);
-//                amountPrimaryPressed = 0;
-//            }
-//        }
+        if (stage == 1){JetDash(ClientPlayer, player, level, primaryLaunchPower/5);}
+        if (stage == 2){JetDash(ClientPlayer, player, level, primaryLaunchPower/2);}
+        if (stage == 3){JetDash(ClientPlayer, player, level, (float) (primaryLaunchPower * 1.5));}
         return true;
     }
 
-    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+    float secondaryLaunchPower = 5;
+    @Override
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
-        player.addDeltaMovement(new Vec3(0, 1.5,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
-        level.sendParticles(ParticleTypes.FLAME,
-                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
-                5, 0, -0.3, 0, 0.4);
+        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+
+        if (stage == 1){JetFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
+        if (stage == 2){JetFly(ClientPlayer, player, level, secondaryLaunchPower);}
+        if (stage == 3){JetFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
         return true;
     }
 }

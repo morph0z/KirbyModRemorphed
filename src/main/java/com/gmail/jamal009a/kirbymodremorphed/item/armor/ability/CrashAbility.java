@@ -59,20 +59,18 @@ public class CrashAbility extends AbilityClass implements GeoItem {
         });
     }
 
+    public void CrashOut(ServerLevel level, ServerPlayer player, float power){
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashexplode");
+        level.explode(player, player.getX(), player.getY(), player.getZ(), 5*power, Level.ExplosionInteraction.MOB);
+        player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+    }
+
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        int ChargeTime = 20;
-        LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-        if (holdTimePrimary <= 1) {
-            ClientPlayer.playSound(SoundEvents.BEACON_AMBIENT, 1, holdTimePrimary/4);
-            player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 1, 0, true, false, false));
-            ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");
-        }
-        if (holdTimePrimary >= ChargeTime) {
-            level.explode(player, player.getX(), player.getY(), player.getZ(), 20, Level.ExplosionInteraction.MOB);
-            ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashexplode");
-            player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-        }
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");
+        if (stage == 1){CrashOut(level, player, 1);}
+        if (stage == 2){CrashOut(level, player, 2);}
+        if (stage == 3){CrashOut(level, player, 4);}
         return true;
     }
 }

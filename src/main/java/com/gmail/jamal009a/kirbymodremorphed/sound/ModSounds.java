@@ -18,6 +18,10 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent>MIC_SHOUT_2 = registerSoundEvents("mic_shout_2");
     public static final RegistryObject<SoundEvent>MIC_SHOUT_3 = registerSoundEvents("mic_shout_3");
 
+    public static final RegistryObject<SoundEvent>ABILITY_CHARGE_1 = registerSoundEvents("ability_charge_1");
+    public static final RegistryObject<SoundEvent>ABILITY_CHARGE_2 = registerSoundEvents("ability_charge_2");
+    public static final RegistryObject<SoundEvent>ABILITY_CHARGE_3 = registerSoundEvents("ability_charge_3");
+
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(KirbyModRemorphed.MODID, name)));
     }

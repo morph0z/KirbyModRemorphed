@@ -12,11 +12,18 @@ import org.slf4j.LoggerFactory;
 
 import java.util.function.Supplier;
 
+import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler.*;
+
 public class PrimaryAbilityC2SPacket {
     private static final Logger log = LoggerFactory.getLogger(PrimaryAbilityC2SPacket.class);
+    public static boolean abilityActive;
 
     public PrimaryAbilityC2SPacket(){
 
+    }
+
+    public PrimaryAbilityC2SPacket(boolean ActivateAbility){
+        abilityActive = ActivateAbility;
     }
 
     public PrimaryAbilityC2SPacket(FriendlyByteBuf buf){
@@ -27,9 +34,6 @@ public class PrimaryAbilityC2SPacket {
 
     }
 
-    int stageOneTickLength = 40;
-    int stageTwoTickLength = 80;
-
     public boolean handle(Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
@@ -37,26 +41,22 @@ public class PrimaryAbilityC2SPacket {
             ServerPlayer player = context.getSender();
             ServerLevel level = (ServerLevel) context.getSender().level();
             assert player != null;
-            if (player.hasItemInSlot(EquipmentSlot.HEAD)) {
-                if (AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) {
-                    AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
-                    if (playersHead.PrimaryAbility(level, player, -1)) {
-                        playersHead.PrimaryAbility(level, player, -1);
-                        if (ClientForgeHandler.holdTimePrimary <= stageOneTickLength) {
-                            System.out.println("Stage 1");
-                            playersHead.PrimaryAbility(level, player, 1);
-                        }
-                        if ((ClientForgeHandler.holdTimePrimary >= stageOneTickLength) && (ClientForgeHandler.holdTimePrimary < stageTwoTickLength)) {
-                            System.out.println("Stage 2");
-                            playersHead.PrimaryAbility(level, player, 2);
-                        }
-                        if (ClientForgeHandler.holdTimePrimary >= stageTwoTickLength) {
-                            System.out.println("Stage 3");
-                            playersHead.PrimaryAbility(level, player, 3);
-                        }
-                    }
-                }
-            }
+            if (!abilityActive){return;}
+            if (!player.hasItemInSlot(EquipmentSlot.HEAD)) {return;}
+            if (!AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) {return;}
+
+            AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
+            if (!playersHead.PrimaryAbility(level, player, -1)) {return;}
+
+            playersHead.PrimaryAbility(level, player, -1);
+            if ((holdTimePrimary <= stageOneTickLength) && (holdTimePrimary != 0)) {playersHead.PrimaryAbility(level, player, 1);}
+            if ((holdTimePrimary >= stageOneTickLength) && (holdTimePrimary < stageTwoTickLength)) {playersHead.PrimaryAbility(level, player, 2);}
+            if (holdTimePrimary >= stageTwoTickLength) {playersHead.PrimaryAbility(level, player, 3);}
+            holdTimePrimary = 0;
+
+            playPrimaryFirstSoundOnce = false;
+            playPrimarySecondSoundOnce = false;
+            playPrimaryThirdSoundOnce = false;
         });
         return true;
     }
