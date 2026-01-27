@@ -94,6 +94,9 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         return 0.95F;
     }
 
+    @Override
+    protected void updateRotation() {}
+
     public void tick() {
         Entity shooter = this.getOwner();
         if (this.level().isClientSide || (shooter == null || !shooter.isRemoved()) && this.level().hasChunkAt(this.blockPosition())) {
@@ -104,11 +107,11 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
                 this.onHit(hitresult);
             }
 
-            float f = this.getInertia();
+            float inertia = this.getInertia();
 
             this.checkInsideBlocks();
             Vec3 deltaMovement = this.getDeltaMovement();
-            this.setDeltaMovement(deltaMovement.add(this.xPower, this.yPower, this.zPower).scale((double)f));
+            this.setDeltaMovement(deltaMovement.add(this.xPower, this.yPower, this.zPower).scale(inertia));
 
             Vec3 motion = this.getDeltaMovement();
 
@@ -144,7 +147,7 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
                                                 deltaMovement.x, deltaMovement.y, deltaMovement.z);
                 }
 
-                f = 0.8F;
+                inertia = 0.8F;
             }
 
 

@@ -2,15 +2,9 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CrashAbilityRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
-import com.mojang.blaze3d.shaders.Effect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -66,7 +60,7 @@ public class CrashAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
         int ChargeTime = 20;
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
         if (holdTimePrimary <= 1) {

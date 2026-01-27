@@ -14,16 +14,16 @@ public class CupidArrowProjectileEntity extends AbstractArrow {
         super(pEntityType, pLevel);
     }
 
+    public CupidArrowProjectileEntity(LivingEntity player, Level level) {
+        super(ModEntities.CUPID_ARROW.get(), player, level);
+    }
+
     protected CupidArrowProjectileEntity(EntityType<? extends AbstractArrow> pEntityType, double pX, double pY, double pZ, Level pLevel) {
         super(pEntityType, pX, pY, pZ, pLevel);
     }
 
     protected CupidArrowProjectileEntity(EntityType<? extends AbstractArrow> pEntityType, LivingEntity pShooter, Level pLevel) {
         super(pEntityType, pShooter, pLevel);
-    }
-
-    public CupidArrowProjectileEntity(LivingEntity player, Level level) {
-        super(ModEntities.CUPID_ARROW.get(), player, level);
     }
 
     @Override

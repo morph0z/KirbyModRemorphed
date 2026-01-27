@@ -1,22 +1,13 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
-import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
-import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.FighterAbilityRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.particle.ModParticles;
 import com.google.common.collect.Iterables;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.core.Rotations;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,26 +16,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class FighterAbility extends AbilityClass implements GeoItem {
@@ -91,12 +71,19 @@ public class FighterAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
-        player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        if (stage == -1) {
+            player.addItem(new ItemStack(ModItems.FIGHTER_GLOVE.get()));
+        }
         return true;
     }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player){
+        System.out.println(ClientForgeHandler.holdTimeSecondary);
+        player.displayClientMessage(
+                Component.literal(String.valueOf(ClientForgeHandler.holdTimeSecondary)),
+                true
+        );
         Vec3 playerLookDirection = player.getLookAngle();
         double lookX = playerLookDirection.x;
         double lookY = playerLookDirection.y;
@@ -119,6 +106,9 @@ public class FighterAbility extends AbilityClass implements GeoItem {
         if (ClientForgeHandler.holdTimeSecondary >= 80) {
             if (ClientForgeHandler.holdTimeSecondary <= 81) {
                 //player.level().addFreshEntity(projectile);
+                for (int i = 0; i < player.yHeadRot; i++){
+                    KiBlast.yRotO = i;
+                }
                 level.addFreshEntity(KiBlast);
 
             }

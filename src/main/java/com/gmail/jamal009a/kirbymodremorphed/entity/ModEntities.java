@@ -2,10 +2,11 @@ package com.gmail.jamal009a.kirbymodremorphed.entity;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.BeamProjectileEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.BeamWaveProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.CupidArrowProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.Level;
@@ -29,6 +30,18 @@ public class ModEntities {
                 () -> EntityType.Builder.of((EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) -> new KiBlastProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .build("ki_blast_projectile"));
+
+    public static final RegistryObject<EntityType<BeamProjectileEntity>> BEAM_PROJECTILE =
+            ENTITY_TYPES.register("beam_projectile",
+                    () -> EntityType.Builder.of((EntityType<BeamProjectileEntity> pEntityType, Level pLevel) -> new BeamProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .build("beam_projectile"));
+
+    public static final RegistryObject<EntityType<BeamWaveProjectileEntity>> BEAM_WAVE_PROJECTILE =
+            ENTITY_TYPES.register("beam_wave_projectile",
+                    () -> EntityType.Builder.of((EntityType<BeamWaveProjectileEntity> pEntityType, Level pLevel) -> new BeamWaveProjectileEntity(pEntityType, pLevel), MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .build("beam_wave_projectile"));
 
     public static final RegistryObject<EntityType<CupidArrowProjectileEntity>> CUPID_ARROW =
             ENTITY_TYPES.register("cupid_arrow",

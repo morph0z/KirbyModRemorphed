@@ -70,7 +70,7 @@ public class CupidAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
         player.addItem(new ItemStack(ModItems.CUPID_BOW.get()));
         return true;
     }

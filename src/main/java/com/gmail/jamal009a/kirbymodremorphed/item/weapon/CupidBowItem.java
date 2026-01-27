@@ -32,6 +32,7 @@ public class CupidBowItem extends KirbyAbilityBowItem {
         if (power < 0.1F) return;
 
         CupidArrowProjectileEntity projectile = new CupidArrowProjectileEntity(player, level);
+        projectile.setBaseDamage(7.5D);
         projectile.shootFromRotation(
                 player,
                 player.getXRot(),

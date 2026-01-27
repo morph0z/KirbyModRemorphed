@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -27,9 +28,12 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = KirbyModRemorphed.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientForgeHandler {
     public static int holdTimeSecondary = 0;
-    public static int holdTimePrimary = 0;
-    static int giveCooldown = 0;
+    static boolean wasSecondaryKeyPressed = false;
 
+    public static int holdTimePrimary = 0;
+    public static boolean wasPrimaryKeyPressed = false;
+
+    static int giveCooldown = 0;
 
     public static void playerAnimationPlay(AbstractClientPlayer player, String animationName){
         var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData(player).get(new ResourceLocation(KirbyModRemorphed.MODID, "animation"));
@@ -42,23 +46,28 @@ public class ClientForgeHandler {
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event){
         Minecraft minecraft = Minecraft.getInstance();
+        
+        boolean isPrimaryCurrentlyPressed = ModKeybindings.INSTANCE.primaryAbilityUse.isDown();
+        boolean isSecondaryCurrentlyPressed = ModKeybindings.INSTANCE.secondaryAbilityUse.isDown();
 
-        //adds one every tick
-        //therefore 1giveCooldown= 1 =1tick
-        giveCooldown += 1;
+        if (isPrimaryCurrentlyPressed) {holdTimePrimary += 1;} else if (!isPrimaryCurrentlyPressed) {holdTimePrimary = 0;}
+        if (isSecondaryCurrentlyPressed) {holdTimeSecondary += 1;} else if (!isSecondaryCurrentlyPressed) {holdTimeSecondary = 0;}
 
-        var player = minecraft.player;
-        assert player != null;
+        if (minecraft.screen == null) {
 
-        if(ModKeybindings.INSTANCE.primaryAbilityUse.isDown()){holdTimePrimary += 1;} else if (!ModKeybindings.INSTANCE.primaryAbilityUse.isDown()) {holdTimePrimary = 0;}
-        if(ModKeybindings.INSTANCE.primaryAbilityUse.consumeClick()){
-            ModMessages.sendToServer(new PrimaryAbilityC2SPacket());
-        }
 
-        //this line removes the ability to hold the second keybind
-        if(ModKeybindings.INSTANCE.secondaryAbilityUse.isDown()){holdTimeSecondary += 1;} else if (!ModKeybindings.INSTANCE.secondaryAbilityUse.isDown()) {holdTimeSecondary = 0;}
-        if(ModKeybindings.INSTANCE.secondaryAbilityUse.consumeClick()) {
-            ModMessages.sendToServer(new SecondaryAbilityC2SPacket());
+            //adds one every tick
+            //therefore 1giveCooldown= 1 =1tick
+            giveCooldown += 1;
+
+            var player = minecraft.player;
+            assert player != null;
+
+            if (wasPrimaryKeyPressed && !isPrimaryCurrentlyPressed){ModMessages.sendToServer(new PrimaryAbilityC2SPacket());}
+            if (wasSecondaryKeyPressed && !isSecondaryCurrentlyPressed){ModMessages.sendToServer(new SecondaryAbilityC2SPacket());}
+
+            wasSecondaryKeyPressed = isSecondaryCurrentlyPressed;
+            wasPrimaryKeyPressed = isPrimaryCurrentlyPressed;
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
-import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.client.Minecraft;
@@ -8,7 +7,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
@@ -58,7 +56,7 @@ public class MicrophoneAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player){
+    public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (holdTimePrimary <= 1) {
             LocalPlayer ClientPlayer = Minecraft.getInstance().player;
             amountPrimaryPressed++;

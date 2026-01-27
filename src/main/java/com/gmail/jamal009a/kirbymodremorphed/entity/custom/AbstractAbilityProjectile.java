@@ -1,20 +1,11 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.RegistryObject;
 
 public abstract class AbstractAbilityProjectile extends Projectile {
     public double xPower;
@@ -28,7 +19,6 @@ public abstract class AbstractAbilityProjectile extends Projectile {
     public AbstractAbilityProjectile(EntityType<? extends AbstractAbilityProjectile> pEntityType, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ, Level pLevel) {
         this(pEntityType, pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
         this.setOwner(pShooter);
-        this.setRot(pShooter.getYRot(), pShooter.getXRot());
     }
 
     public AbstractAbilityProjectile(EntityType<? extends AbstractAbilityProjectile> type, Level worldIn, double x, double y, double z) {
@@ -46,7 +36,27 @@ public abstract class AbstractAbilityProjectile extends Projectile {
             this.yPower = pOffsetY / d0 * 0.1;
             this.zPower = pOffsetZ / d0 * 0.1;
         }
+    }
 
+    public void setRotation(float yaw, float pitch) {
+        // Set the yaw and pitch directly
+        this.setYRot(yaw);
+        this.setXRot(pitch);
+
+        // Update the previous frame's rotation values for consistency
+        this.yRotO = yaw;
+        this.xRotO = pitch;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        this.setYRot(this.getYRot());
+        this.yRotO = this.getYRot();
+
+        this.setXRot(this.getXRot());
+        this.xRotO = this.getXRot();
     }
 
     protected abstract void onHitEntity(EntityHitResult result);
