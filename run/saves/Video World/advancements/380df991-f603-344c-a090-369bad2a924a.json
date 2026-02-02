@@ -14,12 +14,6 @@
     },
     "done": false
   },
-  "minecraft:recipes/misc/charcoal": {
-    "criteria": {
-      "has_log": "2026-01-27 17:51:30 -0500"
-    },
-    "done": true
-  },
   "minecraft:recipes/decorations/glow_item_frame": {
     "criteria": {
       "has_item_frame": "2026-01-27 17:46:43 -0500"
@@ -29,6 +23,12 @@
   "minecraft:recipes/decorations/chest": {
     "criteria": {
       "has_lots_of_items": "2026-01-27 17:46:50 -0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/charcoal": {
+    "criteria": {
+      "has_log": "2026-01-27 17:51:30 -0500"
     },
     "done": true
   },

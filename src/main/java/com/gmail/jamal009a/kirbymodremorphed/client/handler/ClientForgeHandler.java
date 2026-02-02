@@ -51,12 +51,14 @@ public class ClientForgeHandler {
     public static boolean playSecondarySecondSoundOnce = false;
     public static boolean playSecondaryThirdSoundOnce = false;
 
+    public static String lastAnimationPlayed;
     public static void playerAnimationPlay(AbstractClientPlayer player, String animationName){
         var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData(player).get(new ResourceLocation(KirbyModRemorphed.MODID, "animation"));
         assert animation != null;
-        if (!animation.isActive()) {
+        if (lastAnimationPlayed != animationName) {
             animation.setAnimation(new KeyframeAnimationPlayer(Objects.requireNonNull(PlayerAnimationRegistry.getAnimation(new ResourceLocation("kirbymodremorphed", animationName)))));
         }
+        lastAnimationPlayed = animationName;
     }
 
     @SubscribeEvent
@@ -82,21 +84,21 @@ public class ClientForgeHandler {
             if ((holdTimePrimary <= stageOneTickLength) && (holdTimePrimary != 0)) {
                 if (!playPrimaryFirstSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 1");
+                    //System.out.println("Stage 1");
                     playPrimaryFirstSoundOnce = true;
                 }
             }
             if ((holdTimePrimary >= stageOneTickLength) && (holdTimePrimary < stageTwoTickLength)) {
                 if (!playPrimarySecondSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 2");
+                    //System.out.println("Stage 2");
                     playPrimarySecondSoundOnce = true;
                 }
             }
             if (holdTimePrimary >= stageTwoTickLength) {
                 if (!playPrimaryThirdSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 3");
+                    //System.out.println("Stage 3");
                     playPrimaryThirdSoundOnce = true;
                 }
             }
@@ -104,21 +106,21 @@ public class ClientForgeHandler {
             if ((holdTimeSecondary <= stageOneTickLength) && (holdTimeSecondary != 0)) {
                 if (!playSecondaryFirstSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 1");
+                    //System.out.println("Stage 1");
                     playSecondaryFirstSoundOnce = true;
                 }
             }
             if ((holdTimeSecondary >= stageOneTickLength) && (holdTimeSecondary < stageTwoTickLength)) {
                 if (!playSecondarySecondSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 2");
+                    //System.out.println("Stage 2");
                     playSecondarySecondSoundOnce = true;
                 }
             }
             if (holdTimeSecondary >= stageTwoTickLength) {
                 if (!playSecondaryThirdSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    System.out.println("Stage 3");
+                    //System.out.println("Stage 3");
                     playSecondaryThirdSoundOnce = true;
                 }
             }
