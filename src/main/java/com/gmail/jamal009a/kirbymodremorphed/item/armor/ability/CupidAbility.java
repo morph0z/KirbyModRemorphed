@@ -84,7 +84,7 @@ public class CupidAbility extends AbilityClass implements GeoItem {
     public void CupidFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
         ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) (power*5), 3, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) ((power+1)*10), 3, false, false));
         level.sendParticles(ParticleTypes.CLOUD,
                 player.getX() + 0, player.getY() + 0, player.getZ() + 0,
                 Math.round(5*power), 0, -0.3, 0, 0.4);
@@ -95,7 +95,7 @@ public class CupidAbility extends AbilityClass implements GeoItem {
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
 
-        if (stage == 1){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/3);}
+        if (stage == 1){CupidFly(ClientPlayer, player, level, 0);}
         if (stage == 2){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
         if (stage == 3){
             CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));

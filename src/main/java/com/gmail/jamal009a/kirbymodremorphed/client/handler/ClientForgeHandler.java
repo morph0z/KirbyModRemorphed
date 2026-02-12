@@ -1,7 +1,6 @@
 package com.gmail.jamal009a.kirbymodremorphed.client.handler;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
-import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.network.packet.SecondaryAbilityC2SPacket;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
@@ -14,16 +13,12 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.event.server.ServerLifecycleEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -57,6 +52,9 @@ public class ClientForgeHandler {
         assert animation != null;
         if (lastAnimationPlayed != animationName) {
             animation.setAnimation(new KeyframeAnimationPlayer(Objects.requireNonNull(PlayerAnimationRegistry.getAnimation(new ResourceLocation("kirbymodremorphed", animationName)))));
+        } else if (lastAnimationPlayed == animationName) {
+            if (animation.isActive()){return;}
+            animation.setAnimation(new KeyframeAnimationPlayer(Objects.requireNonNull(PlayerAnimationRegistry.getAnimation(new ResourceLocation("kirbymodremorphed", animationName)))));
         }
         lastAnimationPlayed = animationName;
     }
@@ -84,6 +82,7 @@ public class ClientForgeHandler {
             if ((holdTimePrimary <= stageOneTickLength) && (holdTimePrimary != 0)) {
                 if (!playPrimaryFirstSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§1* _ _"), true);
                     //System.out.println("Stage 1");
                     playPrimaryFirstSoundOnce = true;
                 }
@@ -91,6 +90,7 @@ public class ClientForgeHandler {
             if ((holdTimePrimary >= stageOneTickLength) && (holdTimePrimary < stageTwoTickLength)) {
                 if (!playPrimarySecondSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§3* * _"), true);
                     //System.out.println("Stage 2");
                     playPrimarySecondSoundOnce = true;
                 }
@@ -98,6 +98,7 @@ public class ClientForgeHandler {
             if (holdTimePrimary >= stageTwoTickLength) {
                 if (!playPrimaryThirdSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§b* * *"), true);
                     //System.out.println("Stage 3");
                     playPrimaryThirdSoundOnce = true;
                 }
@@ -106,6 +107,7 @@ public class ClientForgeHandler {
             if ((holdTimeSecondary <= stageOneTickLength) && (holdTimeSecondary != 0)) {
                 if (!playSecondaryFirstSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§4* _ _"), true);
                     //System.out.println("Stage 1");
                     playSecondaryFirstSoundOnce = true;
                 }
@@ -113,6 +115,7 @@ public class ClientForgeHandler {
             if ((holdTimeSecondary >= stageOneTickLength) && (holdTimeSecondary < stageTwoTickLength)) {
                 if (!playSecondarySecondSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§6* * _"), true);
                     //System.out.println("Stage 2");
                     playSecondarySecondSoundOnce = true;
                 }
@@ -120,6 +123,7 @@ public class ClientForgeHandler {
             if (holdTimeSecondary >= stageTwoTickLength) {
                 if (!playSecondaryThirdSoundOnce) {
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
+                    Minecraft.getInstance().player.displayClientMessage(Component.literal("§e* * *"), true);
                     //System.out.println("Stage 3");
                     playSecondaryThirdSoundOnce = true;
                 }

@@ -37,7 +37,7 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         super(ModEntities.KI_BLAST_PROJECTILE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
         this.setOwner(pShooter);
         this.DamageMultiplyer = Damage;
-        this.setRot(pShooter.getYRot(), pShooter.getXRot());
+        this.setRotation(pShooter.getYHeadRot(), pShooter.getXRot( ));
     }
 
     public KiBlastProjectileEntity(Level level) {

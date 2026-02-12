@@ -80,7 +80,7 @@ public class JetAbility extends AbilityClass implements GeoItem {
     }
     public void JetFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) (power*5), 3, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) ((power+1)*10), 3, false, false));
         level.sendParticles(ParticleTypes.FLAME,
                 player.getX() + 0, player.getY() + 0, player.getZ() + 0,
                 Math.round(5*power), 0, -0.3, 0, 0.4);
@@ -104,7 +104,7 @@ public class JetAbility extends AbilityClass implements GeoItem {
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
 
-        if (stage == 1){JetFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
+        if (stage == 1){JetFly(ClientPlayer, player, level, 0);}
         if (stage == 2){JetFly(ClientPlayer, player, level, secondaryLaunchPower);}
         if (stage == 3){JetFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
         return true;
