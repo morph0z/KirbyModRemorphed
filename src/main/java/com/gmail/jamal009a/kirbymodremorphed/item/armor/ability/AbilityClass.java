@@ -23,9 +23,11 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     public String TextColor;
 
     public boolean HasPrimary;
+    public boolean PrimaryCharges;
     public String PrimaryName;
 
     public boolean HasSecondary;
+    public boolean SecondaryCharges;
     public String SecondaryName;
 
     public boolean HasPassive;

@@ -56,18 +56,23 @@ public class SecondaryAbilityC2SPacket {
             if (!AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) {return;}
 
             AbilityClass playersHead = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
-            if (!playersHead.SecondaryAbility(level, player, -1)) {return;}
+            if (!playersHead.SecondaryAbility(level, player, -1)) {
+                playersHead.SecondaryAbility(level, player, -1);
+                if ((holdTimeSecondary <= stageOneTickLength) && (holdTimeSecondary != 0)) {
+                    playersHead.SecondaryAbility(level, player, 1);
+                }
+                if ((holdTimeSecondary >= stageOneTickLength) && (holdTimeSecondary < stageTwoTickLength)) {
+                    playersHead.SecondaryAbility(level, player, 2);
+                }
+                if (holdTimeSecondary >= stageTwoTickLength) {
+                    playersHead.SecondaryAbility(level, player, 3);
+                }
+                holdTimeSecondary = 0;
 
-            playersHead.SecondaryAbility(level, player, -1);
-            if ((holdTimeSecondary <= stageOneTickLength) && (holdTimeSecondary != 0)) {playersHead.SecondaryAbility(level, player, 1);}
-            if ((holdTimeSecondary >= stageOneTickLength) && (holdTimeSecondary < stageTwoTickLength)) {playersHead.SecondaryAbility(level, player, 2);}
-            if (holdTimeSecondary >= stageTwoTickLength) {playersHead.SecondaryAbility(level, player, 3);}
-            holdTimeSecondary = 0;
-
-            playSecondaryFirstSoundOnce = false;
-            playSecondarySecondSoundOnce = false;
-            playSecondaryThirdSoundOnce = false;
-
+                playSecondaryFirstSoundOnce = false;
+                playSecondarySecondSoundOnce = false;
+                playSecondaryThirdSoundOnce = false;
+            }
         });
         return true;
     }

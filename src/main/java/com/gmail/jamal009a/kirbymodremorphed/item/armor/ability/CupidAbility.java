@@ -36,7 +36,9 @@ public class CupidAbility extends AbilityClass implements GeoItem {
         TextColor = "\u00A7d";
 
         HasPrimary = true;
+        PrimaryCharges = false;
         HasSecondary = true;
+        SecondaryCharges = true;
         HasPassive = true;
 
         PrimaryName = "Love Bow";

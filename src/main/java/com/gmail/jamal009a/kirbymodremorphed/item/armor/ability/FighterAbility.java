@@ -33,7 +33,9 @@ public class FighterAbility extends AbilityClass implements GeoItem {
         TextColor = "\u00A74";
 
         HasPrimary = true;
+        PrimaryCharges = false;
         HasSecondary = true;
+        SecondaryCharges = true;
         HasPassive = true;
 
         PrimaryName = "Fighter Glove";
@@ -83,8 +85,8 @@ public class FighterAbility extends AbilityClass implements GeoItem {
         double lookX = playerLookDirection.x;
         double lookY = playerLookDirection.y;
         double lookZ = playerLookDirection.z;
-        KiBlastProjectileEntity KiBlast = new KiBlastProjectileEntity(player, player.level(), lookX, lookY, lookZ, power);
-        KiBlast.lerpMotion(lookX, lookY, lookZ);
+        KiBlastProjectileEntity KiBlast = new KiBlastProjectileEntity(player, player.level(), 0, 0, 0, power);
+        //KiBlast.lerpMotion(lookX, lookY, lookZ);
         KiBlast.setOwner(player);
         KiBlast.setPosRaw(player.getX() + lookX * 1.5, player.getEyeY() - 0.1, player.getZ() + lookZ * 1.5);
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "hadukenshoot");
@@ -93,7 +95,7 @@ public class FighterAbility extends AbilityClass implements GeoItem {
     }
 
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "hadukencharge");
+        //ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "hadukencharge");
         level.sendParticles(ModParticles.HADUKEN_PARTICLES.get(), player.getX() + 0, player.getEyeY() - 1, player.getZ() + 0, 30, 0, 0, 0, 1);
         if (stage == 1){shootKiBlast(level, player, 1);}
         if (stage == 2){shootKiBlast(level, player, 2);}

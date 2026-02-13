@@ -33,7 +33,9 @@ public class JetAbility extends AbilityClass implements GeoItem {
         TextColor = "\u00A71";
 
         HasPrimary = true;
+        PrimaryCharges = true;
         HasSecondary = true;
+        SecondaryCharges = true;
         HasPassive = false;
 
         PrimaryName = "Jet Dash";

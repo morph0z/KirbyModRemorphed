@@ -30,7 +30,9 @@ public class CrashAbility extends AbilityClass implements GeoItem {
         TextColor = "\u00A75";
 
         HasPrimary = true;
+        PrimaryCharges = true;
         HasSecondary = false;
+        SecondaryCharges = false;
         HasPassive = false;
 
         PrimaryName = "Explode";

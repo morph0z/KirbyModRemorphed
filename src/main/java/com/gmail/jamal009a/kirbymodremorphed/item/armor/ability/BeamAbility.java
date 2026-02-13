@@ -29,7 +29,9 @@ public class BeamAbility extends AbilityClass implements GeoItem {
         TextColor = "\u00A76";
 
         HasPrimary = true;
-        HasSecondary = true;
+        PrimaryCharges = true;
+        HasSecondary = false;
+        SecondaryCharges = false;
         HasPassive = true;
 
         PrimaryName = "Wave Beam";
@@ -76,6 +78,6 @@ public class BeamAbility extends AbilityClass implements GeoItem {
     }
 
     public boolean SecondaryAbility(ServerLevel  level, ServerPlayer player){
-        return true;
+        return false;
     }
 }
