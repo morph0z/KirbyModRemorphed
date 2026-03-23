@@ -56,7 +56,8 @@ public class BeamWaveProjectileEntity extends AbstractAbilityProjectile implemen
 
         if (shooter == null) {return;}
         //System.out.println(shooter.yHeadRot);
-        setRotation(shooter.yHeadRot, shooter.getXRot());
+        setPos(shooter.position());
+        setRotation(45, shooter.getXRot());
     }
 
     @Override

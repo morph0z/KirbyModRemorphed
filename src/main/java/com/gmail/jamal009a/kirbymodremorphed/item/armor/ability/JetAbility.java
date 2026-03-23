@@ -91,6 +91,7 @@ public class JetAbility extends AbilityClass implements GeoItem {
     float primaryLaunchPower = 2;
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage) {
+        if (stage == 0){return true;}
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetdash");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
 
@@ -105,7 +106,8 @@ public class JetAbility extends AbilityClass implements GeoItem {
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-
+        assert ClientPlayer != null;
+        System.out.println("YO" + "| sec stage: " + stage);
         if (stage == 1){JetFly(ClientPlayer, player, level, 0);}
         if (stage == 2){JetFly(ClientPlayer, player, level, secondaryLaunchPower);}
         if (stage == 3){JetFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}

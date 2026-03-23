@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class KiBlastProjectileRenderer extends GeoEntityRenderer<KiBlastProjectileEntity> {
+public class KiBlastProjectileRenderer extends AbilityProjectileRenderer<KiBlastProjectileEntity> {
     public KiBlastProjectileRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new KiBlastProjectileModel());
     }
@@ -20,15 +20,4 @@ public class KiBlastProjectileRenderer extends GeoEntityRenderer<KiBlastProjecti
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
-    @Override
-    protected void applyRotations(
-            KiBlastProjectileEntity entity,
-            PoseStack poseStack,
-            float ageInTicks,
-            float rotationYaw,
-            float partialTick
-    ) {
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot()));
-        poseStack.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
-    }
 }

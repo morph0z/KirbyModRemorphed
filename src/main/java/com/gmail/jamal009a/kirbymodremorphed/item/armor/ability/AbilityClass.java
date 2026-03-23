@@ -1,6 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
+import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -84,6 +85,12 @@ public class AbilityClass extends ArmorItem implements GeoItem {
             list.add(Component.literal("  "+PassiveName));
         }
 
+    }
+
+    public boolean giveItem(ServerPlayer player, ItemStack item){
+        if (player.getInventory().contains(item)){return false;}
+        player.addItem(item);
+        return true;
     }
 
     /// set stage to -1 if there are no stages

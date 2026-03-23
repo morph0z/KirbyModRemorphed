@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class BeamWaveProjectileRenderer extends GeoEntityRenderer<BeamWaveProjectileEntity> {
+public class BeamWaveProjectileRenderer extends AbilityProjectileRenderer<BeamWaveProjectileEntity> {
     public BeamWaveProjectileRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new BeamWaveProjectileModel());
     }
@@ -19,17 +19,5 @@ public class BeamWaveProjectileRenderer extends GeoEntityRenderer<BeamWaveProjec
     @Override
     public void render(@NotNull BeamWaveProjectileEntity entity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-    }
-
-    @Override
-    protected void applyRotations(
-            BeamWaveProjectileEntity entity,
-            PoseStack poseStack,
-            float ageInTicks,
-            float rotationYaw,
-            float partialTick
-    ) {
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot()));
-        poseStack.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
     }
 }
