@@ -23,7 +23,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.VOID_TERMINA_FEATHER);
         simpleItem(ModItems.VOID_FLESH);
         simpleItem(ModItems.VOID_TERMINA_HORN);
-        simpleItem(ModItems.VOID_TERMINA_REMAINT);
+        simpleItem(ModItems.VOID_TERMINA_REMNANT);
         simpleItem(ModItems.STARR);
         simpleItem(ModItems.ENERGY_SPHERE);
         simpleItem(ModItems.ESSENTIAL_PART);

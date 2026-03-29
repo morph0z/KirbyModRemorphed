@@ -46,12 +46,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         //this.add(ModBlocks.CLOUDWOOD_LEAVES.get(),block -> createLeavesLikeOreDrops())
         this.add(ModBlocks.CLOUDWOOD_LEAVES.get(),block -> createLeavesDrops(block, ModBlocks.CLOUDWOOD_FENCE_GATE.get(), NORMAL_LEAVES_SAPLING_CHANCES)); //TODO: Change to sapling when added
 
-        this.dropSelf(ModBlocks.COMPRESSEDGOLD.get());
-        this.dropSelf(ModBlocks.COMPRESSEDIRON.get());
+        this.dropSelf(ModBlocks.COMPRESSED_GOLD.get());
+        this.dropSelf(ModBlocks.COMPRESSED_IRON.get());
 
-        this.dropSelf(ModBlocks.GROUNDKIRBY.get());
-        this.dropSelf(ModBlocks.KIRBYGRASS.get());
-        this.dropSelf(ModBlocks.MAGMAMELTEDBLOCK.get());
+        this.dropSelf(ModBlocks.GROUND_KIRBY.get());
+        this.dropSelf(ModBlocks.KIRBY_GRASS.get());
+        this.dropSelf(ModBlocks.MAGMA_MELTED_BLOCK.get());
         this.dropSelf(ModBlocks.SAND.get());
         this.dropSelf(ModBlocks.SNOW.get());
 

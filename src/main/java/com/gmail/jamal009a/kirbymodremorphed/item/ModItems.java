@@ -27,8 +27,8 @@ public class ModItems {
             VoidTerminaFeatherItem::new);
     public static final RegistryObject<Item> VOID_TERMINA_HORN = ITEMS.register("void_termina_horn",
             VoidTerminaHornItem::new);
-    public static final RegistryObject<Item> VOID_TERMINA_REMAINT = ITEMS.register("void_termina_remaint",
-            VoidTerminaRemaintItem::new);
+    public static final RegistryObject<Item> VOID_TERMINA_REMNANT = ITEMS.register("void_termina_remnant",
+            VoidTerminaRemnantItem::new);
     public static final RegistryObject<Item> STARR = ITEMS.register("starr",
             StarrItem::new);
     public static final RegistryObject<Item> ENERGY_SPHERE = ITEMS.register("energy_sphere",

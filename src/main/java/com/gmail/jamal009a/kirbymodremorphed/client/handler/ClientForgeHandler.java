@@ -87,6 +87,7 @@ public class ClientForgeHandler {
         if (isPrimaryCurrentlyPressed && currentAbility.PrimaryCharges){ holdTimePrimary++; PrimaryAbilityOnce.reset();
             if ((holdTimePrimary <= stageOneTickLength) && (holdTimePrimary != 0)) {PrimaryOnce0.run(() -> player.displayClientMessage(Component.literal("§0_ _ _"), true)); PrimaryStage = 0;}
             if ((holdTimePrimary >= stageOneTickLength) && (holdTimePrimary < stageTwoTickLength)){ PrimaryOnce1.run(() -> {
+                    currentAbility.ChargeAnimation(player);
                     player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
                     player.displayClientMessage(Component.literal("§1● _ _"), true);
                     PrimaryStage = 1;
@@ -113,6 +114,7 @@ public class ClientForgeHandler {
         if (isSecondaryCurrentlyPressed && currentAbility.SecondaryCharges){ holdTimeSecondary++; SecondaryAbilityOnce.reset();
             if ((holdTimeSecondary <= stageOneTickLength) && (holdTimeSecondary != 0)) {SecondaryOnce0.run(() -> player.displayClientMessage(Component.literal("§0_ _ _"), true)); SecondaryStage = 0;}
             if ((holdTimeSecondary >= stageOneTickLength) && (holdTimeSecondary < stageTwoTickLength)){ SecondaryOnce1.run(() -> {
+                currentAbility.ChargeAnimation(player);
                 player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
                 player.displayClientMessage(Component.literal("§4● _ _"), true);
                 SecondaryStage = 1;

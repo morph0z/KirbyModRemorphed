@@ -92,15 +92,14 @@ public class CupidAbility extends AbilityClass implements GeoItem {
 
     float secondaryLaunchPower = 5;
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        if (stage == 0){return true;}
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "cupidfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
+        assert ClientPlayer != null;
 
         if (stage == 1){CupidFly(ClientPlayer, player, level, 0);}
         if (stage == 2){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
-        if (stage == 3){
-            CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));
-            player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3, false, false));
-        }
+        if (stage == 3){CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
         return true;
     }
 }

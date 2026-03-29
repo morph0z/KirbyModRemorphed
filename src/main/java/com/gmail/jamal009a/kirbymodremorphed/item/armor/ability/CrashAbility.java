@@ -4,6 +4,7 @@ import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CrashAbilityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,7 +28,7 @@ import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHa
 public class CrashAbility extends AbilityClass implements GeoItem {
     public CrashAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pMaterial, pType, pProperties);
-        TextColor = "\u00A75";
+        TextColor = "§5";
 
         HasPrimary = true;
         PrimaryCharges = true;
@@ -69,10 +70,14 @@ public class CrashAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        if (stage == 0){return true;}
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");
         if (stage == 1){CrashOut(level, player, 1);}
         if (stage == 2){CrashOut(level, player, 2);}
         if (stage == 3){CrashOut(level, player, 4);}
         return true;
     }
+
+    @Override
+    public void ChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");}
 }

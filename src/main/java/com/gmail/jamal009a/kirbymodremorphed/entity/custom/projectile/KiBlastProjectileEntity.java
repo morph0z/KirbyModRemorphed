@@ -2,6 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
+import com.gmail.jamal009a.kirbymodremorphed.util.MethodRunOnce;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -9,7 +10,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -28,23 +28,30 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
+    public double xPower;
+    public double yPower;
+    public double zPower;
 
-    public KiBlastProjectileEntity(EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) {
+    public KiBlastProjectileEntity(EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) {super(pEntityType, pLevel);}
+
+    float DamageMultiplier;
+    public KiBlastProjectileEntity(EntityType<KiBlastProjectileEntity> pEntityType, Vec3 pos, double dirX, double dirY, double dirZ, Level pLevel, float Damage) {
         super(pEntityType, pLevel);
+        this.DamageMultiplier = Damage;
+
+        this.moveTo(pos.x, pos.y, pos.z, this.getYRot(), this.getXRot());
+        this.reapplyPosition();
+        double d0 = Math.sqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
+        if (d0 != (double)0.0F) {
+            this.xPower = dirX / d0 * 0.1;
+            this.yPower = dirY / d0 * 0.1;
+            this.zPower = dirZ / d0 * 0.1;
+        }
     }
 
-    public KiBlastProjectileEntity(LivingEntity pShooter, Level pLevel, double pOffsetX, double pOffsetY, double pOffsetZ, float Damage) {
-        super(ModEntities.KI_BLAST_PROJECTILE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
-        this.setOwner(pShooter);
-        this.DamageMultiplyer = Damage;
-        this.setRotation(pShooter.getYHeadRot(), pShooter.getXRot( ));
+    public KiBlastProjectileEntity(Vec3 pos, double dirX, double dirY, double dirZ, Level pLevel, float Damage){
+        this(ModEntities.KI_BLAST_PROJECTILE.get(), pos , dirX, dirY, dirZ, pLevel, Damage);
     }
-
-    public KiBlastProjectileEntity(Level level) {
-        super(ModEntities.KI_BLAST_PROJECTILE.get(), level);
-    }
-
-    float DamageMultiplyer;
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
@@ -54,17 +61,14 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
 
         DamageSource source = this.damageSources().indirectMagic(this, owner);
 
-        float damage = 4.0F * DamageMultiplyer; // your damage value here
+        float damage = 4.0F * DamageMultiplier; // your damage value here
 
         target.hurt(source, damage);
     }
 
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!this.level().isClientSide) {
-
-            this.discard();
-        }
+        if (!this.level().isClientSide) {this.discard();}
     }
 
     @Override
@@ -96,69 +100,43 @@ public class KiBlastProjectileEntity extends AbstractAbilityProjectile implement
         return 0.95F;
     }
 
-    @Override
-    protected void updateRotation() {}
 
+    MethodRunOnce setRotOnce = new MethodRunOnce();
     public void tick() {
         Entity shooter = this.getOwner();
+        setRotOnce.run(() -> {if (shooter != null){setRotation(shooter.getXRot(), shooter.getYHeadRot());}});
         if (this.level().isClientSide || (shooter == null || !shooter.isRemoved()) && this.level().hasChunkAt(this.blockPosition())) {
             super.tick();
 
             HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-            if (hitresult.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hitresult)) {
-                this.onHit(hitresult);
-            }
-
-            float inertia = this.getInertia();
+            if (hitresult.getType() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {this.onHit(hitresult);}
 
             this.checkInsideBlocks();
-            Vec3 deltaMovement = this.getDeltaMovement();
-            this.setDeltaMovement(deltaMovement.add(this.xPower, this.yPower, this.zPower).scale(inertia));
-
-            Vec3 motion = this.getDeltaMovement();
-
-            if (motion.lengthSqr() > 0.0000001) {
-                float yaw = (float)(
-                        Math.atan2(motion.z, motion.x) * (180F / Math.PI)
-                ) - 90F;
-
-                float pitch = (float)(
-                        Math.atan2(
-                                motion.y,
-                                Math.sqrt(motion.x * motion.x + motion.z * motion.z)
-                        ) * (180F / Math.PI)
-                );
-
-                // This is the important part
-                this.setRot(yaw, pitch);
-
-                // Sync old rotations so rendering interpolation works
-                this.yRotO = yaw;
-                this.xRotO = pitch;
-            }
-
-            double d0 = this.getX() + deltaMovement.x;
-            double d1 = this.getY() + deltaMovement.y;
-            double d2 = this.getZ() + deltaMovement.z;
-
+            Vec3 velocity = this.getDeltaMovement();
+            double OffsetX = this.getX() + velocity.x;
+            double OffsetY = this.getY() + velocity.y;
+            double OffsetZ = this.getZ() + velocity.z;
+            
+            float inertia = this.getInertia();
             if (this.isInWater()) {
                 for(int i = 0; i < 4; ++i) {
-                    this.level().addParticle(ParticleTypes.BUBBLE, d0 - deltaMovement.x * (double)0.25F,
-                                                d1 - deltaMovement.y * (double)0.25F,
-                                                d2 - deltaMovement.z * (double)0.25F,
-                                                deltaMovement.x, deltaMovement.y, deltaMovement.z);
+                    float f1 = 0.25F;
+                    this.level().addParticle(ParticleTypes.BUBBLE,
+                            OffsetX - velocity.x * 0.25D,
+                            OffsetY - velocity.y * 0.25D,
+                            OffsetZ - velocity.z * 0.25D,
+                            velocity.x, velocity.y, velocity.z);
                 }
 
                 inertia = 0.8F;
             }
 
-
-            this.level().addParticle(this.getTrailParticle(), d0, d1 + 0.25, d2, (double)0.0F, (double)0.0F, (double)0.0F);
-            this.setPos(d0, d1, d2);
+            this.setDeltaMovement(velocity.add(this.xPower, this.yPower, this.zPower).scale(inertia));
+            this.level().addParticle(this.getTrailParticle(), OffsetX, OffsetY + 0.5D, OffsetZ, 0.0D, 0.0D, 0.0D);
+            this.setPos(OffsetX, OffsetY, OffsetZ);
         } else {
             this.discard();
         }
-
     }
 
     @Override

@@ -75,8 +75,8 @@ public class ModCreativeModTabs {
             () -> CreativeModeTab.builder().icon((() -> new ItemStack(ModBlocks.CLOUD.get())))
                     .title(Component.translatable("creative.block_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModBlocks.COMPRESSEDGOLD.get());
-                        pOutput.accept(ModBlocks.COMPRESSEDIRON.get());
+                        pOutput.accept(ModBlocks.COMPRESSED_GOLD.get());
+                        pOutput.accept(ModBlocks.COMPRESSED_IRON.get());
                         pOutput.accept(ModBlocks.CLOUD.get());
                         pOutput.accept(ModBlocks.CLOUDWOOD_WOOD.get());
                         pOutput.accept(ModBlocks.CLOUDWOOD_LOG.get());
@@ -97,9 +97,9 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.CRASHED_JAMBA_PIECE.get());
                         pOutput.accept(ModBlocks.UNFINISHED_JAMBA_HEART.get());
                         pOutput.accept(ModBlocks.CORRUPTED_MAGMA.get());
-                        pOutput.accept(ModBlocks.MAGMAMELTEDBLOCK.get());
-                        pOutput.accept(ModBlocks.GROUNDKIRBY.get());
-                        pOutput.accept(ModBlocks.KIRBYGRASS.get());
+                        pOutput.accept(ModBlocks.MAGMA_MELTED_BLOCK.get());
+                        pOutput.accept(ModBlocks.GROUND_KIRBY.get());
+                        pOutput.accept(ModBlocks.KIRBY_GRASS.get());
                         pOutput.accept(ModBlocks.SNOW.get());
                         pOutput.accept(ModBlocks.SAND.get());
                     })
@@ -110,7 +110,7 @@ public class ModCreativeModTabs {
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.VOID_FLESH.get());
                         pOutput.accept(ModItems.JAMBA_CRYSTAL.get());
-                        pOutput.accept(ModItems.VOID_TERMINA_REMAINT.get());
+                        pOutput.accept(ModItems.VOID_TERMINA_REMNANT.get());
                         pOutput.accept(ModItems.VOID_TERMINA_FEATHER.get());
                         pOutput.accept(ModItems.VOID_TERMINA_HORN.get());
                         pOutput.accept(ModItems.STARR.get());

@@ -18,14 +18,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.COMPRESSEDIRON);
-        blockWithItem(ModBlocks.COMPRESSEDGOLD);
+        blockWithItem(ModBlocks.COMPRESSED_IRON);
+        blockWithItem(ModBlocks.COMPRESSED_GOLD);
 
-        blockWithItem(ModBlocks.GROUNDKIRBY);
+        blockWithItem(ModBlocks.GROUND_KIRBY);
         //blockWithItem(ModBlocks.SNOW);
-        //blockWithItem(ModBlocks.KIRBYGRASS);
+        //blockWithItem(ModBlocks.KIRBY_GRASS);
         blockWithItem(ModBlocks.SAND);
-        //blockWithItem(ModBlocks.MAGMAMELTEDBLOCK);
+        //blockWithItem(ModBlocks.MAGMA_MELTED_BLOCK);
 
         blockWithItem(ModBlocks.CLOUD);
         //blockWithItem(ModBlocks.CLOUDWOOD_BUTTON);

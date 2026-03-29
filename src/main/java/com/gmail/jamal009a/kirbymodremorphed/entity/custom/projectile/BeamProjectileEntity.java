@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -17,26 +18,22 @@ import software.bernie.geckolib.core.object.PlayState;
 public class BeamProjectileEntity extends AbstractAbilityProjectile implements GeoEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    float DamageMultiplier;
+    Vec3 Position = new Vec3(0,0,0);
 
     public BeamProjectileEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public BeamProjectileEntity(EntityType<? extends AbstractAbilityProjectile> pEntityType, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ, Level pLevel) {
-        super(pEntityType, pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
-    }
-
-    public BeamProjectileEntity(EntityType<? extends AbstractAbilityProjectile> type, Level worldIn, double x, double y, double z) {
-        super(type, worldIn, x, y, z);
-    }
-
-    public BeamProjectileEntity(LivingEntity pShooter, Level pLevel, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.BEAM_PROJECTILE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pOffsetX, pOffsetY, pOffsetZ, pLevel);
+    public BeamProjectileEntity(LivingEntity pShooter, Level pLevel, Vec3 Position, int damage) {
+        this(ModEntities.BEAM_WAVE_PROJECTILE.get(), Position, pLevel, damage);
         this.setOwner(pShooter);
     }
 
-    public BeamProjectileEntity(EntityType<? extends AbstractAbilityProjectile> pEntityType, double pX, double pY, double pZ, double pOffsetX, double pOffsetY, double pOffsetZ, Level pLevel) {
-        super(pEntityType, pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+    public BeamProjectileEntity(EntityType<? extends AbstractAbilityProjectile> pEntityType, Vec3 pos, Level pLevel, int damage) {
+        super(pEntityType, pLevel);
+        this.DamageMultiplier = damage;
+        this.Position = pos;
     }
 
     @Override

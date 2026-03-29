@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
-import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -99,4 +99,6 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         return false;
     }
+
+    public void ChargeAnimation(AbstractClientPlayer player){}
 }

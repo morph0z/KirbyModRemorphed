@@ -30,7 +30,7 @@ import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHa
 public class JetAbility extends AbilityClass implements GeoItem {
     public JetAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pMaterial, pType, pProperties);
-        TextColor = "\u00A71";
+        TextColor = "§1";
 
         HasPrimary = true;
         PrimaryCharges = true;
@@ -104,10 +104,11 @@ public class JetAbility extends AbilityClass implements GeoItem {
     float secondaryLaunchPower = 5;
     @Override
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
+        if (stage == 0){return true;}
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
         assert ClientPlayer != null;
-        System.out.println("YO" + "| sec stage: " + stage);
+
         if (stage == 1){JetFly(ClientPlayer, player, level, 0);}
         if (stage == 2){JetFly(ClientPlayer, player, level, secondaryLaunchPower);}
         if (stage == 3){JetFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}

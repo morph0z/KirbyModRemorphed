@@ -24,16 +24,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.SAND.get())
-                .add(ModBlocks.KIRBYGRASS.get())
-                .add(ModBlocks.GROUNDKIRBY.get())
+                .add(ModBlocks.KIRBY_GRASS.get())
+                .add(ModBlocks.GROUND_KIRBY.get())
                 .add(ModBlocks.SAND.get())
                 .add(ModBlocks.CLOUD.get());
 
         this.tag(BlockTags.DIRT)
                 .add(ModBlocks.SAND.get())
-                .add(ModBlocks.MAGMAMELTEDBLOCK.get())
-                .add(ModBlocks.KIRBYGRASS.get())
-                .add(ModBlocks.GROUNDKIRBY.get())
+                .add(ModBlocks.MAGMA_MELTED_BLOCK.get())
+                .add(ModBlocks.KIRBY_GRASS.get())
+                .add(ModBlocks.GROUND_KIRBY.get())
                 .add(ModBlocks.SAND.get())
                 .add(ModBlocks.CLOUD.get())
                 .add(ModBlocks.SNOW.get());
@@ -51,13 +51,13 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.CLOUDWOOD_LEAVES.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.MAGMAMELTEDBLOCK.get())
-                .add(ModBlocks.COMPRESSEDIRON.get())
-                .add(ModBlocks.COMPRESSEDGOLD.get());
+                .add(ModBlocks.MAGMA_MELTED_BLOCK.get())
+                .add(ModBlocks.COMPRESSED_IRON.get())
+                .add(ModBlocks.COMPRESSED_GOLD.get());
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlocks.COMPRESSEDIRON.get())
-                .add(ModBlocks.COMPRESSEDGOLD.get());
+                .add(ModBlocks.COMPRESSED_IRON.get())
+                .add(ModBlocks.COMPRESSED_GOLD.get());
 
         this.tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.CLOUDWOOD_FENCE_GATE.get());

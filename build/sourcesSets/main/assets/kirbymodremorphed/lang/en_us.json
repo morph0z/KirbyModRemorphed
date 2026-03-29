@@ -2,7 +2,7 @@
   "item.kirbymodremorphed.sapphire": "Sapphire",
   "item.kirbymodremorphed.void_flesh": "§dVoid §fFlesh",
   "item.kirbymodremorphed.jamba_crystal": "§5Jamba Crystal",
-  "item.kirbymodremorphed.void_termina_remaint": "§l§5Termina §rHide",
+  "item.kirbymodremorphed.void_termina_remnant": "§l§5Termina §rHide",
   "item.kirbymodremorphed.void_termina_horn": "§l§5Termina §rHorn",
   "item.kirbymodremorphed.void_termina_feather": "§l§5Termina §rFeather",
   "item.kirbymodremorphed.starr": "§eStar",
@@ -68,16 +68,16 @@
   "block.kirbymodremorphed.cloudwood_trapdoor": "§lCloudwood §rTrapdoor",
 
   "block.kirbymodremorphed.jamba_heart": "§5Jamba Heart",
-  "block.kirbymodremorphed.commpressedgold": "Compressed §6Gold",
-  "block.kirbymodremorphed.compressediron": "Compressed §7Iron",
+  "block.kirbymodremorphed.compressed_gold": "Compressed §6Gold",
+  "block.kirbymodremorphed.compressed_iron": "Compressed §7Iron",
   "block.kirbymodremorphed.snow": "PopStar §7Snow",
-  "block.kirbymodremorphed.kirbygrass": "PopStar §2Grass",
-  "block.kirbymodremorphed.magmameltedblock": "PopStar §4Magma",
+  "block.kirbymodremorphed.kirby_grass": "PopStar §2Grass",
+  "block.kirbymodremorphed.magma_melted_block": "PopStar §4Magma",
   "block.kirbymodremorphed.crashed_jamba_piece": "Crashed §5Jamba Piece",
   "block.kirbymodremorphed.unfinished_jamba_heart": "Unfinished §5Jamba Heart",
   "block.kirbymodremorphed.jamba_piece": "§5Jamba Piece",
   "block.kirbymodremorphed.corrupted_magma": "§5Corrupted §4Magma",
-  "block.kirbymodremorphed.groundkirby": "PopStar §4Ground",
+  "block.kirbymodremorphed.ground_kirby": "PopStar §4Ground",
   "block.kirbymodremorphed.sand": "PopStar §eSand",
 
   "item.kirbymodremorphed.kirby_spawn_egg": "Kirby Spawn Egg",
@@ -104,7 +104,7 @@
   "creative.items_tab": "§dKirby §7Items",
   "creative.food_tab": "§dKirby §7Foodstuff",
 
-  "key.catagories.kirbymodremorphed": "Kirby mod",
+  "key.categories.kirbymodremorphed": "Kirby mod",
   "key.kirbymodremorphed.primary_ability_use": "Primary Ability",
   "key.kirbymodremorphed.secondary_ability_use": "Secondary Ability"
 }

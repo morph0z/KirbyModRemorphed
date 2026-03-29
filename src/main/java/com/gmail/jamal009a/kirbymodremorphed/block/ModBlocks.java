@@ -76,15 +76,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> CLOUDWOOD_TRAPDOOR = registryBlock("cloudwood_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2f).instrument(NoteBlockInstrument.BASS).ignitedByLava().noOcclusion(), BlockSetType.OAK));
 
     public static final RegistryObject<Block> CORRUPTED_MAGMA = registryBlock("corrupted_magma", () -> new Block(BlockBehaviour.Properties.copy(Blocks.MAGMA_BLOCK).sound(SoundType.AMETHYST).strength(1f, 10f).instrument(NoteBlockInstrument.BASEDRUM)));
-    public static final RegistryObject<Block> CRASHED_JAMBA_PIECE = registryBlock("crashed_jamba_piece", () -> new CrashedJambaPieceBlock());
-    public static final RegistryObject<Block> JAMBA_PIECE = registryBlock("jamba_piece", () -> new JambaPieceBlock());
-    public static final RegistryObject<Block> UNFINISHED_JAMBA_HEART = registryBlock("unfinished_jamba_heart", () -> new UnfinishedJambaHeartBlock());
-    public static final RegistryObject<Block> JAMBA_HEART = registryBlock("jamba_heart", () -> new JambaHeartBlock());
-    public static final RegistryObject<Block> COMPRESSEDGOLD = registryBlock("commpressedgold", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(SoundType.ANVIL).strength(7f, 20f).instrument(NoteBlockInstrument.COW_BELL)));
-    public static final RegistryObject<Block> COMPRESSEDIRON = registryBlock("compressediron", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(SoundType.ANVIL).strength(8f, 20f).instrument(NoteBlockInstrument.COW_BELL)));
-    public static final RegistryObject<Block> GROUNDKIRBY = registryBlock("groundkirby", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.GRAVEL).strength(1f,0.2f).instrument(NoteBlockInstrument.BASS)));
-    public static final RegistryObject<Block> KIRBYGRASS = registryBlock("kirbygrass", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.WET_GRASS).strength(1.2f,0.2f).instrument(NoteBlockInstrument.BASS)));
-    public static final RegistryObject<Block> MAGMAMELTEDBLOCK = registryBlock("magmameltedblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).sound(SoundType.WET_GRASS).strength(0.7f, 1f)));
+    public static final RegistryObject<Block> CRASHED_JAMBA_PIECE = registryBlock("crashed_jamba_piece", CrashedJambaPieceBlock::new);
+    public static final RegistryObject<Block> JAMBA_PIECE = registryBlock("jamba_piece", JambaPieceBlock::new);
+    public static final RegistryObject<Block> UNFINISHED_JAMBA_HEART = registryBlock("unfinished_jamba_heart", UnfinishedJambaHeartBlock::new);
+    public static final RegistryObject<Block> JAMBA_HEART = registryBlock("jamba_heart", JambaHeartBlock::new);
+    public static final RegistryObject<Block> COMPRESSED_GOLD = registryBlock("compressed_gold", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(SoundType.ANVIL).strength(7f, 20f).instrument(NoteBlockInstrument.COW_BELL)));
+    public static final RegistryObject<Block> COMPRESSED_IRON = registryBlock("compressed_iron", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(SoundType.ANVIL).strength(8f, 20f).instrument(NoteBlockInstrument.COW_BELL)));
+    public static final RegistryObject<Block> GROUND_KIRBY = registryBlock("ground_kirby", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.GRAVEL).strength(1f,0.2f).instrument(NoteBlockInstrument.BASS)));
+    public static final RegistryObject<Block> KIRBY_GRASS = registryBlock("kirby_grass", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.WET_GRASS).strength(1.2f,0.2f).instrument(NoteBlockInstrument.BASS)));
+    public static final RegistryObject<Block> MAGMA_MELTED_BLOCK = registryBlock("magma_melted_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).sound(SoundType.WET_GRASS).strength(0.7f, 1f)));
     public static final RegistryObject<Block> SAND = registryBlock("sand", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SAND).sound(SoundType.SAND).strength(0.7f, 1f)));
     public static final RegistryObject<Block> SNOW = registryBlock("snow", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK).sound(SoundType.SNOW).strength(0.7f, 1f)));
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block){
