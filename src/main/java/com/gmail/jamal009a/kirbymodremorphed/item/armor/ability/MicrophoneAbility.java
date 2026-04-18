@@ -1,6 +1,5 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
-import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.MicrophoneAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.client.Minecraft;
@@ -23,14 +22,11 @@ import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHa
 
 public class MicrophoneAbility extends AbilityClass implements GeoItem {
     public MicrophoneAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
+        super(pType, pProperties);
         TextColor = "§5";
 
-        HasPrimary = true;
         PrimaryCharges = true;
-        HasSecondary = false;
         SecondaryCharges = false;
-        HasPassive = false;
 
         PrimaryName = "Microphone Shout";
         SecondaryName = "";
@@ -58,7 +54,6 @@ public class MicrophoneAbility extends AbilityClass implements GeoItem {
         });
     }
 
-    //Todo: always uses the third blast FIX
     public void CrashOut(ServerLevel level, LocalPlayer ClientPlayer, ServerPlayer player, float power){
         playerAnimationPlay(Minecraft.getInstance().player, "micshout");
         level.explode(player, player.getX(), player.getY(), player.getZ(), 5*power, Level.ExplosionInteraction.MOB);

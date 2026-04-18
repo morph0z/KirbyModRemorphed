@@ -7,12 +7,9 @@ import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -32,28 +29,17 @@ import java.util.function.Consumer;
 
 public class CupidAbility extends AbilityClass implements GeoItem {
     public CupidAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
-        TextColor = "\u00A7d";
+        super(pType, pProperties);
+        TextColor = "§d";
 
-        HasPrimary = true;
         PrimaryCharges = false;
-        HasSecondary = true;
         SecondaryCharges = true;
-        HasPassive = true;
 
         PrimaryName = "Love Bow";
         SecondaryName = "Wing Fly";
         PassiveName = "Regeneration";
 
         HasFallingAnimation = false;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), itemstack)) {
-            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 0, true, false));
-        }
-        super.inventoryTick(itemstack, world, entity, slot, selected);
     }
 
     @Override
@@ -77,7 +63,7 @@ public class CupidAbility extends AbilityClass implements GeoItem {
 
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        if (stage != 0) {return true;}
+        if (stage == 0) {return true;}
         return giveItem(player, new ItemStack(ModItems.CUPID_BOW.get()));
     }
 
@@ -100,6 +86,20 @@ public class CupidAbility extends AbilityClass implements GeoItem {
         if (stage == 1){CupidFly(ClientPlayer, player, level, 0);}
         if (stage == 2){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
         if (stage == 3){CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
+        return true;
+    }
+
+    @Override
+    public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check) {
+        if(check){return true;}
+        if (entity instanceof Player player && Iterables.contains(entity.getArmorSlots(), stack)) {
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.REGENERATION,
+                    1,
+                    0,
+                    true,
+                    false));
+        }
         return true;
     }
 }

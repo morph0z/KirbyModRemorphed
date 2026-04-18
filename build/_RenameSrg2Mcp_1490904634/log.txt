@@ -1,0 +1,15 @@
+Java Launcher: /var/home/Jamal/Inst/java/temurin-17.0.18/bin/java
+Arguments: '--task, SRG_TO_MCP, --input, /var/home/Jamal/.gradle/caches/modules-2/files-2.1/dev.kosmx.player-anim/player-animation-lib-forge/1.0.2-rc1+1.20/9515ed7e230bb2d092208179ad2337636b7168d7/player-animation-lib-forge-1.0.2-rc1+1.20.jar, --output, /var/home/Jamal/.gradle/caches/forge_gradle/deobf_dependencies/dev/kosmx/player-anim/player-animation-lib-forge/1.0.2-rc1+1.20_mapped_parchment_2023.06.26-1.20.1/player-animation-lib-forge-1.0.2-rc1+1.20_mapped_parchment_2023.06.26-1.20.1.jar, --mcp, /var/home/Jamal/.gradle/caches/parchmentgradle/org/parchmentmc/data/parchment-1.20.1/2023.06.26/parchment-1.20.1-2023.06.26.zip, --strip-signatures'
+Classpath:
+ - /var/home/Jamal/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/installertools/1.4.4/installertools-1.4.4-fatjar.jar
+Working directory: /var/home/Jamal/Documents/KMR/KirbyModRemorphed/build/_RenameSrg2Mcp_1490904634
+Main class: net.minecraftforge.installertools.ConsoleTool
+====================================
+Task: SRG_TO_MCP
+Input:  /var/home/Jamal/.gradle/caches/modules-2/files-2.1/dev.kosmx.player-anim/player-animation-lib-forge/1.0.2-rc1+1.20/9515ed7e230bb2d092208179ad2337636b7168d7/player-animation-lib-forge-1.0.2-rc1+1.20.jar
+Output: /var/home/Jamal/.gradle/caches/forge_gradle/deobf_dependencies/dev/kosmx/player-anim/player-animation-lib-forge/1.0.2-rc1+1.20_mapped_parchment_2023.06.26-1.20.1/player-animation-lib-forge-1.0.2-rc1+1.20_mapped_parchment_2023.06.26-1.20.1.jar
+MCP:    /var/home/Jamal/.gradle/caches/parchmentgradle/org/parchmentmc/data/parchment-1.20.1/2023.06.26/parchment-1.20.1-2023.06.26.zip
+Loading MCP Data
+Processing ZIP file
+Stripped Manifest of sha digests
+Process complete

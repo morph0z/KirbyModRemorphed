@@ -84,7 +84,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> COMPRESSED_IRON = registryBlock("compressed_iron", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK).sound(SoundType.ANVIL).strength(8f, 20f).instrument(NoteBlockInstrument.COW_BELL)));
     public static final RegistryObject<Block> GROUND_KIRBY = registryBlock("ground_kirby", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.GRAVEL).strength(1f,0.2f).instrument(NoteBlockInstrument.BASS)));
     public static final RegistryObject<Block> KIRBY_GRASS = registryBlock("kirby_grass", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.WET_GRASS).strength(1.2f,0.2f).instrument(NoteBlockInstrument.BASS)));
-    public static final RegistryObject<Block> MAGMA_MELTED_BLOCK = registryBlock("magma_melted_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).sound(SoundType.WET_GRASS).strength(0.7f, 1f)));
+    public static final RegistryObject<Block> MAGMA_MELTED_BLOCK = registryBlock("magma_melted_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).sound(SoundType.NETHER_BRICKS).strength(0.7f, 1f)));
     public static final RegistryObject<Block> SAND = registryBlock("sand", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SAND).sound(SoundType.SAND).strength(0.7f, 1f)));
     public static final RegistryObject<Block> SNOW = registryBlock("snow", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK).sound(SoundType.SNOW).strength(0.7f, 1f)));
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block){

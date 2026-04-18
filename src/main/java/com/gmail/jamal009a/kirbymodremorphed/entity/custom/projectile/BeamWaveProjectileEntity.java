@@ -3,41 +3,35 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
+
+import java.util.List;
 
 public class BeamWaveProjectileEntity extends AbstractAbilityProjectile implements GeoEntity {
 
     float DamageMultiplier;
-    Vec3 Position = new Vec3(0,0,0);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public BeamWaveProjectileEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.refreshDimensions();
     }
 
-    public BeamWaveProjectileEntity(LivingEntity pShooter, Level pLevel, Vec3 Position, int damage) {
-        this(ModEntities.BEAM_WAVE_PROJECTILE.get(), Position, pLevel, damage);
-        this.setOwner(pShooter);
-    }
-
-    public BeamWaveProjectileEntity(EntityType<? extends AbstractAbilityProjectile> pEntityType, Vec3 pos, Level pLevel, int damage) {
-        super(pEntityType, pLevel);
+    public BeamWaveProjectileEntity(LivingEntity pShooter, Level pLevel, int damage) {
+        this(ModEntities.BEAM_WAVE_PROJECTILE.get(), pLevel);
         this.DamageMultiplier = damage;
-        this.Position = pos;
+        this.setOwner(pShooter);
     }
 
     int deleteTimer = 0;
@@ -52,21 +46,24 @@ public class BeamWaveProjectileEntity extends AbstractAbilityProjectile implemen
         deleteTimer++;
         if (!this.level().isClientSide) {if (deleteTimer >= deleteTimerEnd) {this.discard();}}
         if (shooter == null) {return;}
-        setPos(Position);
-    }
+        this.setPos(new Vec3(shooter.getEyePosition().x, shooter.getEyePosition().y-0.5, shooter.getEyePosition().z));
 
+        AABB box = this.getBoundingBox();
+
+        List<Entity> hits = this.level().getEntities(this, box, e -> e != this.getOwner());
+
+        for (Entity target : hits) {
+            if (!this.level().isClientSide) {
+                target.hurt(
+                        this.damageSources().indirectMagic(this, this.getOwner()),
+                        4.0F * DamageMultiplier
+                );
+            }
+        }
+    }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
-        Entity target = result.getEntity();
-        Entity owner = this.getOwner();
-
-        DamageSource source = this.damageSources().indirectMagic(this, owner);
-
-        float damage = 4.0F * DamageMultiplier;; // your damage value here
-
-        target.hurt(source, damage);
-    }
+    protected void onHitEntity(EntityHitResult result) {}
 
     @Override
     protected void defineSynchedData() {}
@@ -79,6 +76,11 @@ public class BeamWaveProjectileEntity extends AbstractAbilityProjectile implemen
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.beamwavemodel.idle", Animation.LoopType.HOLD_ON_LAST_FRAME));
         return PlayState.CONTINUE;
+    }
+
+    @Override
+    public @NotNull EntityDimensions getDimensions(@NotNull Pose pose) {
+        return EntityDimensions.scalable(2F, 2F);
     }
 
     @Override

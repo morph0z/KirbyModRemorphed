@@ -5,12 +5,8 @@ import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CrashAbil
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -23,18 +19,13 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler.holdTimePrimary;
-
 public class CrashAbility extends AbilityClass implements GeoItem {
     public CrashAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
+        super(pType, pProperties);
         TextColor = "§5";
 
-        HasPrimary = true;
         PrimaryCharges = true;
-        HasSecondary = false;
         SecondaryCharges = false;
-        HasPassive = false;
 
         PrimaryName = "Explode";
         SecondaryName = "";

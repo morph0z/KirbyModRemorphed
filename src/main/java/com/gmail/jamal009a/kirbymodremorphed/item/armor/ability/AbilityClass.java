@@ -7,8 +7,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -20,18 +22,14 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class AbilityClass extends ArmorItem implements GeoItem {
+public abstract class AbilityClass extends ArmorItem implements GeoItem {
     public String TextColor;
 
-    public boolean HasPrimary;
     public boolean PrimaryCharges;
-    public String PrimaryName;
-
-    public boolean HasSecondary;
     public boolean SecondaryCharges;
-    public String SecondaryName;
 
-    public boolean HasPassive;
+    public String PrimaryName;
+    public String SecondaryName;
     public String PassiveName;
 
     public boolean HasFallingAnimation;
@@ -39,7 +37,7 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     public int amountPrimaryPressed = 0;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public AbilityClass(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+    public AbilityClass(Type pType, Properties pProperties) {
         super(ModArmorMaterials.ABILITY, pType, pProperties);
     }
 
@@ -53,7 +51,7 @@ public class AbilityClass extends ArmorItem implements GeoItem {
                 } else if (entity.onGround()) {
                     state.setAnimation(DefaultAnimations.IDLE);
                 }
-            } else if (!HasFallingAnimation) {state.setAnimation(DefaultAnimations.IDLE);}
+            } else {state.setAnimation(DefaultAnimations.IDLE);}
             // We'll just have ArmorStands always animate, so we can return here
             if (entity instanceof ArmorStand)
                 return PlayState.CONTINUE;
@@ -64,23 +62,27 @@ public class AbilityClass extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {return this.cache;}
+
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (entity instanceof Player){PassiveAbility(level, entity, stack, false);}
+        super.inventoryTick(stack, level, entity, slot, selected);
     }
 
-    public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+
+    public void appendHoverText(@NotNull ItemStack itemstack, Level world, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
         super.appendHoverText(itemstack, world, list, flag);
-        if (HasPrimary) {
+        if (PrimaryAbility(null, null, 0)) {
             list.add(Component.literal(TextColor+"-Primary"));
             list.add(Component.literal("  "+PrimaryName));
         }
 
-        if(HasSecondary) {
+        if(SecondaryAbility(null, null, 0)) {
             list.add(Component.literal(TextColor+"-Secondary"));
             list.add(Component.literal("  "+SecondaryName));
         }
 
-        if(HasPassive) {
+        if(PassiveAbility(null, null, null, true)) {
             list.add(Component.literal(TextColor+"-Passive"));
             list.add(Component.literal("  "+PassiveName));
         }
@@ -93,12 +95,11 @@ public class AbilityClass extends ArmorItem implements GeoItem {
         return true;
     }
 
-    /// set stage to -1 if there are no stages
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){ return false; }
 
-    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
-        return false;
-    }
+    public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){return false;}
+
+    public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check){return false;}
 
     public void ChargeAnimation(AbstractClientPlayer player){}
 }

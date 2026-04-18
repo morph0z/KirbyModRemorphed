@@ -7,7 +7,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -25,18 +24,13 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-import static com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler.*;
-
 public class JetAbility extends AbilityClass implements GeoItem {
     public JetAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
+        super(pType, pProperties);
         TextColor = "§1";
 
-        HasPrimary = true;
         PrimaryCharges = true;
-        HasSecondary = true;
         SecondaryCharges = true;
-        HasPassive = false;
 
         PrimaryName = "Jet Dash";
         SecondaryName = "Rocket Fly";

@@ -1,5 +1,5 @@
 {
-  "parent": "kirbymodremorphed:block/magmameltedblock",
+  "parent": "kirbymodremorphed:block/magma_melted_block",
   "display": {
     "thirdperson": {
       "rotation": [

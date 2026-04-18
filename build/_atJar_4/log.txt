@@ -1,0 +1,7 @@
+Java Launcher: /var/home/Jamal/Inst/java/temurin-17.0.18/bin/java
+Arguments: '--inJar, /var/home/Jamal/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0/forge-1.20.1-47.2.0-injected.jar, --outJar, /var/home/Jamal/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar, --logFile, accesstransform.log, --atFile, /var/home/Jamal/Documents/KMR/KirbyModRemorphed/build/_atJar_4/parent_at.cfg'
+Classpath:
+ - /var/home/Jamal/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/accesstransformers/8.2.14/accesstransformers-8.2.14-fatjar.jar
+Working directory: /var/home/Jamal/Documents/KMR/KirbyModRemorphed/build/_atJar_4
+Main class: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

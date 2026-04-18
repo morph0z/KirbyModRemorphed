@@ -1,9 +1,9 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.BeamProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.BeamWaveProjectileEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.BeamAbilityRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.particle.ModParticles;
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -28,14 +28,11 @@ import java.util.function.Consumer;
 
 public class BeamAbility extends AbilityClass implements GeoItem {
     public BeamAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
-        super(pMaterial, pType, pProperties);
-        TextColor = "\u00A76";
+        super(pType, pProperties);
+        TextColor = "§6";
 
-        HasPrimary = true;
         PrimaryCharges = true;
-        HasSecondary = false;
-        SecondaryCharges = false;
-        HasPassive = true;
+        SecondaryCharges = true;
 
         PrimaryName = "Wave Beam";
         SecondaryName = "Beam Blast";
@@ -63,18 +60,23 @@ public class BeamAbility extends AbilityClass implements GeoItem {
         });
     }
 
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
-        if (entity instanceof Player player && Iterables.contains(player.getArmorSlots(), stack)) {
-            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1, 0, true, false));
-        }
-        super.inventoryTick(stack, level, entity, slot, selected);
+    public void createWaveAttack(ServerLevel level, ServerPlayer player, int power){
+        BeamWaveProjectileEntity beamWave = new BeamWaveProjectileEntity(player, level, power);
+        level.addFreshEntity(beamWave);
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "wandwave");
     }
 
-    public void createWaveAttack(ServerLevel level, ServerPlayer player, int power){
-        Vec3 wavePosition = new Vec3(player.getX(), player.getEyeY()-0.2, player.getZ());
-        System.out.println("Wave Pos: " + wavePosition);
-        BeamWaveProjectileEntity beamWave = new BeamWaveProjectileEntity(player, level, wavePosition, power);
-        level.addFreshEntity(beamWave);
+    public void createBeamAttack(ServerLevel level, ServerPlayer player, int power){
+        Vec3 playerLookDirection = player.getLookAngle();
+        Vec3 playerPos = new Vec3(player.getX(), player.getY(), player.getZ());
+
+        double lookX = playerLookDirection.x;
+        double lookY = playerLookDirection.y;
+        double lookZ = playerLookDirection.z;
+
+        BeamProjectileEntity beam = new BeamProjectileEntity(playerPos, lookX, lookY, lookZ, level, power);
+        beam.setPosRaw(player.getX() + lookX * 1.5, player.getEyeY() - 0.2, player.getZ() + lookZ * 1.5);
+        level.addFreshEntity(beam);
         ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "wandwave");
     }
 
@@ -87,8 +89,26 @@ public class BeamAbility extends AbilityClass implements GeoItem {
         return true;
     }
 
-    public boolean SecondaryAbility(ServerLevel  level, ServerPlayer player){
-        return false;
+    public boolean SecondaryAbility(ServerLevel  level, ServerPlayer player, int stage){
+        if (stage == 0){return true;}
+        if (stage == 1){createBeamAttack(level, player, 1);}
+        if (stage == 2){createBeamAttack(level, player, 2);}
+        if (stage == 3){createBeamAttack(level, player, 3);}
+        return true;
+    }
+
+    @Override
+    public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check) {
+        if(check){return true;}
+        if (entity instanceof Player player && Iterables.contains(entity.getArmorSlots(), stack)) {
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.MOVEMENT_SPEED,
+                    1,
+                    0,
+                    true,
+                    false));
+        }
+        return true;
     }
 
     @Override

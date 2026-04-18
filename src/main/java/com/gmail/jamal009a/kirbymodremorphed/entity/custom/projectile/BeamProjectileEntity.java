@@ -1,13 +1,16 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractMovingAbilityProjectile;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -15,36 +18,17 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class BeamProjectileEntity extends AbstractAbilityProjectile implements GeoEntity {
 
+public class BeamProjectileEntity extends AbstractMovingAbilityProjectile implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    float DamageMultiplier;
-    Vec3 Position = new Vec3(0,0,0);
 
-    public BeamProjectileEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
-
-    public BeamProjectileEntity(LivingEntity pShooter, Level pLevel, Vec3 Position, int damage) {
-        this(ModEntities.BEAM_WAVE_PROJECTILE.get(), Position, pLevel, damage);
-        this.setOwner(pShooter);
-    }
-
-    public BeamProjectileEntity(EntityType<? extends AbstractAbilityProjectile> pEntityType, Vec3 pos, Level pLevel, int damage) {
-        super(pEntityType, pLevel);
-        this.DamageMultiplier = damage;
-        this.Position = pos;
+    public BeamProjectileEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {super(pEntityType, pLevel);}
+    public BeamProjectileEntity(Vec3 pos, double dirX, double dirY, double dirZ, Level pLevel, float Damage){
+        super(ModEntities.BEAM_PROJECTILE.get(), pos , dirX, dirY, dirZ, pLevel, Damage);
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
-
-    }
-
-    @Override
-    protected void defineSynchedData() {
-
-    }
+    protected ParticleOptions getTrailParticle() {return ParticleTypes.FLASH;}
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -56,7 +40,20 @@ public class BeamProjectileEntity extends AbstractAbilityProjectile implements G
         return PlayState.CONTINUE;
     }
 
+    private float size = 0.5F;
+    @Override
+    public void tick() {
+        super.tick();
+        this.size += 0.02F;
+        this.refreshDimensions();
+    }
+
+    public @NotNull EntityDimensions getDimensions(@NotNull Pose pose) {
+        return EntityDimensions.scalable(size, size);
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return cache;}
+
 
 }
