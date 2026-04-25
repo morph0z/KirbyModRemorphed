@@ -59,20 +59,10 @@ public class JetAbility extends AbilityClass implements GeoItem {
     }
 
     public void JetDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
-        if (player.getDirection() == Direction.NORTH) {
-            ClientPlayer.addDeltaMovement(new Vec3(0, power/5, -power));
-        } else if (player.getDirection() == Direction.SOUTH) {
-            ClientPlayer.addDeltaMovement(new Vec3(0, power/5, power));
-        } else if (player.getDirection() == Direction.EAST) {
-            ClientPlayer.addDeltaMovement(new Vec3(power, power/5, 0));
-        } else if (player.getDirection() == Direction.WEST) {
-            ClientPlayer.addDeltaMovement(new Vec3(-power, power/5, 0));
-        }
-        level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1, 1, false);
-        ClientPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1);
-        level.sendParticles(ParticleTypes.FLAME,
-                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
-                Math.round(5*power), 0, -0.3, 0, 0.4);
+        ClientForgeHandler.playerAnimationPlay(ClientPlayer, "jetdash");
+        Dash(ClientPlayer, player, level, power, true,
+                ParticleTypes.FLAME, 0, -0.3F, 0, 5, 0.4,
+                SoundEvents.FIRECHARGE_USE);
     }
     public void JetFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
@@ -86,7 +76,6 @@ public class JetAbility extends AbilityClass implements GeoItem {
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage) {
         if (stage == 0){return true;}
-        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetdash");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
 
         if (stage == 1){JetDash(ClientPlayer, player, level, primaryLaunchPower/5);}

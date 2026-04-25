@@ -7,9 +7,13 @@ import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -19,12 +23,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class NinjaAbility extends AbilityClass implements GeoItem {
@@ -42,6 +48,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
         HasFallingAnimation = false;
     }
 
+    //TODO: REPLACE MODEL
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -67,6 +74,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
         return giveItem(player, new ItemStack(ModItems.KATANA.get()));
     }
 
+    //TODO: ADD ANIMATIONS
     public void SmokeBomb(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         //ClientForgeHandler.playerAnimationPlay(ClientPlayer, "");
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) ((power+1)*40), 0, false, false));
@@ -75,15 +83,39 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
                 Math.round(50*power), 0, -0.3, 0, 0.03);
     }
 
-    float secondaryLaunchPower = 5;
+    public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
+        Dash(ClientPlayer, player, level, power, false,
+                ParticleTypes.SMOKE, 0, -0.3F, 0, 10, 0.8,
+                SoundEvents.WOOL_STEP);
+    }
+
+    public void suplex(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, List<Entity> hitEntities){
+        hitEntities.get(0).addDeltaMovement(new Vec3(0, 50, 0));
+        ClientPlayer.addDeltaMovement(new Vec3(0, 2, 0));
+    }
+
+    float secondaryPower = 5;
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0){return true;}
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
-        assert ClientPlayer != null;
 
-        if (stage == 1){SmokeBomb(ClientPlayer, player, level, 0);}
-        if (stage == 2){SmokeBomb(ClientPlayer, player, level, secondaryLaunchPower/2);}
-        if (stage == 3){SmokeBomb(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
+        AABB box = player.getBoundingBox().inflate(2);
+        List<Entity> hits = player.level().getEntities(player, box, e -> e != player);
+
+        assert ClientPlayer != null;
+        if (player.isHolding(ModItems.KATANA.get())) {
+            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 0);}
+            if (stage == 2) {KatanaDash(ClientPlayer, player, level, secondaryPower / 2);}
+            if (stage == 3) {KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
+        } else if (!hits.isEmpty()) {
+            if (stage == 1) {suplex(ClientPlayer, player, level, 0, hits);}
+            if (stage == 2) {suplex(ClientPlayer, player, level, secondaryPower / 2, hits);}
+            if (stage == 3) {suplex(ClientPlayer, player, level, (float) (secondaryPower * 1.5), hits);}
+        } else{
+            if (stage == 1) {SmokeBomb(ClientPlayer, player, level, 0);}
+            if (stage == 2) {SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);}
+            if (stage == 3) {SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
+        }
         return true;
     }
 
