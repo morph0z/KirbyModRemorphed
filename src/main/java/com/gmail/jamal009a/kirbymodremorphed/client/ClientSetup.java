@@ -2,10 +2,7 @@ package com.gmail.jamal009a.kirbymodremorphed.client;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.BeamProjectileRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.BeamWaveProjectileRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.CupidArrowProjectileRenderer;
-import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.KiBlastProjectileRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.projectilerender.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,5 +18,6 @@ public class ClientSetup {
         EntityRenderers.register(ModEntities.BEAM_PROJECTILE.get(), BeamProjectileRenderer::new);
         EntityRenderers.register(ModEntities.BEAM_WAVE_PROJECTILE.get(), BeamWaveProjectileRenderer::new);
         EntityRenderers.register(ModEntities.CUPID_ARROW.get(), CupidArrowProjectileRenderer::new);
+        EntityRenderers.register(ModEntities.DAMAGE_HIT_BOX_ENTITY.get(), DamageHitBoxRenderer::new);
     }
 }

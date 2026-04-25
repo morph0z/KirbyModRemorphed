@@ -1,19 +1,16 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
-import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.DamageHitBoxEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -30,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
+import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -83,17 +81,24 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
                 Math.round(50*power), 0, -0.3, 0, 0.03);
     }
 
+    //TODO: ADD ANIMATIONS
     public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         Dash(ClientPlayer, player, level, power, false,
                 ParticleTypes.SMOKE, 0, -0.3F, 0, 10, 0.8,
                 SoundEvents.WOOL_STEP);
+
+        DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, 20*((int) power),
+                                    new Dimension(2, 2), 0,-1,0);
+        level.addFreshEntity(hitBox);
     }
 
-    public void suplex(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, List<Entity> hitEntities){
-        hitEntities.get(0).addDeltaMovement(new Vec3(0, 50, 0));
-        ClientPlayer.addDeltaMovement(new Vec3(0, 2, 0));
+    //TODO: ADD ANIMATIONS
+    public void suplex(LocalPlayer ClientPlayer, float power, List<Entity> hitEntities){
+        hitEntities.get(0).addDeltaMovement(new Vec3(0, 1 * power, 0));
+        ClientPlayer.addDeltaMovement(new Vec3(0, 1 * power, 0));
     }
 
+    //TODO: BALANCE
     float secondaryPower = 5;
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0){return true;}
@@ -104,15 +109,18 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
 
         assert ClientPlayer != null;
         if (player.isHolding(ModItems.KATANA.get())) {
-            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 0);}
+            System.out.println("Katana");
+            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 1);}
             if (stage == 2) {KatanaDash(ClientPlayer, player, level, secondaryPower / 2);}
             if (stage == 3) {KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
         } else if (!hits.isEmpty()) {
-            if (stage == 1) {suplex(ClientPlayer, player, level, 0, hits);}
-            if (stage == 2) {suplex(ClientPlayer, player, level, secondaryPower / 2, hits);}
-            if (stage == 3) {suplex(ClientPlayer, player, level, (float) (secondaryPower * 1.5), hits);}
+            System.out.println("Suplex");
+            if (stage == 1) {suplex(ClientPlayer, 1, hits);}
+            if (stage == 2) {suplex(ClientPlayer,  secondaryPower / 2, hits);}
+            if (stage == 3) {suplex(ClientPlayer, (float) (secondaryPower * 1.5), hits);}
         } else{
-            if (stage == 1) {SmokeBomb(ClientPlayer, player, level, 0);}
+            System.out.println("Smoke");
+            if (stage == 1) {SmokeBomb(ClientPlayer, player, level, 1);}
             if (stage == 2) {SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);}
             if (stage == 3) {SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
         }
