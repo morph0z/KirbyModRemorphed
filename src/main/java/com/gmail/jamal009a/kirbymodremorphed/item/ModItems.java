@@ -122,6 +122,7 @@ public class ModItems {
     public static final RegistryObject<Item> FIGHTER_ABILITY = ITEMS.register("fighter_ability", () -> new FighterAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> JET_ABILITY = ITEMS.register("jet_ability", () -> new JetAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> CRASH_ABILITY = ITEMS.register("crash_ability", () -> new CrashAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> NINJA_ABILITY = ITEMS.register("ninja_ability", () -> new NinjaAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
 

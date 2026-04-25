@@ -23,6 +23,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.FIGHTER_ABILITY.get());
                         pOutput.accept(ModItems.JET_ABILITY.get());
                         pOutput.accept(ModItems.CRASH_ABILITY.get());
+                        pOutput.accept(ModItems.NINJA_ABILITY.get());
                     })
                     .build());
     public  static  final RegistryObject<CreativeModeTab> ABILITIES_ITEMS_TAB = CREATIVE_MODE_TABS.register("abilities_items_tab",

@@ -121,7 +121,9 @@
   "minecraft:adventure/kill_all_mobs": {
     "criteria": {
       "minecraft:skeleton": "2026-03-22 16:38:46 -0400",
-      "minecraft:creeper": "2026-04-18 12:56:21 -0400"
+      "minecraft:creeper": "2026-04-18 12:56:21 -0400",
+      "minecraft:wither": "2026-04-19 11:25:49 -0400",
+      "minecraft:zombie": "2026-04-19 11:07:17 -0400"
     },
     "done": false
   },
@@ -506,6 +508,18 @@
   "minecraft:recipes/redstone/redstone_lamp": {
     "criteria": {
       "has_glowstone": "2026-04-01 16:32:19 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/firework_rocket_simple": {
+    "criteria": {
+      "has_gunpowder": "2026-04-19 11:23:55 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/tnt": {
+    "criteria": {
+      "has_gunpowder": "2026-04-19 11:23:55 -0400"
     },
     "done": true
   },

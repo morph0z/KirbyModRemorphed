@@ -5,5 +5,5 @@ Specification-Version: 1
 Implementation-Title: KirbyModRemorphed
 Implementation-Version: 1.20-1.0.0.0
 Implementation-Vendor: Morpho/Morph0z
-Implementation-Timestamp: 2025-12-30T13:09:30-0500
+Implementation-Timestamp: 2026-04-18T13:19:02-0400
 

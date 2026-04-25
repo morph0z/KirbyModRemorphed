@@ -27,17 +27,17 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-public class CupidAbility extends AbilityClass implements GeoItem {
-    public CupidAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+public class NinjaAbility extends AbilityClass implements GeoItem {
+    public NinjaAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pType, pProperties);
-        TextColor = "§d";
+        TextColor = "§5";
 
         PrimaryCharges = false;
         SecondaryCharges = true;
 
-        PrimaryName = "Love Bow";
-        SecondaryName = "Wing Fly";
-        PassiveName = "Regeneration";
+        PrimaryName = "Katana";
+        SecondaryName = "Slash / Suplex / Smoke bomb";
+        PassiveName = "Speed / Wall Jumping";
 
         HasFallingAnimation = false;
     }
@@ -64,16 +64,15 @@ public class CupidAbility extends AbilityClass implements GeoItem {
     @Override
     public boolean PrimaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0) {return true;}
-        return giveItem(player, new ItemStack(ModItems.CUPID_BOW.get()));
+        return giveItem(player, new ItemStack(ModItems.KATANA.get()));
     }
 
-    public void CupidFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
-        ClientForgeHandler.playerAnimationPlay(ClientPlayer, "cupidfly");
-        ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) ((power+1)*10), 3, false, false));
-        level.sendParticles(ParticleTypes.CLOUD,
+    public void SmokeBomb(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
+        //ClientForgeHandler.playerAnimationPlay(ClientPlayer, "");
+        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) ((power+1)*40), 0, false, false));
+        level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
                 player.getX(), player.getY(), player.getZ(),
-                Math.round(5*power), 0, -0.3, 0, 0.4);
+                Math.round(50*power), 0, -0.3, 0, 0.03);
     }
 
     float secondaryLaunchPower = 5;
@@ -82,9 +81,9 @@ public class CupidAbility extends AbilityClass implements GeoItem {
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
         assert ClientPlayer != null;
 
-        if (stage == 1){CupidFly(ClientPlayer, player, level, 0);}
-        if (stage == 2){CupidFly(ClientPlayer, player, level, secondaryLaunchPower/2);}
-        if (stage == 3){CupidFly(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
+        if (stage == 1){SmokeBomb(ClientPlayer, player, level, 0);}
+        if (stage == 2){SmokeBomb(ClientPlayer, player, level, secondaryLaunchPower/2);}
+        if (stage == 3){SmokeBomb(ClientPlayer, player, level, (float) (secondaryLaunchPower * 1.5));}
         return true;
     }
 
@@ -93,7 +92,7 @@ public class CupidAbility extends AbilityClass implements GeoItem {
         if(check){return true;}
         if (entity instanceof Player player && Iterables.contains(entity.getArmorSlots(), stack)) {
             player.addEffect(new MobEffectInstance(
-                    MobEffects.REGENERATION,
+                    MobEffects.MOVEMENT_SPEED,
                     1,
                     0,
                     true,

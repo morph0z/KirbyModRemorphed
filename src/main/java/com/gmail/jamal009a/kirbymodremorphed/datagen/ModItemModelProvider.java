@@ -38,6 +38,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         abilityItemWith2D(ModItems.FIGHTER_ABILITY);
         abilityItemWith2D(ModItems.JET_ABILITY);
         abilityItemWith2D(ModItems.CRASH_ABILITY);
+        abilityItemWith2D(ModItems.NINJA_ABILITY);
 
         armorItemWith2D(ModItems.META_KNIGHTS_MASK);
         armorItemWith2D(ModItems.META_KNIGHTS_WINGS);
