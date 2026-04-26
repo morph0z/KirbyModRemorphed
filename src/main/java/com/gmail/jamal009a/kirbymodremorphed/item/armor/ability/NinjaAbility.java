@@ -3,6 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.DamageHitBoxEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.DashAbility;
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -31,7 +32,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class NinjaAbility extends AbilityClass implements GeoItem {
+public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
     public NinjaAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pType, pProperties);
         TextColor = "§5";
@@ -82,12 +83,12 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
     }
 
     //TODO: ADD ANIMATIONS
-    public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
+    public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, int stage){
         Dash(ClientPlayer, player, level, power, false,
                 ParticleTypes.SMOKE, 0, -0.3F, 0, 10, 0.8,
                 SoundEvents.WOOL_STEP);
 
-        DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, 20*((int) power),
+        DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, 20 * stage,
                                     new Dimension(2, 2), 0,-1,0);
         level.addFreshEntity(hitBox);
     }
@@ -109,17 +110,14 @@ public class NinjaAbility extends AbilityClass implements GeoItem {
 
         assert ClientPlayer != null;
         if (player.isHolding(ModItems.KATANA.get())) {
-            System.out.println("Katana");
-            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 1);}
-            if (stage == 2) {KatanaDash(ClientPlayer, player, level, secondaryPower / 2);}
-            if (stage == 3) {KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
+            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 1, stage);}
+            if (stage == 2) {KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage);}
+            if (stage == 3) {KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage);}
         } else if (!hits.isEmpty()) {
-            System.out.println("Suplex");
             if (stage == 1) {suplex(ClientPlayer, 1, hits);}
-            if (stage == 2) {suplex(ClientPlayer,  secondaryPower / 2, hits);}
-            if (stage == 3) {suplex(ClientPlayer, (float) (secondaryPower * 1.5), hits);}
+            if (stage == 2) {suplex(ClientPlayer, secondaryPower/ 4, hits);}
+            if (stage == 3) {suplex(ClientPlayer, secondaryPower / 2, hits);}
         } else{
-            System.out.println("Smoke");
             if (stage == 1) {SmokeBomb(ClientPlayer, player, level, 1);}
             if (stage == 2) {SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);}
             if (stage == 3) {SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}

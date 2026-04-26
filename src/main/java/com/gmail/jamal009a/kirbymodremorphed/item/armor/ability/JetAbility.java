@@ -2,13 +2,17 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.JetAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.DashAbility;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.FlyAbility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,7 +28,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-public class JetAbility extends AbilityClass implements GeoItem {
+public class JetAbility extends AbilityClass implements GeoItem, DashAbility, FlyAbility {
     public JetAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pType, pProperties);
         TextColor = "§1";
@@ -64,12 +68,12 @@ public class JetAbility extends AbilityClass implements GeoItem {
                 ParticleTypes.FLAME, 0, -0.3F, 0, 5, 0.4,
                 SoundEvents.FIRECHARGE_USE);
     }
+
     public void JetFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
-        ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) ((power+1)*10), 3, false, false));
-        level.sendParticles(ParticleTypes.FLAME,
-                player.getX() + 0, player.getY() + 0, player.getZ() + 0,
-                Math.round(5*power), 0, -0.3, 0, 0.4);
+        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
+        Fly(ClientPlayer, player, level, power, ParticleTypes.FLAME,
+0, -0.3F, 0, 5, 0.4,
+            SoundEvents.FIRECHARGE_USE);
     }
 
     float primaryLaunchPower = 2;
@@ -88,7 +92,6 @@ public class JetAbility extends AbilityClass implements GeoItem {
     @Override
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0){return true;}
-        ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "jetfly");
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
         assert ClientPlayer != null;
 

@@ -24,6 +24,8 @@ public class DamageHitBoxEntity extends AbstractAbilityProjectile{
     double yOffset = 0;
     double zOffset = 0;
 
+    Vec3 Offset = new Vec3(0,0,0);
+
     public DamageHitBoxEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.refreshDimensions();
@@ -39,6 +41,7 @@ public class DamageHitBoxEntity extends AbstractAbilityProjectile{
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.zOffset = zOffset;
+        this.Offset = new Vec3(this.xOffset, this.yOffset, this.zOffset);
 
         this.setOwner(pShooter);
     }
@@ -53,9 +56,7 @@ public class DamageHitBoxEntity extends AbstractAbilityProjectile{
         deleteTimer++;
         if (!this.level().isClientSide) {if (deleteTimer >= deleteTimerEnd) {this.discard();}}
         if (shooter == null) {return;}
-        this.setPos(new Vec3(shooter.getEyePosition().x + xOffset,
-                            shooter.getEyePosition().y + yOffset,
-                            shooter.getEyePosition().z + zOffset));
+        this.setPos(new Vec3(shooter.position().add(this.Offset).toVector3f()));
 
         AABB box = this.getBoundingBox();
 

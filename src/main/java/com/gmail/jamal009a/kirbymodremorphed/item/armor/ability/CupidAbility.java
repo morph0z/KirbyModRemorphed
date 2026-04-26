@@ -3,6 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.FlyAbility;
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -10,6 +11,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +30,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-public class CupidAbility extends AbilityClass implements GeoItem {
+public class CupidAbility extends AbilityClass implements GeoItem, FlyAbility {
     public CupidAbility(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pType, pProperties);
         TextColor = "§d";
@@ -69,11 +72,9 @@ public class CupidAbility extends AbilityClass implements GeoItem {
 
     public void CupidFly(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
         ClientForgeHandler.playerAnimationPlay(ClientPlayer, "cupidfly");
-        ClientPlayer.addDeltaMovement(new Vec3(0, power,0));
-        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, (int) ((power+1)*10), 3, false, false));
-        level.sendParticles(ParticleTypes.CLOUD,
-                player.getX(), player.getY(), player.getZ(),
-                Math.round(5*power), 0, -0.3, 0, 0.4);
+        Fly(ClientPlayer, player, level, power,
+                ParticleTypes.CLOUD, 0,-0.3F,0, 5, 0.4,
+                SoundEvents.WOOL_BREAK);
     }
 
     float secondaryLaunchPower = 5;

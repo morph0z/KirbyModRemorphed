@@ -1,4 +1,5 @@
 {
+
   "item.kirbymodremorphed.sapphire": "Sapphire",
   "item.kirbymodremorphed.void_flesh": "§dVoid §fFlesh",
   "item.kirbymodremorphed.jamba_crystal": "§5Jamba Crystal",
@@ -88,6 +89,7 @@
   "item.kirbymodremorphed.fighter_ability": "Fighter Ability",
   "item.kirbymodremorphed.jet_ability": "Jet Ability",
   "item.kirbymodremorphed.crash_ability": "Crash Ability",
+  "item.kirbymodremorphed.ninja_ability": "Ninja Ability",
 
   "sounds.kirbymodremorphed.power_up": "Power up",
   "sounds.kirbymodremorphed.mic_shout_1": "Microphone Shout 1",
