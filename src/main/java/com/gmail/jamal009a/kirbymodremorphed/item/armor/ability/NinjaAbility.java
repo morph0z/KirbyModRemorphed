@@ -99,7 +99,6 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         ClientPlayer.addDeltaMovement(new Vec3(0, 1 * power, 0));
     }
 
-    //TODO: BALANCE
     float secondaryPower = 5;
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0){return true;}
@@ -109,19 +108,21 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         List<Entity> hits = player.level().getEntities(player, box, e -> e != player);
 
         assert ClientPlayer != null;
-        if (player.isHolding(ModItems.KATANA.get())) {
-            if (stage == 1) {KatanaDash(ClientPlayer, player, level, 1, stage);}
-            if (stage == 2) {KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage);}
-            if (stage == 3) {KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage);}
-        } else if (!hits.isEmpty()) {
-            if (stage == 1) {suplex(ClientPlayer, 1, hits);}
-            if (stage == 2) {suplex(ClientPlayer, secondaryPower/ 4, hits);}
-            if (stage == 3) {suplex(ClientPlayer, secondaryPower / 2, hits);}
-        } else{
-            if (stage == 1) {SmokeBomb(ClientPlayer, player, level, 1);}
-            if (stage == 2) {SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);}
-            if (stage == 3) {SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));}
-        }
+        if (player.isHolding(ModItems.KATANA.get())) { switch (stage){
+                case (1): KatanaDash(ClientPlayer, player, level, 1, stage);
+                case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage);
+                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage);
+            }}
+        else if (!hits.isEmpty()) { switch (stage) {
+                case (1): suplex(ClientPlayer, 1, hits);
+                case (2): suplex(ClientPlayer, secondaryPower / 4, hits);
+                case (3): suplex(ClientPlayer, secondaryPower / 2, hits);
+            }}
+        else { switch (stage){
+                case (1):SmokeBomb(ClientPlayer, player, level, 1);
+                case (2):SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);
+                case (3):SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));
+            }}
         return true;
     }
 
