@@ -1,26 +1,15 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
 import com.gmail.jamal009a.kirbymodremorphed.item.ModArmorMaterials;
-import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.constant.DataTickets;
@@ -29,11 +18,9 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class AbilityClass extends ArmorItem implements GeoItem {
     public String TextColor;
@@ -113,5 +100,6 @@ public abstract class AbilityClass extends ArmorItem implements GeoItem {
 
     public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check){return false;}
 
-    public void ChargeAnimation(AbstractClientPlayer player){}
+    public void PrimaryChargeAnimation(AbstractClientPlayer player){}
+    public void SecondaryChargeAnimation(AbstractClientPlayer player){}
 }

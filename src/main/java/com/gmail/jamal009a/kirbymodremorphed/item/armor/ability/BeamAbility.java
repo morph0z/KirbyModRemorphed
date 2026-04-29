@@ -112,6 +112,8 @@ public class BeamAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public void ChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "wandcharge");}
+    public void PrimaryChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "wandcharge");}
 
+    @Override
+    public void SecondaryChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "wandcharge");}
 }

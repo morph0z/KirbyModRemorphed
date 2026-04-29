@@ -565,5 +565,17 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/glass": {
+    "criteria": {
+      "has_smelts_to_glass": "2026-04-27 08:13:15 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone": {
+    "criteria": {
+      "has_sand": "2026-04-27 08:13:15 -0400"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }

@@ -1,0 +1,199 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+        "smokebombthrow": {
+            "animation_length": 0.375,
+            "bones": {
+                "head": {
+                    "rotation": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                25,
+                                10
+                            ],
+                            "easing": "easeOutBack"
+                        },
+                        "0.25": {
+                            "vector": [
+                                27.5,
+                                -25,
+                                10
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    },
+                    "position": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    }
+                },
+                "body": {
+                    "rotation": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                25,
+                                0
+                            ],
+                            "easing": "easeOutBack"
+                        },
+                        "0.25": {
+                            "vector": [
+                                15,
+                                -25,
+                                0
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    },
+                    "position": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    }
+                },
+                "right_arm": {
+                    "rotation": {
+                        "0.0": {
+                            "vector": [
+                                -171.7064,
+                                12.0175,
+                                -16.1065
+                            ],
+                            "easing": "easeOutBack"
+                        },
+                        "0.25": {
+                            "vector": [
+                                -41.247,
+                                14.89,
+                                2.1329
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    },
+                    "position": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "0.25": {
+                            "vector": [
+                                0,
+                                -2,
+                                -4
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    }
+                },
+                "left_arm": {
+                    "rotation": {
+                        "0.0": {
+                            "vector": [
+                                -100.0936,
+                                -28.6042,
+                                -16.3296
+                            ],
+                            "easing": "easeOutBack"
+                        },
+                        "0.25": {
+                            "vector": [
+                                51.0588,
+                                -23.3667,
+                                -72.1381
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    },
+                    "position": {
+                        "0.0": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "0.25": {
+                            "vector": [
+                                1,
+                                -2,
+                                0
+                            ],
+                            "easing": "easeInCubic"
+                        },
+                        "0.375": {
+                            "vector": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "geckolib_format_version": 2
+}

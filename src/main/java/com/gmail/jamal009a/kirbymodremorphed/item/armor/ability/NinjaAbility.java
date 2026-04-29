@@ -1,14 +1,20 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
+import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.DamageHitBoxEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.DashAbility;
+import com.gmail.jamal009a.kirbymodremorphed.util.MethodRunOnce;
 import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -73,17 +79,16 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         return giveItem(player, new ItemStack(ModItems.KATANA.get()));
     }
 
-    //TODO: ADD ANIMATIONS
     public void SmokeBomb(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power){
-        //ClientForgeHandler.playerAnimationPlay(ClientPlayer, "");
-        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) ((power+1)*40), 0, false, false));
+        ClientForgeHandler.playerAnimationPlay(ClientPlayer, "smokebombthrow");
+        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, (int) ((power)*40), 0, false, false));
         level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
                 player.getX(), player.getY(), player.getZ(),
                 Math.round(50*power), 0, -0.3, 0, 0.03);
     }
 
-    //TODO: ADD ANIMATIONS
     public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, int stage){
+        ClientForgeHandler.playerAnimationPlay(ClientPlayer, "slashthrow");
         Dash(ClientPlayer, player, level, power, false,
                 ParticleTypes.SMOKE, 0, -0.3F, 0, 10, 0.8,
                 SoundEvents.WOOL_STEP);
@@ -108,35 +113,110 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         List<Entity> hits = player.level().getEntities(player, box, e -> e != player);
 
         assert ClientPlayer != null;
+
         if (player.isHolding(ModItems.KATANA.get())) { switch (stage){
-                case (1): KatanaDash(ClientPlayer, player, level, 1, stage);
-                case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage);
-                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage);
+                case (1): KatanaDash(ClientPlayer, player, level, 1, stage); break;
+                case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage); break;
+                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage); break;
             }}
         else if (!hits.isEmpty()) { switch (stage) {
-                case (1): suplex(ClientPlayer, 1, hits);
-                case (2): suplex(ClientPlayer, secondaryPower / 4, hits);
-                case (3): suplex(ClientPlayer, secondaryPower / 2, hits);
+                case (1): suplex(ClientPlayer, 1, hits); break;
+                case (2): suplex(ClientPlayer, secondaryPower / 4, hits); break;
+                case (3): suplex(ClientPlayer, secondaryPower / 2, hits); break;
             }}
         else { switch (stage){
-                case (1):SmokeBomb(ClientPlayer, player, level, 1);
-                case (2):SmokeBomb(ClientPlayer, player, level, secondaryPower / 2);
-                case (3):SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5));
+                case (1):SmokeBomb(ClientPlayer, player, level, 1); break;
+                case (2):SmokeBomb(ClientPlayer, player, level, secondaryPower / 2); break;
+                case (3):SmokeBomb(ClientPlayer, player, level, (float) (secondaryPower * 1.5)); break;
             }}
         return true;
+    }
+
+
+    @Override
+    public void SecondaryChargeAnimation(AbstractClientPlayer player){
+        AABB box = player.getBoundingBox().inflate(2);
+        List<Entity> hits = player.level().getEntities(player, box, e -> e != player);
+
+        if (player.isHolding(ModItems.KATANA.get())) {
+            ClientForgeHandler.playerAnimationPlay(player, "slashcharge");
+        }else if (!hits.isEmpty()) {
+            //TODO: SUPLEX CHARGE ANIMATION
+        }else{
+            ClientForgeHandler.playerAnimationPlay(player, "smokebombcharge");
+        }
     }
 
     @Override
     public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check) {
         if(check){return true;}
-        if (entity instanceof Player player && Iterables.contains(entity.getArmorSlots(), stack)) {
+        if (entity instanceof ServerPlayer player && Iterables.contains(entity.getArmorSlots(), stack)) {
             player.addEffect(new MobEffectInstance(
                     MobEffects.MOVEMENT_SPEED,
                     1,
                     0,
                     true,
-                    false));
+                    false)
+            );
+
+            if (player.horizontalCollision){startCling(player);}
         }
+        
         return true;
     }
+
+    private static boolean isSolidAt(Level level, int x, int y, int z) {
+        BlockPos bp = new BlockPos(x, y, z);
+        return !level.isEmptyBlock(bp) && level.getBlockState(bp).isSolid();
+    }
+
+    public static void attemptWallJump(ServerPlayer player){
+        if (player.onGround()) return;
+        if (!player.horizontalCollision) return;
+
+        // determine wall normal: check nearby blocks in four horizontal directions
+        Vec3 pos = player.position();
+        Level level = player.level();
+        Vec3 push = Vec3.ZERO;
+        int checkRadius = 1;
+        // check cardinal directions
+        if (isSolidAt(level, (int)pos.x + checkRadius, (int)pos.y, (int)pos.z)) push = push.add(-1, 0, 0);
+        if (isSolidAt(level, (int)pos.x - checkRadius, (int)pos.y, (int)pos.z)) push = push.add(1, 0, 0);
+        if (isSolidAt(level, (int)pos.x, (int)pos.y, (int)pos.z + checkRadius)) push = push.add(0, 0, -1);
+        if (isSolidAt(level, (int)pos.x, (int)pos.y, (int)pos.z - checkRadius)) push = push.add(0, 0, 1);
+
+        if (push.lengthSqr() == 0) return;
+
+        push = push.normalize();
+
+        // push values — tune these
+        double horizontalSpeed = 0.6;
+        double verticalBoost = 0.5;
+
+        Vec3 currentMotion = player.getDeltaMovement();
+        Vec3 newMotion = new Vec3(push.x * horizontalSpeed, Math.max(currentMotion.y, verticalBoost), push.z * horizontalSpeed);
+        player.setDeltaMovement(newMotion);
+        player.hurtMarked = true;
+
+    }
+
+    public static void startCling(ServerPlayer player) {
+        CompoundTag data = player.getPersistentData();
+        data.putBoolean("isWallClinging", true);
+        player.fallDistance = 0f;
+        player.setNoGravity(true);
+        player.setDeltaMovement(player.getDeltaMovement().multiply(0, 0, 0));
+        player.hurtMarked = true;
+        if (player.isShiftKeyDown()){stopCling(player, true);}
+    }
+
+    public static void stopCling(ServerPlayer player, boolean applyJumpImpulse) {
+        CompoundTag data = player.getPersistentData();
+        data.putBoolean("isWallClinging", false);
+        player.setNoGravity(false);
+        if (applyJumpImpulse) {attemptWallJump(player);}
+        player.hurtMarked = true;
+    }
 }
+
+

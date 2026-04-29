@@ -70,5 +70,5 @@ public class CrashAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public void ChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");}
+    public void PrimaryChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(Minecraft.getInstance().player, "crashcharge");}
 }

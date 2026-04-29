@@ -109,5 +109,5 @@ public class FighterAbility extends AbilityClass implements GeoItem {
     }
 
     @Override
-    public void ChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(player, "hadukencharge");}
+    public void SecondaryChargeAnimation(AbstractClientPlayer player){ClientForgeHandler.playerAnimationPlay(player, "hadukencharge");}
 }
