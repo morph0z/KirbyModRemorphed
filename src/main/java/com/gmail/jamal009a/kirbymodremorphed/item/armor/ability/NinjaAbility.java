@@ -98,10 +98,14 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         level.addFreshEntity(hitBox);
     }
 
-    //TODO: ADD ANIMATIONS
+    //TODO: ADD CANCEL ANIMATION WHEN GROUND HIT
     public void suplex(LocalPlayer ClientPlayer, float power, List<Entity> hitEntities){
+        ClientForgeHandler.playerAnimationPlay(ClientPlayer, "suplexthrow");
         hitEntities.get(0).addDeltaMovement(new Vec3(0, 1 * power, 0));
         ClientPlayer.addDeltaMovement(new Vec3(0, 1 * power, 0));
+//        if (ClientPlayer.fallDistance > 0){
+//
+//        }
     }
 
     float secondaryPower = 5;
@@ -138,15 +142,12 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         AABB box = player.getBoundingBox().inflate(2);
         List<Entity> hits = player.level().getEntities(player, box, e -> e != player);
 
-        if (player.isHolding(ModItems.KATANA.get())) {
-            ClientForgeHandler.playerAnimationPlay(player, "slashcharge");
-        }else if (!hits.isEmpty()) {
-            //TODO: SUPLEX CHARGE ANIMATION
-        }else{
-            ClientForgeHandler.playerAnimationPlay(player, "smokebombcharge");
-        }
+        if (player.isHolding(ModItems.KATANA.get())) {ClientForgeHandler.playerAnimationPlay(player, "slashcharge");}
+        else if (!hits.isEmpty()) {ClientForgeHandler.playerAnimationPlay(player, "suplexcharge");}
+        else{ClientForgeHandler.playerAnimationPlay(player, "smokebombcharge");}
     }
 
+    //TODO: WALL CLING
     @Override
     public boolean PassiveAbility(Level level, Entity entity, ItemStack stack, boolean check) {
         if(check){return true;}
