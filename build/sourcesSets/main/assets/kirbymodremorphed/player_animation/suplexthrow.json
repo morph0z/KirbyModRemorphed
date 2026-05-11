@@ -2,7 +2,6 @@
   "format_version": "1.8.0",
   "animations": {
     "suplexthrow": {
-      "loop": "hold_on_last_frame",
       "animation_length": 0.75,
       "bones": {
         "head": {

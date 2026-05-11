@@ -1,9 +1,11 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.armor.ability;
 
+import ca.weblite.objc.Client;
 import com.gmail.jamal009a.kirbymodremorphed.client.handler.ClientForgeHandler;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.DamageHitBoxEntity;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.CupidAbilityRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.client.NinjaAbilityRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.subAbility.DashAbility;
 import com.gmail.jamal009a.kirbymodremorphed.util.MethodRunOnce;
 import com.google.common.collect.Iterables;
@@ -50,10 +52,9 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         SecondaryName = "Slash / Suplex / Smoke bomb";
         PassiveName = "Speed / Wall Jumping";
 
-        HasFallingAnimation = false;
+        HasFallingAnimation = true;
     }
 
-    //TODO: REPLACE MODEL
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -62,7 +63,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null)
-                    this.renderer = new CupidAbilityRenderer();
+                    this.renderer = new NinjaAbilityRenderer();
 
                 // This prepares our GeoArmorRenderer for the current render frame.
                 // These parameters may be null however, so we don't do anything further with them
@@ -94,18 +95,15 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                 SoundEvents.WOOL_STEP);
 
         DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, 20 * stage,
-                                    new Dimension(2, 2), 0,-1,0);
+                                    new Dimension(2, 2), 0,0,0);
         level.addFreshEntity(hitBox);
     }
 
-    //TODO: ADD CANCEL ANIMATION WHEN GROUND HIT
     public void suplex(LocalPlayer ClientPlayer, float power, List<Entity> hitEntities){
         ClientForgeHandler.playerAnimationPlay(ClientPlayer, "suplexthrow");
+        ClientPlayer.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 4, false, false));
         hitEntities.get(0).addDeltaMovement(new Vec3(0, 1 * power, 0));
         ClientPlayer.addDeltaMovement(new Vec3(0, 1 * power, 0));
-//        if (ClientPlayer.fallDistance > 0){
-//
-//        }
     }
 
     float secondaryPower = 5;
@@ -121,7 +119,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         if (player.isHolding(ModItems.KATANA.get())) { switch (stage){
                 case (1): KatanaDash(ClientPlayer, player, level, 1, stage); break;
                 case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage); break;
-                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower * 1.5), stage); break;
+                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower), stage); break;
             }}
         else if (!hits.isEmpty()) { switch (stage) {
                 case (1): suplex(ClientPlayer, 1, hits); break;
@@ -159,64 +157,9 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                     true,
                     false)
             );
-
-            if (player.horizontalCollision){startCling(player);}
         }
         
         return true;
-    }
-
-    private static boolean isSolidAt(Level level, int x, int y, int z) {
-        BlockPos bp = new BlockPos(x, y, z);
-        return !level.isEmptyBlock(bp) && level.getBlockState(bp).isSolid();
-    }
-
-    public static void attemptWallJump(ServerPlayer player){
-        if (player.onGround()) return;
-        if (!player.horizontalCollision) return;
-
-        // determine wall normal: check nearby blocks in four horizontal directions
-        Vec3 pos = player.position();
-        Level level = player.level();
-        Vec3 push = Vec3.ZERO;
-        int checkRadius = 1;
-        // check cardinal directions
-        if (isSolidAt(level, (int)pos.x + checkRadius, (int)pos.y, (int)pos.z)) push = push.add(-1, 0, 0);
-        if (isSolidAt(level, (int)pos.x - checkRadius, (int)pos.y, (int)pos.z)) push = push.add(1, 0, 0);
-        if (isSolidAt(level, (int)pos.x, (int)pos.y, (int)pos.z + checkRadius)) push = push.add(0, 0, -1);
-        if (isSolidAt(level, (int)pos.x, (int)pos.y, (int)pos.z - checkRadius)) push = push.add(0, 0, 1);
-
-        if (push.lengthSqr() == 0) return;
-
-        push = push.normalize();
-
-        // push values — tune these
-        double horizontalSpeed = 0.6;
-        double verticalBoost = 0.5;
-
-        Vec3 currentMotion = player.getDeltaMovement();
-        Vec3 newMotion = new Vec3(push.x * horizontalSpeed, Math.max(currentMotion.y, verticalBoost), push.z * horizontalSpeed);
-        player.setDeltaMovement(newMotion);
-        player.hurtMarked = true;
-
-    }
-
-    public static void startCling(ServerPlayer player) {
-        CompoundTag data = player.getPersistentData();
-        data.putBoolean("isWallClinging", true);
-        player.fallDistance = 0f;
-        player.setNoGravity(true);
-        player.setDeltaMovement(player.getDeltaMovement().multiply(0, 0, 0));
-        player.hurtMarked = true;
-        if (player.isShiftKeyDown()){stopCling(player, true);}
-    }
-
-    public static void stopCling(ServerPlayer player, boolean applyJumpImpulse) {
-        CompoundTag data = player.getPersistentData();
-        data.putBoolean("isWallClinging", false);
-        player.setNoGravity(false);
-        if (applyJumpImpulse) {attemptWallJump(player);}
-        player.hurtMarked = true;
     }
 }
 

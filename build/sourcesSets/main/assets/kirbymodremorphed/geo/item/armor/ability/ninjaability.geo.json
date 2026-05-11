@@ -1,0 +1,100 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorHead",
+					"parent": "bipedHead",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4, 32, -4], "size": [8, 1, 8], "uv": [0, 16]},
+						{"origin": [-4.3, 30, -4.1], "size": [0, 2, 8.3], "uv": [32, 0]},
+						{"origin": [-4.1, 29, -4], "size": [0, 4, 8.1], "uv": [0, 25]},
+						{"origin": [-4, 29, 4.1], "size": [8, 4, 0], "uv": [32, 20]},
+						{"origin": [4.1, 29, -4], "size": [0, 4, 8.1], "uv": [16, 25]},
+						{"origin": [-4.3, 30, 4.2], "size": [8.6, 2, 0], "uv": [32, 24]},
+						{"origin": [-4.3, 30, -4.1], "size": [8.6, 2, 0], "uv": [32, 26]},
+						{"origin": [4.3, 30, -4.1], "size": [0, 2, 8.3], "uv": [32, 10]}
+					]
+				},
+				{
+					"name": "RightFlap",
+					"parent": "armorHead",
+					"pivot": [-4.2, 32.875, -3.1],
+					"cubes": [
+						{"origin": [-4.2, 30, -4.1], "size": [0, 3, 2], "uv": [32, 28]}
+					]
+				},
+				{
+					"name": "Rflap2",
+					"parent": "RightFlap",
+					"pivot": [-4.2, 30, -3.1],
+					"cubes": [
+						{"origin": [-4.2, 28, -4.1], "size": [0, 2, 2], "uv": [36, 32]}
+					]
+				},
+				{
+					"name": "Rflap3",
+					"parent": "Rflap2",
+					"pivot": [-4.2, 28, -3.1],
+					"cubes": [
+						{"origin": [-4.2, 26, -4.1], "size": [0, 2, 2], "uv": [36, 36]}
+					]
+				},
+				{
+					"name": "Rflap4",
+					"parent": "Rflap3",
+					"pivot": [-4.2, 26, -3.1],
+					"cubes": [
+						{"origin": [-4.2, 24, -4.1], "size": [0, 2, 2], "uv": [4, 37]}
+					]
+				},
+				{
+					"name": "LeftFlap",
+					"parent": "armorHead",
+					"pivot": [4.15, 32.9, -3.1],
+					"cubes": [
+						{"origin": [4.2, 30, -4.1], "size": [0, 3, 2], "uv": [32, 33]}
+					]
+				},
+				{
+					"name": "Lflap2",
+					"parent": "LeftFlap",
+					"pivot": [4.2, 30, -3.1],
+					"cubes": [
+						{"origin": [4.2, 28, -4.1], "size": [0, 2, 2], "uv": [0, 37]}
+					]
+				},
+				{
+					"name": "Lflap3",
+					"parent": "Lflap2",
+					"pivot": [4.2, 28, -3.1],
+					"cubes": [
+						{"origin": [4.2, 26, -4.1], "size": [0, 2, 2], "uv": [8, 37]}
+					]
+				},
+				{
+					"name": "Lflap4",
+					"parent": "Lflap3",
+					"pivot": [4.2, 26, -3.1],
+					"cubes": [
+						{"origin": [4.2, 24, -4.1], "size": [0, 2, 2], "uv": [36, 28]}
+					]
+				}
+			]
+		}
+	]
+}
