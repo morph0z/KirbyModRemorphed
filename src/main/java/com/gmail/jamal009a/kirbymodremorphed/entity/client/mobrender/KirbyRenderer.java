@@ -22,4 +22,9 @@ public class KirbyRenderer extends GeoEntityRenderer<KirbyEntity> {
     public void render(@NotNull KirbyEntity entity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
+
+    @Override
+    protected float getDeathMaxRotation(KirbyEntity animatable) {
+        return 0.0F;
+    }
 }

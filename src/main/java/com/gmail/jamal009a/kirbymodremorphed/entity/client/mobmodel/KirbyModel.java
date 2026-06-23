@@ -8,7 +8,7 @@ import software.bernie.geckolib.model.GeoModel;
 public class KirbyModel extends GeoModel<KirbyEntity> {
     @Override
     public ResourceLocation getModelResource(KirbyEntity animatable) {
-        return new ResourceLocation(KirbyModRemorphed.MODID, "geo/entity/kirbyani.geo.json");
+        return new ResourceLocation(KirbyModRemorphed.MODID, "geo/entity/kirby.geo.json");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class KirbyModel extends GeoModel<KirbyEntity> {
 
     @Override
     public ResourceLocation getAnimationResource(KirbyEntity animatable) {
-        return new ResourceLocation(KirbyModRemorphed.MODID, "animations/entity/kirbyani.animation.json");
+        return new ResourceLocation(KirbyModRemorphed.MODID, "animations/entity/kirby.animation.json");
     }
 
 //    @Override
