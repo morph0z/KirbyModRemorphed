@@ -16,8 +16,8 @@ public class SpecialAnimationGoal extends Goal {
     @Override
     public boolean canUse() {return (this.mob.getRandom().nextFloat() < Chance/100)
                             && mob.onGround()
-                            && mob.MainAnimationController.isPlayingTriggeredAnimation()
-                            && !mob.isMovingOnXZ;}
+                            && mob.MainAnimationController.isPlayingTriggeredAnimation();}
+    //&& !mob.isMovingOnXZ
 
     public void start() {
         mob.triggerAnim("Main", "special");

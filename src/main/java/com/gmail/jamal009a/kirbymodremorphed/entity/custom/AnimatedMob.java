@@ -1,5 +1,6 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;

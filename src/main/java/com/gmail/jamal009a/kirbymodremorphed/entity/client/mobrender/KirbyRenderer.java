@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobmodel.KirbyModel;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

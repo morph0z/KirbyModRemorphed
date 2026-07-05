@@ -1,17 +1,14 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals;
 import java.util.EnumSet;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
@@ -30,15 +27,15 @@ public class KirbyFollowBuddy extends Goal {
     private final float startDistance;
     private float oldWaterCost;
 
-    public KirbyFollowBuddy(KirbyEntity pTamable, double pSpeedModifier, float pStartDistance, float pStopDistance) {
-        this.kirby = pTamable;
-        this.level = pTamable.level();
+    public KirbyFollowBuddy(KirbyEntity pKirby, double pSpeedModifier, float pStartDistance, float pStopDistance) {
+        this.kirby = pKirby;
+        this.level = pKirby.level();
         this.speedModifier = pSpeedModifier;
-        this.navigation = pTamable.getNavigation();
+        this.navigation = pKirby.getNavigation();
         this.startDistance = pStartDistance;
         this.stopDistance = pStopDistance;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-        if (!(!(pTamable.getNavigation() instanceof GroundPathNavigation) && !(pTamable.getNavigation() instanceof FlyingPathNavigation))) {return;}
+        if (!(!(pKirby.getNavigation() instanceof GroundPathNavigation) && !(pKirby.getNavigation() instanceof FlyingPathNavigation))) {return;}
         throw new IllegalArgumentException("Unsupported mob type for KirbyFollowBuddy");
     }
 

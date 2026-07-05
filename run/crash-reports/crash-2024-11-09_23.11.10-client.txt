@@ -8,7 +8,7 @@ software.bernie.geckolib.GeckoLibException: kirbymodremorphed:animations/kirbyan
 	at software.bernie.geckolib.model.GeoModel.getAnimation(GeoModel.java:115) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.buildAnimationQueue(AnimationProcessor.java:45) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.setAnimation(AnimationController.java:338) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.predicate(KirbyEntity.java:75) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.predicate(KirbyEntity.java:75) ~[main/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
@@ -54,7 +54,7 @@ Stacktrace:
 	at software.bernie.geckolib.model.GeoModel.getAnimation(GeoModel.java:115) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.buildAnimationQueue(AnimationProcessor.java:45) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.setAnimation(AnimationController.java:338) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.predicate(KirbyEntity.java:75) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.predicate(KirbyEntity.java:75) ~[%23196!/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23198!/:4.4.6] {re:classloading}
@@ -71,7 +71,7 @@ Stacktrace:
 	at net.minecraft.client.renderer.GameRenderer.renderLevel(GameRenderer.java:1126) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 -- Entity being rendered --
 Details:
-	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity)
+	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity)
 	Entity ID: 47
 	Entity Name: entity.kirbymodremorphed.kirby
 	Entity's Exact location: -115.50, 72.00, 126.50

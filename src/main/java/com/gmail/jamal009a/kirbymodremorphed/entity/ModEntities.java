@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
