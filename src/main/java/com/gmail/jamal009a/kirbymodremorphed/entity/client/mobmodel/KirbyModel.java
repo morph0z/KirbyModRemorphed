@@ -13,6 +13,8 @@ public class KirbyModel extends GeoModel<KirbyEntity> {
 
     @Override
     public ResourceLocation getTextureResource(KirbyEntity animatable) {
+        //TODO: add suck texture
+        if (animatable.suckTexture) return new ResourceLocation(KirbyModRemorphed.MODID, "textures/entities/kirby.png");
         return new ResourceLocation(KirbyModRemorphed.MODID, "textures/entities/kirby.png");
     }
 

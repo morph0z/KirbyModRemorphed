@@ -3,10 +3,9 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals;
 import java.util.EnumSet;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.pathfinder.Path;
@@ -54,7 +53,7 @@ public class KirbySuckGoal extends Goal {
                 this.path = this.mob.getNavigation().createPath(livingentity, 0);
                 if (this.path != null) return true;
                 else {
-                    return this.getAttackReachSqr(livingentity) >= this.mob.distanceToSqr(livingentity.getX(), livingentity.getY(), livingentity.getZ());
+                    return this.getAttackReach(livingentity) >= this.mob.distanceToSqr(livingentity.getX(), livingentity.getY(), livingentity.getZ());
                 }
             }
         }
@@ -91,10 +90,11 @@ public class KirbySuckGoal extends Goal {
     }
 
     public void tick() {
+        mob.setDeltaMovement(0,0,0);
         LivingEntity livingentity = this.mob.getTarget();
         if (livingentity != null) {
             this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
-            double d0 = this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(livingentity);
+            double distanceFromEnemy = Math.sqrt(this.mob.getPerceivedTargetDistanceSquareForMeleeAttack(livingentity));
             this.ticksUntilNextPathRecalculation = Math.max(this.ticksUntilNextPathRecalculation - 1, 0);
             if ((this.followingTargetEvenIfNotSeen || this.mob.getSensing().hasLineOfSight(livingentity)) && this.ticksUntilNextPathRecalculation <= 0 && (this.pathedTargetX == 0.0D && this.pathedTargetY == 0.0D && this.pathedTargetZ == 0.0D || livingentity.distanceToSqr(this.pathedTargetX, this.pathedTargetY, this.pathedTargetZ) >= 1.0D || this.mob.getRandom().nextFloat() < 0.05F)) {
                 this.pathedTargetX = livingentity.getX();
@@ -109,8 +109,8 @@ public class KirbySuckGoal extends Goal {
                         else failedPathFindingPenalty += 10;
                     } else failedPathFindingPenalty += 10;
                 }
-                if (d0 > 1024.0D) this.ticksUntilNextPathRecalculation += 10;
-                else if (d0 > 256.0D) this.ticksUntilNextPathRecalculation += 5;
+                if (distanceFromEnemy > 1024.0D) this.ticksUntilNextPathRecalculation += 10;
+                else if (distanceFromEnemy > 256.0D) this.ticksUntilNextPathRecalculation += 5;
 
                 if (!this.mob.getNavigation().moveTo(livingentity, this.speedModifier)) this.ticksUntilNextPathRecalculation += 15;
 
@@ -118,23 +118,33 @@ public class KirbySuckGoal extends Goal {
             }
 
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
-            this.checkAndPerformAttack(livingentity, d0);
+            this.checkAndPerformAttack(livingentity, distanceFromEnemy);
         }
     }
 
-    boolean attackKill = false;
-    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        double d0 = this.getAttackReachSqr(pEnemy);
-        if ((pDistToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0)){
-            if (!attackKill) {
-                this.resetAttackCooldown();
-                pEnemy.moveTo(mob.position());
-                mob.triggerAnim("Main", "suck");
-                attackKill = true;
-            } else {
-                pEnemy.discard();
-                attackKill = false;
+    int timeSucking = 0;
+    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemy) {
+        double reachDistance = this.getAttackReach(pEnemy);
+        if ((pDistToEnemy >= reachDistance)) {
+            this.resetAttackCooldown();
+            //pEnemy.moveTo(this.mob.position());
+            pEnemy.setDeltaMovement(pEnemy.position().vectorTo(mob.position()).normalize());
+            //pEnemy.setDeltaMovement(pEnemy.position().vectorTo(pEnemy.position()).normalize().scale(0.001D));
+            double eyeLevel = this.mob.getEyeY();
+            this.mob.getLookControl().setLookAt(pEnemy.getX(), eyeLevel, pEnemy.getZ());
+            this.mob.triggerAnim("Main", "suck");
+            this.mob.suckTexture = true;
+
+            this.timeSucking++;
+            if (this.timeSucking > 20*30) {
+                pEnemy.addDeltaMovement(new Vec3(0, 0.3, 0));
+                this.timeSucking = 0;
             }
+        }
+        else{
+            pEnemy.remove(Entity.RemovalReason.KILLED);
+            this.mob.suckTexture = false;
+            this.mob.triggerAnim("Main", "swallow");
         }
     }
 
@@ -146,7 +156,5 @@ public class KirbySuckGoal extends Goal {
 
     protected int getAttackInterval() {return this.adjustedTickDelay(5);}
 
-    protected double getAttackReachSqr(LivingEntity pAttackTarget) {
-        return (double)(this.mob.getBbWidth() * 2.0F * this.mob.getBbWidth() * 2.0F + pAttackTarget.getBbWidth());
-    }
+    protected double getAttackReach(LivingEntity pAttackTarget) {return 0.5;}
 }

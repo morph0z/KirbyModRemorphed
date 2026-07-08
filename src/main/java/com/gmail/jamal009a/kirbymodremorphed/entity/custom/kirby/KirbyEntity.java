@@ -2,8 +2,6 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals.*;
-import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Dynamic;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,31 +9,22 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.sensing.Sensor;
-import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -49,11 +38,11 @@ import software.bernie.geckolib.core.animation.*;
 import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.UUID;
 
 public class KirbyEntity extends AnimatedMob implements OwnableEntity {
 
+    public boolean suckTexture = false;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public  KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -80,10 +69,6 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         this.goalSelector.addGoal(6, new SpecialAnimationGoal(this, 0.5F));
 
         this.targetSelector.addGoal(1, new BuddyHurtTarget(this));
-        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
-        //this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        //this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
     }
 
     public final RawAnimation wave = RawAnimation.begin().then("wave", Animation.LoopType.PLAY_ONCE);
@@ -94,7 +79,8 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
     public final RawAnimation sitting = RawAnimation.begin().thenLoop("sitting");
     public final RawAnimation stand_up = RawAnimation.begin().then("stand_up", Animation.LoopType.PLAY_ONCE);
 
-    public final RawAnimation suck = RawAnimation.begin().then("suck", Animation.LoopType.PLAY_ONCE).then("swallow", Animation.LoopType.PLAY_ONCE);
+    public final RawAnimation suck = RawAnimation.begin().then("suck", Animation.LoopType.HOLD_ON_LAST_FRAME);
+    public final RawAnimation swallow = RawAnimation.begin().then("swallow", Animation.LoopType.PLAY_ONCE);
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -108,6 +94,7 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         MainAnimationController.triggerableAnim("stand_up", stand_up);
 
         MainAnimationController.triggerableAnim("suck", suck);
+        MainAnimationController.triggerableAnim("swallow", swallow);
     }
 
 
@@ -269,15 +256,13 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
     public boolean isOwnedBy(LivingEntity pEntity) {return pEntity == this.getOwner();}
 
     public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
+        if (pTarget instanceof KirbyEntity) return false;
         if (!(pTarget instanceof Creeper) && !(pTarget instanceof Ghast)) {
-            if (pTarget instanceof Wolf) {
-                Wolf wolf = (Wolf)pTarget;
-                return !wolf.isTame() || wolf.getOwner() != pOwner;
-            }
+            if (pTarget instanceof Wolf wolf) return !wolf.isTame() || wolf.getOwner() != pOwner;
             else if (pTarget instanceof Player && pOwner instanceof Player && !((Player)pOwner).canHarmPlayer((Player)pTarget)) return false;
             else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) return false;
-            else if (pTarget instanceof KirbyEntity && ((KirbyEntity)pTarget).isTame()) return false;
             else return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
-        } else return false;
+        }
+        else return false;
     }
 }
