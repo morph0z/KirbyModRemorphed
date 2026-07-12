@@ -42,7 +42,6 @@ import java.util.UUID;
 
 public class KirbyEntity extends AnimatedMob implements OwnableEntity {
 
-    public boolean suckTexture = false;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public  KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -110,15 +109,11 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         this.oHoverSpeed = this.hoverSpeed;
         this.hoverSpeed += (this.onGround() ? -1.0F : 4.0F) * 0.3F;
         this.hoverSpeed = Mth.clamp(this.hoverSpeed, 0.0F, 1.0F);
-        if (!this.onGround() && this.hovering < 1.0F) {
-            this.hovering = 1.0F;
-        }
+        if (!this.onGround() && this.hovering < 1.0F) this.hovering = 1.0F;
 
         this.hovering *= 0.9F;
         Vec3 vec3 = this.getDeltaMovement();
-        if (!this.onGround() && vec3.y < 0.0D) {
-            this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
-        }
+        if (!this.onGround() && vec3.y < 0.0D) this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
 
         this.hover += this.hovering * 2.0F;
     }
@@ -170,14 +165,16 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
     //TAMEABLILITY OF KIRBY
 
 
-    protected static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(TamableAnimal.class, EntityDataSerializers.BYTE);
+    protected static final EntityDataAccessor<Byte> TAMED_SITTING_FLAG = SynchedEntityData.defineId(TamableAnimal.class, EntityDataSerializers.BYTE);
+    protected static final EntityDataAccessor<Byte> SUCKING_FLAG = SynchedEntityData.defineId(KirbyEntity.class, EntityDataSerializers.BYTE);
     protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(TamableAnimal.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private boolean orderedToSit;
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte)0);
+        this.entityData.define(TAMED_SITTING_FLAG, (byte)0);
+        this.entityData.define(SUCKING_FLAG, (byte)0);
         this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
     }
 
@@ -216,23 +213,22 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
             double d2 = this.random.nextGaussian() * 0.02D;
             this.level().addParticle(particleoptions, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
         }
-
     }
 
-    public boolean isTame() {return (this.entityData.get(DATA_FLAGS_ID) & 4) != 0;}
+    public boolean isTame() {return (this.entityData.get(TAMED_SITTING_FLAG) & 4) != 0;}
     public void setTame(boolean pTamed) {
-        byte b0 = this.entityData.get(DATA_FLAGS_ID);
-        if (pTamed) this.entityData.set(DATA_FLAGS_ID, (byte)(b0 | 4));
-        else this.entityData.set(DATA_FLAGS_ID, (byte)(b0 & -5));
+        byte b0 = this.entityData.get(TAMED_SITTING_FLAG);
+        if (pTamed) this.entityData.set(TAMED_SITTING_FLAG, (byte)(b0 | 4));
+        else this.entityData.set(TAMED_SITTING_FLAG, (byte)(b0 & -5));
     }
 
-    public boolean isInSittingPose() {return (this.entityData.get(DATA_FLAGS_ID) & 1) != 0;}
+    public boolean isInSittingPose() {return (this.entityData.get(TAMED_SITTING_FLAG) & 1) != 0;}
     public boolean isOrderedToSit() {return this.orderedToSit;}
     public void setOrderedToSit(boolean pOrderedToSit) {this.orderedToSit = pOrderedToSit;}
     public void sittingData(boolean sitting){
-        byte b0 = this.entityData.get(DATA_FLAGS_ID);
-        if (sitting) this.entityData.set(DATA_FLAGS_ID, (byte)(b0 | 1));
-        else this.entityData.set(DATA_FLAGS_ID, (byte)(b0 & -2));
+        byte b0 = this.entityData.get(TAMED_SITTING_FLAG);
+        if (sitting) this.entityData.set(TAMED_SITTING_FLAG, (byte)(b0 | 1));
+        else this.entityData.set(TAMED_SITTING_FLAG, (byte)(b0 & -2));
     }
 
     public void setInSittingPose(boolean pSitting) {
@@ -264,5 +260,12 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
             else return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
         }
         else return false;
+    }
+
+    public boolean isSucking(){return (this.entityData.get(SUCKING_FLAG) & 4) != 0;}
+    public void kirbySuck(boolean isSucking){
+        byte b0 = this.entityData.get(SUCKING_FLAG);
+        if (isSucking) this.entityData.set(SUCKING_FLAG, (byte)(b0 | 4));
+        else this.entityData.set(SUCKING_FLAG, (byte)(b0 & -5));
     }
 }

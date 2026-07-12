@@ -127,13 +127,11 @@ public class KirbySuckGoal extends Goal {
         double reachDistance = this.getAttackReach(pEnemy);
         if ((pDistToEnemy >= reachDistance)) {
             this.resetAttackCooldown();
-            //pEnemy.moveTo(this.mob.position());
             pEnemy.setDeltaMovement(pEnemy.position().vectorTo(mob.position()).normalize());
-            //pEnemy.setDeltaMovement(pEnemy.position().vectorTo(pEnemy.position()).normalize().scale(0.001D));
             double eyeLevel = this.mob.getEyeY();
             this.mob.getLookControl().setLookAt(pEnemy.getX(), eyeLevel, pEnemy.getZ());
             this.mob.triggerAnim("Main", "suck");
-            this.mob.suckTexture = true;
+            mob.kirbySuck(true);
 
             this.timeSucking++;
             if (this.timeSucking > 20*30) {
@@ -143,7 +141,7 @@ public class KirbySuckGoal extends Goal {
         }
         else{
             pEnemy.remove(Entity.RemovalReason.KILLED);
-            this.mob.suckTexture = false;
+            mob.kirbySuck(false);
             this.mob.triggerAnim("Main", "swallow");
         }
     }
