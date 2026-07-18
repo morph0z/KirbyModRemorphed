@@ -56,6 +56,7 @@ public class AnimatedMob extends Animal implements GeoEntity {
 
     @Override
     protected void actuallyHurt(@NotNull DamageSource pDamageSource, float pDamageAmount) {
+        if (deathAnimationStarted) return;
         triggerAnim("Main", "hurt");
         super.actuallyHurt(pDamageSource, pDamageAmount);
     }
@@ -63,8 +64,9 @@ public class AnimatedMob extends Animal implements GeoEntity {
     boolean deathAnimationStarted = false;
     @Override
     public void die(@NotNull DamageSource pDamageSource) {
-        if (deathAnimationStarted) {return;}
+        if (deathAnimationStarted) return;
         deathAnimationStarted = true;
+        setDeltaMovement(0,-3,0);
         triggerAnim("Main", "death");
         setHealth(1.0F);
     }
@@ -73,19 +75,19 @@ public class AnimatedMob extends Animal implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-        if (deathAnimationStarted) {
-            deathTicks++;
 
-            lerpMotion(0,-10,0);
-            setNoAi(true);
-            setInvulnerable(true);
+        if (!deathAnimationStarted) return;
+        deathTicks++;
 
-            if (!(deathTicks >= 60)) return;
-            if (level() instanceof ServerLevel)
-                ((ServerLevel)level()).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(),getY(),getZ(),20
-                        ,0,0,0,0.1);
-            discard();
-        }
+        lerpMotion(0,0,0);
+        setNoAi(true);
+        setInvulnerable(true);
+
+        if (!(deathTicks >= 60)) return;
+        if (level() instanceof ServerLevel)
+            ((ServerLevel)level()).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(),getY(),getZ(),20
+                    ,0,0,0,0.1);
+        discard();
     }
 
     @Override

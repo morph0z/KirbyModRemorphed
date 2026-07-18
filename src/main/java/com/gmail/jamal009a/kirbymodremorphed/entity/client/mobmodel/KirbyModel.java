@@ -16,6 +16,7 @@ public class KirbyModel extends GeoModel<KirbyEntity> {
         if (animatable.isSucking()) return new ResourceLocation(KirbyModRemorphed.MODID, "textures/entities/kirby_sucking.png");
         return new ResourceLocation(KirbyModRemorphed.MODID, "textures/entities/kirby.png");
     }
+
     @Override
     public ResourceLocation getAnimationResource(KirbyEntity animatable) {
         return new ResourceLocation(KirbyModRemorphed.MODID, "animations/entity/kirby.animation.json");

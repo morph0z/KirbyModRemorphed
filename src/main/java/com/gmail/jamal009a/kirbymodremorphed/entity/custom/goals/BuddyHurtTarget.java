@@ -22,24 +22,19 @@ public class BuddyHurtTarget extends TargetGoal {
     public boolean canUse() {
         if (this.kirby.isTame() && !this.kirby.isOrderedToSit()) {
             LivingEntity livingentity = this.kirby.getOwner();
-            if (livingentity == null) {
-                return false;
-            } else {
+            if (livingentity == null) return false;
+            else {
                 this.ownerLastHurt = livingentity.getLastHurtMob();
                 int i = livingentity.getLastHurtMobTimestamp();
                 return i != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.kirby.wantsToAttack(this.ownerLastHurt, livingentity);
             }
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public void start() {
         this.mob.setTarget(this.ownerLastHurt);
         LivingEntity livingentity = this.kirby.getOwner();
-        if (livingentity != null) {
-            this.timestamp = livingentity.getLastHurtMobTimestamp();
-        }
+        if (livingentity != null) this.timestamp = livingentity.getLastHurtMobTimestamp();
 
         super.start();
     }

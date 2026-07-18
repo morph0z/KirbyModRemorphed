@@ -52,9 +52,8 @@ public class KirbySuckGoal extends Goal {
                 }
                 this.path = this.mob.getNavigation().createPath(livingentity, 0);
                 if (this.path != null) return true;
-                else {
+                else
                     return this.getAttackReach(livingentity) >= this.mob.distanceToSqr(livingentity.getX(), livingentity.getY(), livingentity.getZ());
-                }
             }
         }
     }
@@ -77,10 +76,7 @@ public class KirbySuckGoal extends Goal {
 
     public void stop() {
         LivingEntity livingentity = this.mob.getTarget();
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
-            this.mob.setTarget((LivingEntity)null);
-        }
-
+        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity))this.mob.setTarget((LivingEntity)null);
         this.mob.setAggressive(false);
         this.mob.getNavigation().stop();
     }
@@ -122,7 +118,6 @@ public class KirbySuckGoal extends Goal {
         }
     }
 
-    int timeSucking = 0;
     protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemy) {
         double reachDistance = this.getAttackReach(pEnemy);
         if ((pDistToEnemy >= reachDistance)) {
@@ -133,11 +128,9 @@ public class KirbySuckGoal extends Goal {
             this.mob.triggerAnim("Main", "suck");
             mob.kirbySuck(true);
 
-            this.timeSucking++;
-            if (this.timeSucking > 20*30) {
-                pEnemy.addDeltaMovement(new Vec3(0, 0.3, 0));
-                this.timeSucking = 0;
-            }
+            if(pEnemy.isAlive()) return;
+            mob.kirbySuck(false);
+            this.mob.triggerAnim("Main", "land");
         }
         else{
             pEnemy.remove(Entity.RemovalReason.KILLED);
