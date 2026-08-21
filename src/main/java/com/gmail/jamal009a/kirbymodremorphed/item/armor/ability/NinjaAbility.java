@@ -14,6 +14,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,10 +26,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -88,25 +91,31 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                 Math.round(50*power), 0, -0.3, 0, 0.03);
     }
 
-    public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, int stage){
+    public void KatanaDash(LocalPlayer ClientPlayer, ServerPlayer player, ServerLevel level, float power, int time){
         ClientForgeHandler.playerAnimationPlay(ClientPlayer, "slashthrow");
         Dash(ClientPlayer, player, level, power, false,
                 ParticleTypes.SMOKE, 0, -0.3F, 0, 10, 0.8,
                 SoundEvents.WOOL_STEP);
 
-        DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, 20 * stage,
+        DamageHitBoxEntity hitBox = new DamageHitBoxEntity(player, level, (int) power, time*20,
                                     new Dimension(2, 2), 0,0,0);
         level.addFreshEntity(hitBox);
     }
 
     public void suplex(LocalPlayer ClientPlayer, float power, List<Entity> hitEntities){
+        Entity suplexReceiver = hitEntities.get(0);
+
         ClientForgeHandler.playerAnimationPlay(ClientPlayer, "suplexthrow");
         ClientPlayer.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 4, false, false));
-        hitEntities.get(0).addDeltaMovement(new Vec3(0, 1 * power, 0));
+        suplexReceiver.addDeltaMovement(new Vec3(0, 1 * power, 0));
+
+        if (suplexReceiver instanceof Monster)
+            ((Monster) suplexReceiver).setAggressive(false);
+
         ClientPlayer.addDeltaMovement(new Vec3(0, 1 * power, 0));
     }
 
-    float secondaryPower = 5;
+    float secondaryPower = 3;
     public boolean SecondaryAbility(ServerLevel level, ServerPlayer player, int stage){
         if (stage == 0){return true;}
         LocalPlayer ClientPlayer = Minecraft.getInstance().player;
@@ -117,9 +126,9 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         assert ClientPlayer != null;
 
         if (player.isHolding(ModItems.KATANA.get())) { switch (stage){
-                case (1): KatanaDash(ClientPlayer, player, level, 1, stage); break;
-                case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, stage); break;
-                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower), stage); break;
+                case (1): KatanaDash(ClientPlayer, player, level, 1, 1); break;
+                case (2): KatanaDash(ClientPlayer, player, level, secondaryPower / 2, 2); break;
+                case (3): KatanaDash(ClientPlayer, player, level, (float) (secondaryPower), 2); break;
             }}
         else if (!hits.isEmpty()) { switch (stage) {
                 case (1): suplex(ClientPlayer, 1, hits); break;
@@ -157,9 +166,56 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                     true,
                     false)
             );
+            WallCling(player, level);
         }
         
         return true;
+    }
+
+    void WallCling(ServerPlayer player, Level level){
+        boolean wallOnXAxis = (((player.getDirection() == Direction.NORTH) || (player.getDirection() == Direction.SOUTH)) &&
+                ((!level.isEmptyBlock
+                        (BlockPos.of
+                                (BlockPos.asLong(
+                                        player.getBlockX() + 1,
+                                        player.getBlockY() + 1,
+                                        player.getBlockZ())
+                                )
+                        )
+                ) || (!level.isEmptyBlock
+                        (BlockPos.of
+                                (BlockPos.asLong(
+                                        player.getBlockX() - 1,
+                                        player.getBlockY() + 1,
+                                        player.getBlockZ())
+                                )
+                        )
+                )));
+
+        boolean wallOnZAxis = (((player.getDirection() == Direction.EAST) || (player.getDirection() == Direction.WEST)) &&
+                ((!level.isEmptyBlock
+                        (BlockPos.of
+                                (BlockPos.asLong(
+                                        player.getBlockX(),
+                                        player.getBlockY() + 1,
+                                        player.getBlockZ() + 1)
+                                )
+                        )
+                ) || (!level.isEmptyBlock
+                        (BlockPos.of
+                                (BlockPos.asLong(
+                                        player.getBlockX() ,
+                                        player.getBlockY() + 1,
+                                        player.getBlockZ() - 1)
+                                )
+                        )
+                )));
+
+        if ((wallOnXAxis || wallOnZAxis) && !player.onGround())
+            player.setNoGravity(true);
+        if (!(wallOnXAxis || wallOnZAxis) || player.onGround())
+            player.setNoGravity(false);
+
     }
 }
 

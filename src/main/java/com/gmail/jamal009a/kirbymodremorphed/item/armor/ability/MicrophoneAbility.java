@@ -56,7 +56,7 @@ public class MicrophoneAbility extends AbilityClass implements GeoItem {
 
     public void CrashOut(ServerLevel level, LocalPlayer ClientPlayer, ServerPlayer player, float power){
         playerAnimationPlay(Minecraft.getInstance().player, "micshout");
-        level.explode(player, player.getX(), player.getY(), player.getZ(), 5*power, Level.ExplosionInteraction.MOB);
+        level.explode(player, player.getX(), player.getY(), player.getZ(), 5*power, Level.ExplosionInteraction.NONE);
 
         if (amountPrimaryPressed == 1) {ClientPlayer.playSound(ModSounds.MIC_SHOUT_1.get(), 1, 1);}
         else if (amountPrimaryPressed == 2) {ClientPlayer.playSound(ModSounds.MIC_SHOUT_2.get(), 1, 1);}
