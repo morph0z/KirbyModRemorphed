@@ -5,6 +5,7 @@
       "kirbymodremorphed:power_up"
     ]
   },
+
   "mic_shout_1": {
     "subtitle": "sounds.kirbymodremorphed.mic_shout_1",
     "sounds": [
@@ -23,6 +24,7 @@
       "kirbymodremorphed:mic_shout_3"
     ]
   },
+
   "ability_charge_1": {
     "subtitle": "sounds.kirbymodremorphed.ability_charge_1",
     "sounds": [
@@ -39,6 +41,56 @@
     "subtitle": "sounds.kirbymodremorphed.ability_charge_3",
     "sounds": [
       "kirbymodremorphed:ability_charge_3"
+    ]
+  },
+
+  "kirby_passive_1": {
+    "subtitle": "sounds.kirbymodremorphed.kirby_passive_1",
+    "sounds": [
+      "kirbymodremorphed:kirby_passive_1"
+    ]
+  },
+  "kirby_passive_2": {
+    "subtitle": "sounds.kirbymodremorphed.kirby_passive_2",
+    "sounds": [
+      "kirbymodremorphed:kirby_passive_2"
+    ]
+  },
+  "kirby_passive_3": {
+    "subtitle": "sounds.kirbymodremorphed.kirby_passive_3",
+    "sounds": [
+      "kirbymodremorphed:kirby_passive_3"
+    ]
+  },
+
+  "waddle_dee_passive_1": {
+    "subtitle": "sounds.kirbymodremorphed.waddle_dee_passive_1",
+    "sounds": [
+      "kirbymodremorphed:waddle_dee_passive_1"
+    ]
+  },
+  "waddle_dee_passive_2": {
+    "subtitle": "sounds.kirbymodremorphed.waddle_dee_passive_2",
+    "sounds": [
+      "kirbymodremorphed:waddle_dee_passive_2"
+    ]
+  },
+  "waddle_dee_passive_3": {
+    "subtitle": "sounds.kirbymodremorphed.waddle_dee_passive_3",
+    "sounds": [
+      "kirbymodremorphed:waddle_dee_passive_3"
+    ]
+  },
+  "waddle_dee_passive_4": {
+    "subtitle": "sounds.kirbymodremorphed.waddle_dee_passive_4",
+    "sounds": [
+      "kirbymodremorphed:waddle_dee_passive_4"
+    ]
+  },
+  "waddle_dee_passive_5": {
+    "subtitle": "sounds.kirbymodremorphed.waddle_dee_passive_5",
+    "sounds": [
+      "kirbymodremorphed:waddle_dee_passive_5"
     ]
   }
 }

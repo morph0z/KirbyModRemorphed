@@ -125,6 +125,7 @@ public class ModItems {
     public static final RegistryObject<Item> NINJA_ABILITY = ITEMS.register("ninja_ability", () -> new NinjaAbility(ModArmorMaterials.ABILITY, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> KIRBY_SPAWN_EGG = ITEMS.register("kirby_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KIRBY, 0xFFC0CB, 0xFF007F, new Item.Properties()));
+    public static final RegistryObject<Item> WADDLE_DEE_SPAWN_EGG = ITEMS.register("waddle_dee_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WADDLE_DEE, 0xEE604B, 0xFDD59C, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register((eventBus));

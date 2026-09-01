@@ -43,7 +43,7 @@ public class ZanSpearItem extends AxeItem {
 	@Override
 	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("\u00A7eZan's prized possession\u00A7f"));
+		list.add(Component.literal("\u00A7eZan's weapon of choice\u00A7f"));
 		list.add(Component.literal("§7infused with \u00A7eLightning\u00A7f"));
 		list.add(Component.literal("§7moves swift but softer blow"));
 	}

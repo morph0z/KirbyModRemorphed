@@ -1,9 +1,11 @@
 package com.gmail.jamal009a.kirbymodremorphed.client.handler;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.MetaKnightArmor;
 import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.AbilityClass;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import com.gmail.jamal009a.kirbymodremorphed.util.MethodRunOnce;
+import com.mojang.blaze3d.platform.InputConstants;
 import dev.kosmx.playerAnim.api.layered.IAnimation;
 import com.gmail.jamal009a.kirbymodremorphed.client.ModKeybindings;
 import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
@@ -19,12 +21,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-
+import javax.swing.*;
 import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = KirbyModRemorphed.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -50,6 +54,16 @@ public class ClientForgeHandler {
         lastAnimationPlayed = animationName;
     }
 
+    @SubscribeEvent
+    public static void clientTick(TickEvent.ClientTickEvent event){
+        abilityCharge();
+    }
+
+    @SubscribeEvent
+    public static void keyInput(InputEvent.Key event){
+        if (event.getAction() != InputConstants.PRESS) return;
+        wingRoll();
+    }
 
     static MethodRunOnce PrimaryOnce0 = new MethodRunOnce();
     static MethodRunOnce PrimaryOnce1 = new MethodRunOnce();
@@ -66,8 +80,7 @@ public class ClientForgeHandler {
     public static int PrimaryStage = 0;
     public static int SecondaryStage = 0;
 
-    @SubscribeEvent
-    public static void clientTick(TickEvent.ClientTickEvent event){
+    static void abilityCharge(){
         Minecraft minecraft = Minecraft.getInstance();
         var player = minecraft.player;
 
@@ -79,29 +92,29 @@ public class ClientForgeHandler {
 
         assert player != null;
 
-        if (minecraft.screen != null) {return;}
-        if (!player.hasItemInSlot(EquipmentSlot.HEAD)) {return;}
-        if (!AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())){return;}
+        if (minecraft.screen != null) return;
+        if (!player.hasItemInSlot(EquipmentSlot.HEAD)) return;
+        if (!AbilityClass.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.HEAD).getItem().getClass())) return;
         AbilityClass currentAbility = (AbilityClass) player.getItemBySlot(EquipmentSlot.HEAD).getItem();
 
         if (isPrimaryCurrentlyPressed && currentAbility.PrimaryCharges){ holdTimePrimary++; PrimaryAbilityOnce.reset();
             if ((holdTimePrimary <= stageOneTickLength) && (holdTimePrimary != 0)) {PrimaryOnce0.run(() -> player.displayClientMessage(Component.literal("§0_ _ _"), true)); PrimaryStage = 0;}
             if ((holdTimePrimary >= stageOneTickLength) && (holdTimePrimary < stageTwoTickLength)){ PrimaryOnce1.run(() -> {
-                    currentAbility.PrimaryChargeAnimation(player);
-                    player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    player.displayClientMessage(Component.literal("§1● _ _"), true);
-                    PrimaryStage = 1;
-                }); }
+                currentAbility.PrimaryChargeAnimation(player);
+                player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_1.get(), SoundSource.NEUTRAL, 1, 1, false);
+                player.displayClientMessage(Component.literal("§1● _ _"), true);
+                PrimaryStage = 1;
+            }); }
             if ((holdTimePrimary >= stageTwoTickLength) && (holdTimePrimary < stageThreeTickLength)){ PrimaryOnce2.run(() -> {
-                    player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    player.displayClientMessage(Component.literal("§3● ● _"), true);
-                    PrimaryStage = 2;
-                }); }
+                player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_2.get(), SoundSource.NEUTRAL, 1, 1, false);
+                player.displayClientMessage(Component.literal("§3● ● _"), true);
+                PrimaryStage = 2;
+            }); }
             if (holdTimePrimary >= stageThreeTickLength){ PrimaryOnce3.run(() -> {
-                    player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
-                    player.displayClientMessage(Component.literal("§b● ● ●"), true);
-                    PrimaryStage = 3;
-                }); }
+                player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ModSounds.ABILITY_CHARGE_3.get(), SoundSource.NEUTRAL, 1, 1, false);
+                player.displayClientMessage(Component.literal("§b● ● ●"), true);
+                PrimaryStage = 3;
+            }); }
         }
         if (isPrimaryCurrentlyPressed && !currentAbility.PrimaryCharges) {ModMessages.sendToServer(new PrimaryAbilityC2SPacket());}
         if (!isPrimaryCurrentlyHeld){
@@ -137,5 +150,33 @@ public class ClientForgeHandler {
             holdTimeSecondary = 0;
             SecondaryOnce0.reset(); SecondaryOnce1.reset(); SecondaryOnce2.reset(); SecondaryOnce3.reset();
         }
+    }
+
+    static void wingRoll(){
+        Minecraft minecraft = Minecraft.getInstance();
+        var player = minecraft.player;
+
+        boolean isLeftRollPressed = ModKeybindings.INSTANCE.wingsSideRollLeft.consumeClick();
+        boolean isRightRollPressed = ModKeybindings.INSTANCE.wingsSideRollRight.consumeClick();
+
+        assert player != null;
+        if (minecraft.screen != null) return;
+        if (!player.hasItemInSlot(EquipmentSlot.CHEST)) return;
+
+        if (!MetaKnightArmor.class.isAssignableFrom(player.getItemBySlot(EquipmentSlot.CHEST).getItem().getClass())) return;
+
+        Vec3 normLookDir = player.getLookAngle().normalize();
+        Vec3 dashVector = new Vec3(
+                normLookDir.x * 1.5,
+                0,
+                normLookDir.z * 1.5
+        );
+
+        float turnVectorBy = 67.5F;
+        if (isLeftRollPressed)
+            player.addDeltaMovement(dashVector.yRot(-turnVectorBy));
+
+        if (isRightRollPressed)
+            player.addDeltaMovement(dashVector.yRot(turnVectorBy));
     }
 }

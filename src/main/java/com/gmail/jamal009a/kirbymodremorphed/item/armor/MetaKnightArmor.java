@@ -77,38 +77,26 @@ public class MetaKnightArmor extends ArmorItem implements GeoItem {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, 20, state -> {
-
-            // Let's gather some data from the state to use below
-            // This is the entity that is currently wearing/holding the item
             Entity entity = state.getData(DataTickets.ENTITY);
 
-            // We'll just have ArmorStands always animate, so we can return here
             if (entity instanceof ArmorStand)
                 return PlayState.CONTINUE;
-            if (!entity.onGround()) {
-                if (entity.flyDist > 15) {
-                    state.setAnimation(DefaultAnimations.FLY);
-                }else{
-                    state.setAnimation(DefaultAnimations.SIT);
-                }
-            } else{
-                state.setAnimation(DefaultAnimations.IDLE);
-            }
 
-            // For this example, we only want the animation to play if the entity is wearing all pieces of the armor
-            // Let's collect the armor pieces the entity is currently wearing
+            if (!entity.onGround()) {
+                if (entity.flyDist > 15) state.setAnimation(DefaultAnimations.FLY);
+                else state.setAnimation(DefaultAnimations.SIT);
+            }
+            else state.setAnimation(DefaultAnimations.IDLE);
+
             Set<Item> wornArmor = new ObjectOpenHashSet<>();
 
-            for (ItemStack stack : entity.getArmorSlots()) {
-                // We can stop immediately if any of the slots are empty
+            for (ItemStack stack : entity.getArmorSlots())
                 wornArmor.add(stack.getItem());
-            }
 
-            // Check each of the pieces match our set
+
             boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
                     ModItems.META_KNIGHTS_MASK.get()));
 
-            // Play the animation if the full set is being worn, otherwise stop
             return PlayState.CONTINUE;
         }));
     }

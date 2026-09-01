@@ -18,6 +18,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +27,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
@@ -35,12 +38,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
@@ -53,7 +59,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
 
         PrimaryName = "Katana";
         SecondaryName = "Slash / Suplex / Smoke bomb";
-        PassiveName = "Speed / Wall Jumping";
+        PassiveName = "Speed / Wall Sliding";
 
         HasFallingAnimation = true;
     }
@@ -172,7 +178,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
         return true;
     }
 
-    void WallCling(ServerPlayer player, Level level){
+    void WallCling(ServerPlayer player, Level level) {
         boolean wallOnXAxis = (((player.getDirection() == Direction.NORTH) || (player.getDirection() == Direction.SOUTH)) &&
                 ((!level.isEmptyBlock
                         (BlockPos.of
@@ -204,7 +210,7 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                 ) || (!level.isEmptyBlock
                         (BlockPos.of
                                 (BlockPos.asLong(
-                                        player.getBlockX() ,
+                                        player.getBlockX(),
                                         player.getBlockY() + 1,
                                         player.getBlockZ() - 1)
                                 )
@@ -212,10 +218,16 @@ public class NinjaAbility extends AbilityClass implements GeoItem, DashAbility {
                 )));
 
         if ((wallOnXAxis || wallOnZAxis) && !player.onGround())
-            player.setNoGravity(true);
-        if (!(wallOnXAxis || wallOnZAxis) || player.onGround())
-            player.setNoGravity(false);
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.SLOW_FALLING,
+                    1,
+                    0,
+                    false,
+                    false)
+            );
 
+        if ((!(wallOnXAxis || wallOnZAxis) || player.onGround() || player.isShiftKeyDown()))
+            player.removeEffect(MobEffects.SLOW_FALLING);
     }
 }
 

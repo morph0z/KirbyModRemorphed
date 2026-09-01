@@ -66,6 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.META_KNIGHTS_SWORD);
 
         withExistingParent(ModItems.KIRBY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.WADDLE_DEE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

@@ -2,7 +2,9 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals.*;
+import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -11,6 +13,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,6 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -36,16 +40,14 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class KirbyEntity extends AnimatedMob implements OwnableEntity {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public  KirbyEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+        super(pEntityType, pLevel, true, 0);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
@@ -65,7 +67,7 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         this.goalSelector.addGoal(3, new KirbySitGoal(this));
         this.goalSelector.addGoal(4,  new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new KirbyFollowBuddy(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.addGoal(6, new SpecialAnimationGoal(this, 0.5F));
+        this.goalSelector.addGoal(6, new SpecialAnimationGoal(this, 5F));
 
         this.targetSelector.addGoal(1, new BuddyHurtTarget(this));
     }
@@ -103,6 +105,7 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
     public float oHover;
     public float hovering = 1.0F;
 
+    @Override
     public void aiStep() {
         super.aiStep();
         this.oHover = this.hover;
@@ -123,6 +126,21 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         triggerAnim("Main", "land");
         return false;
     }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        int rand = random.nextIntBetweenInclusive(0,2);
+
+
+        if (rand == 0) return ModSounds.KIRBY_PASSIVE_1.get();
+        else if (rand == 1) return ModSounds.KIRBY_PASSIVE_2.get();
+        else if (rand == 2) return ModSounds.KIRBY_PASSIVE_3.get();
+
+        return null;
+    }
+
+    @Override
+    public int getAmbientSoundInterval() {return 300;}
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return cache;}

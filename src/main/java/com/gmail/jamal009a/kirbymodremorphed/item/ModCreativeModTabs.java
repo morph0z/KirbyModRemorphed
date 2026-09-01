@@ -70,6 +70,7 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("creative.mob_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.KIRBY_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.WADDLE_DEE_SPAWN_EGG.get());
                     })
                     .build());
     public  static  final RegistryObject<CreativeModeTab> BLOCK_TAB = CREATIVE_MODE_TABS.register("block_tab",

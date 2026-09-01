@@ -18,6 +18,9 @@ public class ClientModHandler {
     public static void registerKeys(RegisterKeyMappingsEvent event){
         event.register(ModKeybindings.INSTANCE.primaryAbilityUse);
         event.register(ModKeybindings.INSTANCE.secondaryAbilityUse);
+
+        event.register(ModKeybindings.INSTANCE.wingsSideRollLeft);
+        event.register(ModKeybindings.INSTANCE.wingsSideRollRight);
     }
 }
 

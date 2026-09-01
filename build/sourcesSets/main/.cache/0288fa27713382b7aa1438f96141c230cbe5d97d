@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-24T22:54:16.109929622	Item Models: kirbymodremorphed
+// 1.20.1	2026-09-01T11:17:28.556639498	Item Models: kirbymodremorphed
 5024106c5ef31580206f40b05eff32ee5d97ad09 assets/kirbymodremorphed/models/item/banana_bunch.json
 0b12a3d301c2aaa3dc4f1865c4fecb3cde6deb2b assets/kirbymodremorphed/models/item/beam_ability.json
 c5a330d5164cf64c095c98bcb481beb71c6cf787 assets/kirbymodremorphed/models/item/candy.json
@@ -38,3 +38,4 @@ eaddde4ac1145cae040dcb59d49289567903fd65 assets/kirbymodremorphed/models/item/vo
 0a9006fbe2e27156d43aeeefbf73708f1f60c71a assets/kirbymodremorphed/models/item/void_termina_feather.json
 8fc6a80e1ef274c9289364ba2aacfeb53d9f95b6 assets/kirbymodremorphed/models/item/void_termina_horn.json
 da45075928a22588a3f247e3c149f18520300ea0 assets/kirbymodremorphed/models/item/void_termina_remnant.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/kirbymodremorphed/models/item/waddle_dee_spawn_egg.json

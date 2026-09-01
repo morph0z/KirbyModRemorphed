@@ -43,7 +43,7 @@ public class FlamSwordItem extends SwordItem {
 	@Override
 	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("\u00A7cFlam's prized possession\u00A7f"));
+		list.add(Component.literal("\u00A7cFlam's weapon of choice\u00A7f"));
 		list.add(Component.literal("§7infused with \u00A7cFlames\u00A7f"));
 		list.add(Component.literal("§7balanced damage and speed"));
 	}

@@ -44,10 +44,10 @@ public class KatanaItem extends KirbyAbilitySwordItem {
 		}, 3, -1f, new Properties());
 	}
 
-	@Override
-	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("§7kirby's special ninja blade"));
-	}
+//	@Override
+//	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+//		super.appendHoverText(itemstack, world, list, flag);
+//		list.add(Component.literal("§7kirby's special ninja blade"));
+//	}
 
 }

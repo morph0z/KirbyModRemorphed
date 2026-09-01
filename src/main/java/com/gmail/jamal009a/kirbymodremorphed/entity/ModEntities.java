@@ -3,6 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed.entity;
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.*;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.waddledee.WaddleDeeEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -22,6 +23,14 @@ public class ModEntities {
                             .sized(0.75f, 0.75f)
                             .build(new ResourceLocation(KirbyModRemorphed.MODID, "kirby").toString()));
 
+    public static final RegistryObject<EntityType<WaddleDeeEntity>> WADDLE_DEE =
+            ENTITY_TYPES.register("waddle_dee",
+                    () -> EntityType.Builder.of(WaddleDeeEntity::new, MobCategory.CREATURE)
+                            .sized(0.75f, 0.75f)
+                            .build(new ResourceLocation(KirbyModRemorphed.MODID, "waddle_dee").toString()));
+
+    
+    
     public static final RegistryObject<EntityType<KiBlastProjectileEntity>> KI_BLAST_PROJECTILE =
             ENTITY_TYPES.register("ki_blast_projectile",
                 () -> EntityType.Builder.of((EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) -> new KiBlastProjectileEntity(pEntityType, pLevel), MobCategory.MISC)

@@ -43,11 +43,11 @@ public class FighterGloveItem extends KirbyAbilityAxeItem {
 			}
 		}, 1, 3.5f, new Properties());
 	}
-	@Override
-	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("§7fast punch"));
-	}
+//	@Override
+//	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+//		super.appendHoverText(itemstack, world, list, flag);
+//		list.add(Component.literal("§7Fast"));
+//	}
 
 	@Override
 	public void onInventoryTick(ItemStack stack, Level level, Player player, int slotIndex, int selectedIndex) {

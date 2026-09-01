@@ -43,7 +43,7 @@ public class FranAxeItem extends AxeItem {
 	@Override
 	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("\u00A79Fran's prized possession\u00A7f"));
+		list.add(Component.literal("\u00A79Fran's weapon of choice\u00A7f"));
 		list.add(Component.literal("§7infused with \u00A79Frost\u00A7f"));
 		list.add(Component.literal("§7hits hard and moves slow"));
 	}

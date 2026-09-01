@@ -40,9 +40,9 @@ public class RockFistItem extends KirbyAbilityAxeItem {
 		}, 1, -3.8f, new Properties());
 	}
 
-	@Override
-	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("§7Rock Smash"));
-	}
+//	@Override
+//	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+//		super.appendHoverText(itemstack, world, list, flag);
+//		list.add(Component.literal("§7Rock Smash"));
+//	}
 }

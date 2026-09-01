@@ -16,6 +16,9 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
 public class AnimatedMob extends Animal implements GeoEntity {
+
+    boolean extraAnimations = false;
+
     public final static RawAnimation walk = RawAnimation.begin().thenLoop("run");
     public final static RawAnimation idle = RawAnimation.begin().thenLoop("idle");
     public final static RawAnimation fly = RawAnimation.begin().thenLoop("fly");
@@ -25,25 +28,27 @@ public class AnimatedMob extends Animal implements GeoEntity {
     public final static RawAnimation special = RawAnimation.begin().thenPlay("special");
     public final static RawAnimation death = RawAnimation.begin().thenPlayAndHold("death");
 
-    protected AnimatedMob(EntityType<? extends Animal> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
 
-    public boolean isMovingOnXZ = (getDeltaMovement().x != 0) && (getDeltaMovement().y != 0);
 
     public AnimationController<AnimatedMob> MainAnimationController = new AnimationController<>(this, "Main", state -> {
         if (state.getController().isPlayingTriggeredAnimation()) {return null;}
         else if (state.isCurrentAnimation(death)) {return null;}
         else {
             if (state.isMoving() && this.onGround()) {return state.setAndContinue(walk);}
-            else if (this.isSwimming() || this.isInWater()){return state.setAndContinue(swim);}
-            else if (!this.onGround()) {return state.setAndContinue(fly);}
+            else if ((this.isSwimming() || this.isInWater()) && extraAnimations){return state.setAndContinue(swim);}
+            else if ((!this.onGround())) {return state.setAndContinue(fly);}
 
             if (this instanceof KirbyEntity){if (((KirbyEntity) this).isInSittingPose()) return state.setAndContinue(((KirbyEntity) this).sitting);}
 
             return state.setAndContinue(idle);
         }
     });
+
+    protected AnimatedMob(EntityType<? extends Animal> pEntityType, Level pLevel, boolean needsExtraAnimations, int animationTransitionTime) {
+        super(pEntityType, pLevel);
+        this.extraAnimations = needsExtraAnimations;
+        this.MainAnimationController.transitionLength(animationTransitionTime);
+    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -56,7 +61,7 @@ public class AnimatedMob extends Animal implements GeoEntity {
 
     @Override
     protected void actuallyHurt(@NotNull DamageSource pDamageSource, float pDamageAmount) {
-        if (deathAnimationStarted) return;
+        if (deathAnimationStarted || extraAnimations) return;
         triggerAnim("Main", "hurt");
         super.actuallyHurt(pDamageSource, pDamageAmount);
     }
@@ -64,7 +69,7 @@ public class AnimatedMob extends Animal implements GeoEntity {
     boolean deathAnimationStarted = false;
     @Override
     public void die(@NotNull DamageSource pDamageSource) {
-        if (deathAnimationStarted) return;
+        if (deathAnimationStarted || extraAnimations) return;
         deathAnimationStarted = true;
         setDeltaMovement(0,-3,0);
         triggerAnim("Main", "death");
@@ -83,7 +88,7 @@ public class AnimatedMob extends Animal implements GeoEntity {
         setNoAi(true);
         setInvulnerable(true);
 
-        if (!(deathTicks >= 60)) return;
+        if ((!(deathTicks >= 60)) && extraAnimations) return;
         if (level() instanceof ServerLevel)
             ((ServerLevel)level()).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(),getY(),getZ(),20
                     ,0,0,0,0.1);

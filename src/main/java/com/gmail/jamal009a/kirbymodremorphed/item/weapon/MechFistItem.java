@@ -2,17 +2,12 @@
 package com.gmail.jamal009a.kirbymodremorphed.item.weapon;
 
 import com.gmail.jamal009a.kirbymodremorphed.item.weapon.KirbyAbilityItems.KirbyAbilityAxeItem;
-import com.gmail.jamal009a.kirbymodremorphed.procedures.IronfistLivingEntityIsHitWithToolProcedure;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.Level;
-
-import java.util.List;
 
 public class MechFistItem extends KirbyAbilityAxeItem {
 	public MechFistItem() {
@@ -45,14 +40,13 @@ public class MechFistItem extends KirbyAbilityAxeItem {
 
 	@Override
 	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
-		IronfistLivingEntityIsHitWithToolProcedure.execute(entity);
-		return retval;
+		entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 2, false, false));
+		return super.hurtEnemy(itemstack, entity, sourceentity);
 	}
-
-	@Override
-	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
-		super.appendHoverText(itemstack, world, list, flag);
-		list.add(Component.literal("§7Heavy hits"));
-	}
+//
+//	@Override
+//	public void appendHoverText(ItemStack itemstack, Level world, List<Component> list, TooltipFlag flag) {
+//		super.appendHoverText(itemstack, world, list, flag);
+//		list.add(Component.literal("§7Heavy hits"));
+//	}
 }

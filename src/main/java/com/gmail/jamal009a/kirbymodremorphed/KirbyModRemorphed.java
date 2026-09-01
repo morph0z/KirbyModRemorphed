@@ -3,6 +3,7 @@ package com.gmail.jamal009a.kirbymodremorphed;
 import com.gmail.jamal009a.kirbymodremorphed.block.ModBlocks;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.WaddleDeeRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModCreativeModTabs;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
@@ -79,6 +80,7 @@ public class KirbyModRemorphed {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.KIRBY.get(), KirbyRenderer::new);
+            EntityRenderers.register(ModEntities.WADDLE_DEE.get(), WaddleDeeRenderer::new);
         }
 
         @SubscribeEvent
