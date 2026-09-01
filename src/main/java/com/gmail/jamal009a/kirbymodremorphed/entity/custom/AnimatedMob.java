@@ -31,8 +31,9 @@ public class AnimatedMob extends Animal implements GeoEntity {
 
 
     public AnimationController<AnimatedMob> MainAnimationController = new AnimationController<>(this, "Main", state -> {
-        if (state.getController().isPlayingTriggeredAnimation()) {return null;}
-        else if (state.isCurrentAnimation(death)) {return null;}
+        if (state.getController().isPlayingTriggeredAnimation() ||
+                state.isCurrentAnimation(death))
+        {return null;}
         else {
             if (state.isMoving() && this.onGround()) {return state.setAndContinue(walk);}
             else if ((this.isSwimming() || this.isInWater()) && extraAnimations){return state.setAndContinue(swim);}
@@ -61,15 +62,16 @@ public class AnimatedMob extends Animal implements GeoEntity {
 
     @Override
     protected void actuallyHurt(@NotNull DamageSource pDamageSource, float pDamageAmount) {
-        if (deathAnimationStarted || extraAnimations) return;
-        triggerAnim("Main", "hurt");
+        if (deathAnimationStarted && extraAnimations) return;
+        if (extraAnimations) triggerAnim("Main", "hurt");
         super.actuallyHurt(pDamageSource, pDamageAmount);
     }
 
     boolean deathAnimationStarted = false;
     @Override
     public void die(@NotNull DamageSource pDamageSource) {
-        if (deathAnimationStarted || extraAnimations) return;
+        if (deathAnimationStarted || !extraAnimations) return;
+
         deathAnimationStarted = true;
         setDeltaMovement(0,-3,0);
         triggerAnim("Main", "death");
@@ -89,6 +91,7 @@ public class AnimatedMob extends Animal implements GeoEntity {
         setInvulnerable(true);
 
         if ((!(deathTicks >= 60)) && extraAnimations) return;
+
         if (level() instanceof ServerLevel)
             ((ServerLevel)level()).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, getX(),getY(),getZ(),20
                     ,0,0,0,0.1);

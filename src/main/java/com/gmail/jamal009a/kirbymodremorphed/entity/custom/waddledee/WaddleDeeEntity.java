@@ -68,6 +68,8 @@ public class WaddleDeeEntity extends AnimatedMob {
         if (this.getRandom().nextFloat() < 0.5F) triggerAnim("Main", "wave");
         else triggerAnim("Main", "cheer");
 
+        playSound(ModSounds.WADDLE_DEE_PASSIVE_4.get());
+
         return super.mobInteract(pPlayer, pHand);
     }
 

@@ -162,12 +162,14 @@ public class KirbyEntity extends AnimatedMob implements OwnableEntity {
         //} else {
         InteractionResult interactionresult = super.mobInteract(pPlayer, pHand);
 
-        if (!isTame()) {
+        if (!interactionresult.consumesAction() && !isTame()) {
 
             if (this.getRandom().nextFloat() < 0.5F) triggerAnim("Main", "wave");
             else triggerAnim("Main", "cheer");
 
             interactCounter++;
+
+            playSound(ModSounds.KIRBY_PASSIVE_2.get());
 
             if (interactCounter > 4) tame(pPlayer);
         }
