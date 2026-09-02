@@ -65,7 +65,7 @@ Stacktrace:
 	at net.minecraft.client.renderer.GameRenderer.renderLevel(GameRenderer.java:1141) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 -- Entity being rendered --
 Details:
-	Entity Type: kirbymodremorphed:waddle_dee (com.gmail.jamal009a.kirbymodremorphed.entity.custom.waddledee.WaddleDeeEntity)
+	Entity Type: kirbymodremorphed:waddle_dee (com.gmail.jamal009a.kirbymodremorphed.entity.custom.WaddleDeeEntity)
 	Entity ID: 9
 	Entity Name: entity.kirbymodremorphed.waddle_dee
 	Entity's Exact location: -23.50, 74.00, -73.50

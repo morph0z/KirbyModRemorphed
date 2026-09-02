@@ -1,10 +1,9 @@
-package com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby;
+package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals.*;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +31,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;

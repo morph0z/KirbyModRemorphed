@@ -1,6 +1,6 @@
-package com.gmail.jamal009a.kirbymodremorphed.entity.custom.waddledee;
+package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob;
 import com.gmail.jamal009a.kirbymodremorphed.sound.ModSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
@@ -43,10 +44,10 @@ public class WaddleDeeEntity extends AnimatedMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(1,  new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new FloatGoal(this));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
     }
 
     public final RawAnimation land = RawAnimation.begin().then("land", Animation.LoopType.PLAY_ONCE);
-
     public final RawAnimation wave = RawAnimation.begin().then("wave", Animation.LoopType.PLAY_ONCE);
     public final RawAnimation cheer = RawAnimation.begin().then("cheer", Animation.LoopType.PLAY_ONCE);
 

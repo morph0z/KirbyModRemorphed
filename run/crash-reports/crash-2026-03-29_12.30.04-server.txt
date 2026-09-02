@@ -6,7 +6,7 @@ Description: Ticking entity
 
 java.lang.NullPointerException: Ticking entity
 	at java.util.Objects.requireNonNull(Objects.java:208) ~[?:?] {}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile.tick(AbstractAbilityProjectile.java:38) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AbstractAbilityProjectile.tick(AbstractAbilityProjectile.java:38) ~[%23196!/:?] {re:classloading}
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity.tick(KiBlastProjectileEntity.java:121) ~[%23196!/:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:702) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.level.Level.guardEntityTick(Level.java:522) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
@@ -28,7 +28,7 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Thread: Server thread
 Stacktrace:
 	at java.util.Objects.requireNonNull(Objects.java:208) ~[?:?] {}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile.tick(AbstractAbilityProjectile.java:38) ~[%23196!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AbstractAbilityProjectile.tick(AbstractAbilityProjectile.java:38) ~[%23196!/:?] {re:classloading}
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.KiBlastProjectileEntity.tick(KiBlastProjectileEntity.java:121) ~[%23196!/:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:702) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.level.Level.guardEntityTick(Level.java:522) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}

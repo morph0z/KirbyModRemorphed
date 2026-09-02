@@ -53,7 +53,7 @@ Stacktrace:
 	at net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:326) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B}
 -- Entity being ticked --
 Details:
-	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity)
+	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity)
 	Entity ID: 16
 	Entity Name: entity.kirbymodremorphed.kirby
 	Entity's Exact location: -40.91, 77.00, -3.48

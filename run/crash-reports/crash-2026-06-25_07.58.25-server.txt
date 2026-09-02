@@ -7,14 +7,14 @@ Description: Exception in server tick loop
 java.lang.NoClassDefFoundError: Could not initialize class com.gmail.jamal009a.kirbymodremorphed.entity.ModActivity
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyAi.initSuckActivity(KirbyAi.java:24) ~[%23186!/:?] {re:classloading}
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyAi.makeBrain(KirbyAi.java:16) ~[%23186!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.makeBrain(KirbyEntity.java:280) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.makeBrain(KirbyEntity.java:280) ~[%23186!/:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.<init>(LivingEntity.java:247) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,re:mixin}
 	at net.minecraft.world.entity.Mob.<init>(Mob.java:123) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.entity.PathfinderMob.<init>(PathfinderMob.java:14) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
 	at net.minecraft.world.entity.AgeableMob.<init>(AgeableMob.java:24) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
 	at net.minecraft.world.entity.animal.Animal.<init>(Animal.java:40) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob.<init>(AnimatedMob.java:29) ~[%23186!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.<init>(KirbyEntity.java:56) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob.<init>(AnimatedMob.java:29) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.<init>(KirbyEntity.java:56) ~[%23186!/:?] {re:classloading}
 	at net.minecraft.world.entity.EntityType.create(EntityType.java:528) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,xf:fml:forge:forge_method_redirector}
 	at net.minecraft.world.entity.EntityType.create(EntityType.java:406) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,xf:fml:forge:forge_method_redirector}
 	at net.minecraft.world.entity.EntityType.spawn(EntityType.java:396) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,xf:fml:forge:forge_method_redirector}
@@ -50,14 +50,14 @@ Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalSta
 	at com.gmail.jamal009a.kirbymodremorphed.entity.ModActivity.<clinit>(KirbyAi.java:33) ~[%23186!/:?] {re:classloading}
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyAi.initSuckActivity(KirbyAi.java:24) ~[%23186!/:?] {re:classloading}
 	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyAi.makeBrain(KirbyAi.java:16) ~[%23186!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.makeBrain(KirbyEntity.java:280) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.makeBrain(KirbyEntity.java:280) ~[%23186!/:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.<init>(LivingEntity.java:247) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,re:mixin}
 	at net.minecraft.world.entity.Mob.<init>(Mob.java:123) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.entity.PathfinderMob.<init>(PathfinderMob.java:14) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
 	at net.minecraft.world.entity.AgeableMob.<init>(AgeableMob.java:24) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
 	at net.minecraft.world.entity.animal.Animal.<init>(Animal.java:40) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob.<init>(AnimatedMob.java:29) ~[%23186!/:?] {re:classloading}
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity.<init>(KirbyEntity.java:56) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob.<init>(AnimatedMob.java:29) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity.<init>(KirbyEntity.java:56) ~[%23186!/:?] {re:classloading}
 	at net.minecraft.world.entity.EntityType.create(EntityType.java:528) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,xf:fml:forge:forge_method_redirector}
 	at net.minecraft.world.entity.EntityType.lambda$create$4(EntityType.java:533) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,xf:fml:forge:forge_method_redirector}
 	at java.util.Optional.map(Optional.java:260) ~[?:?] {}

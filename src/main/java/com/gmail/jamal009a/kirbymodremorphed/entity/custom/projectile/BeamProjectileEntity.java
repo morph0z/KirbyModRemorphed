@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractMovingAbilityProjectile;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AbstractMovingAbilityProjectile;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityDimensions;

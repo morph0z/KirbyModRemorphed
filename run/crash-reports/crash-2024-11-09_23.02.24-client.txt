@@ -53,7 +53,7 @@ Stacktrace:
 	at net.minecraft.client.renderer.GameRenderer.renderLevel(GameRenderer.java:1126) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 -- Entity being rendered --
 Details:
-	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity)
+	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity)
 	Entity ID: 191
 	Entity Name: entity.kirbymodremorphed.kirby
 	Entity's Exact location: -115.50, 72.00, 126.50

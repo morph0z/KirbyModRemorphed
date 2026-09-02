@@ -1,8 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
-import net.minecraft.world.damagesource.DamageSource;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AbstractAbilityProjectile;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;

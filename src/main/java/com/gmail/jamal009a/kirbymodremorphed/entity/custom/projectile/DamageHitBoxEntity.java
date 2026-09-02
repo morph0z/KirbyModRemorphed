@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AbstractAbilityProjectile;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AbstractAbilityProjectile;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
@@ -9,7 +9,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.core.animation.*;
 
 import java.awt.*;
 import java.util.List;

@@ -2,14 +2,13 @@ package com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals;
 
 import java.util.EnumSet;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.phys.Vec3;
 
 public class KirbySuckGoal extends Goal {
     protected final KirbyEntity mob;

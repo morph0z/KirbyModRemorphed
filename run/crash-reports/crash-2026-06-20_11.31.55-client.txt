@@ -5,7 +5,7 @@ Time: 2026-06-20 11:31:55
 Description: Rendering entity in world
 
 java.lang.NullPointerException: Cannot invoke "software.bernie.geckolib.core.animation.RawAnimation.equals(Object)" because the return value of "software.bernie.geckolib.core.animation.AnimationController.getCurrentRawAnimation()" is null
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob.lambda$new$0(AnimatedMob.java:35) ~[main/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob.lambda$new$0(AnimatedMob.java:35) ~[main/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar:4.4.6] {re:classloading}
@@ -48,7 +48,7 @@ A detailed walkthrough of the error, its code path and all known details is as f
 -- Head --
 Thread: Render thread
 Stacktrace:
-	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob.lambda$new$0(AnimatedMob.java:35) ~[%23186!/:?] {re:classloading}
+	at com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob.lambda$new$0(AnimatedMob.java:35) ~[%23186!/:?] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.handleAnimationState(AnimationController.java:395) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23188!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationController.process(AnimationController.java:419) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23188!/:4.4.6] {re:classloading}
 	at software.bernie.geckolib.core.animation.AnimationProcessor.tickAnimation(AnimationProcessor.java:83) ~[geckolib-forge-1.20.1-4.4.6_mapped_parchment_2023.06.26-1.20.1.jar%23188!/:4.4.6] {re:classloading}
@@ -65,7 +65,7 @@ Stacktrace:
 	at net.minecraft.client.renderer.GameRenderer.renderLevel(GameRenderer.java:1141) ~[forge-1.20.1-47.2.0_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23181!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A}
 -- Entity being rendered --
 Details:
-	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.kirby.KirbyEntity)
+	Entity Type: kirbymodremorphed:kirby (com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity)
 	Entity ID: 165
 	Entity Name: entity.kirbymodremorphed.kirby
 	Entity's Exact location: -36.50, 77.00, -2.50

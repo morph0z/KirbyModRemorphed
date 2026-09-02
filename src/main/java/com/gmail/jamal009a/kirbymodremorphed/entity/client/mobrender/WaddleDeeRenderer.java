@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobmodel.WaddleDeeModel;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.waddledee.WaddleDeeEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.WaddleDeeEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,4 +1,4 @@
-package com.gmail.jamal009a.kirbymodremorphed.entity.custom;
+package com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses;
 
 import com.gmail.jamal009a.kirbymodremorphed.util.MethodRunOnce;
 import net.minecraft.core.particles.ParticleOptions;

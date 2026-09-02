@@ -1,8 +1,6 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.goals;
 
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.AnimatedMob;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Mob;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses.AnimatedMob;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
@@ -14,7 +12,7 @@ public class SpecialAnimationGoal extends Goal {
     public SpecialAnimationGoal(AnimatedMob pMob, float chance) {this.mob = pMob; this.Chance = chance;}
 
     @Override
-    public boolean canUse() {return (this.mob.getRandom().nextFloat() < Chance/100)
+    public boolean canUse() {return (this.mob.getRandom().nextIntBetweenInclusive(1,100) < Chance)
                             && mob.onGround()
                             && mob.MainAnimationController.isPlayingTriggeredAnimation();}
     //&& !mob.isMovingOnXZ

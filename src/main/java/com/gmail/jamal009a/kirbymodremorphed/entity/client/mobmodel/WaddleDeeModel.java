@@ -1,7 +1,7 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.client.mobmodel;
 
 import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
-import com.gmail.jamal009a.kirbymodremorphed.entity.custom.waddledee.WaddleDeeEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.WaddleDeeEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
