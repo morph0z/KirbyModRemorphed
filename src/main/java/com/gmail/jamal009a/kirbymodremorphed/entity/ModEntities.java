@@ -4,6 +4,7 @@ import com.gmail.jamal009a.kirbymodremorphed.KirbyModRemorphed;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.projectile.*;
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.WaddleDeeEntity;
+import com.gmail.jamal009a.kirbymodremorphed.entity.custom.JambelieverEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -29,8 +30,21 @@ public class ModEntities {
                             .sized(0.75f, 0.75f)
                             .build(new ResourceLocation(KirbyModRemorphed.MODID, "waddle_dee").toString()));
 
+
+    public static final RegistryObject<EntityType<JambelieverEntity>> JAMBELIEVER =
+            ENTITY_TYPES.register("jambeliever",
+                    () -> EntityType.Builder.of(JambelieverEntity::new, MobCategory.CREATURE)
+                            .sized(0.75f, 0.75f)
+                            .build(new ResourceLocation(KirbyModRemorphed.MODID, "jambeliever").toString()));
     
-    
+
+
+
+
+
+
+
+
     public static final RegistryObject<EntityType<KiBlastProjectileEntity>> KI_BLAST_PROJECTILE =
             ENTITY_TYPES.register("ki_blast_projectile",
                 () -> EntityType.Builder.of((EntityType<KiBlastProjectileEntity> pEntityType, Level pLevel) -> new KiBlastProjectileEntity(pEntityType, pLevel), MobCategory.MISC)

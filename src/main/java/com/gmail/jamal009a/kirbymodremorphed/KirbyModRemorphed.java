@@ -4,6 +4,7 @@ import com.gmail.jamal009a.kirbymodremorphed.block.ModBlocks;
 import com.gmail.jamal009a.kirbymodremorphed.entity.ModEntities;
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.KirbyRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.WaddleDeeRenderer;
+import com.gmail.jamal009a.kirbymodremorphed.entity.client.mobrender.JambelieverRenderer;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModCreativeModTabs;
 import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
 import com.gmail.jamal009a.kirbymodremorphed.network.ModMessages;
@@ -32,7 +33,7 @@ import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the INF/mods.toml file
 @Mod(KirbyModRemorphed.MODID)
 public class KirbyModRemorphed {
     public static final String MODID = "kirbymodremorphed";
@@ -81,6 +82,8 @@ public class KirbyModRemorphed {
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.KIRBY.get(), KirbyRenderer::new);
             EntityRenderers.register(ModEntities.WADDLE_DEE.get(), WaddleDeeRenderer::new);
+
+            EntityRenderers.register(ModEntities.JAMBELIEVER.get(), JambelieverRenderer::new);
         }
 
         @SubscribeEvent

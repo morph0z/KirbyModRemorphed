@@ -1,6 +1,8 @@
 package com.gmail.jamal009a.kirbymodremorphed.entity.custom.abstractclasses;
 
 import com.gmail.jamal009a.kirbymodremorphed.entity.custom.KirbyEntity;
+import com.gmail.jamal009a.kirbymodremorphed.item.ModItems;
+import com.gmail.jamal009a.kirbymodremorphed.item.armor.ability.AbilityClass;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -103,4 +105,6 @@ public class AnimatedMob extends Animal implements GeoEntity {
 
     @Override
     public @Nullable AgeableMob getBreedOffspring(@NotNull ServerLevel pLevel, @NotNull AgeableMob pOtherParent) {return null;}
+
+    public AbilityClass getCopyAbility() {return null;}
 }
